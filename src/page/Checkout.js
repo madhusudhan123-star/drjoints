@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '@formspree/react';
 
+// API base URL that works in both development and production environments
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+    ? 'https://drjoints-backend.onrender.com' // Use your actual production backend URL
+    : 'http://localhost:5000';
+
 const COUNTRY_CURRENCY_MAP = {
     'India': { currency: 'INR', symbol: '₹', rate: 1 }
 };
@@ -133,6 +138,78 @@ const Checkout = ({ translations, currentLang }) => {
         }
     };
 
+    // Send order confirmation email
+    const sendOrderConfirmationEmail = async (customerDetails, orderDetails) => {
+        try {
+            console.log('Sending order confirmation email to:', customerDetails.email);
+            console.log('Order details:', orderDetails);
+            
+            const response = await fetch(`${API_BASE_URL}/send-order-confirmation`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    customerEmail: customerDetails.email,
+                    customerName: `${customerDetails.firstName} ${customerDetails.lastName}`,
+                    customerPhone: customerDetails.phone,
+                    customerDetails,
+                    orderDetails
+                }),
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Server responded with status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (!data.success) {
+                console.error('Failed to send confirmation email:', data.message);
+                return false;
+            } else {
+                console.log('Confirmation email sent successfully');
+                return true;
+            }
+        } catch (error) {
+            console.error('Error sending confirmation email:', error);
+            return false;
+        }
+    };
+
+    // Send abandoned order email notification
+    const sendAbandonedOrderEmail = async (customerDetails, orderDetails) => {
+        try {
+            console.log('Sending abandoned order email to:', customerDetails.email);
+            
+            const response = await fetch(`${API_BASE_URL}/send-abandoned-order-email`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    customerEmail: customerDetails.email,
+                    customerDetails,
+                    orderDetails
+                }),
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Server responded with status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (!data.success) {
+                console.error('Failed to send abandoned order email:', data.message);
+            } else {
+                console.log('Abandoned order email sent successfully');
+            }
+        } catch (error) {
+            console.error('Error sending abandoned order email:', error);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const errors = validateForm();
@@ -145,32 +222,48 @@ const Checkout = ({ translations, currentLang }) => {
                     handleRazorpayPayment();
                 } else if (formData.paymentMode === 'cod') {
                     // Prepare the data for COD orders
-                    const formSubmitData = {
-                        customerDetails: {
-                            firstName: formData.firstName,
-                            lastName: formData.lastName,
-                            email: formData.email,
-                            phone: formData.phone,
-                            address: formData.streetAddress,
-                            apartment: formData.apartment,
-                            city: formData.townCity,
-                            country: formData.country,
-                        },
-                        orderDetails: {
-                            orderNumber, // Add order number
-                            productName: orderDetails.productName,
-                            quantity: orderDetails.quantity,
-                            totalAmount: convertedAmount, // Use the discounted amount
-                            paymentMethod: "Cash on Delivery",
-                            orderStatus: "Pending",
-                        },
+                    const customerDetails = {
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        email: formData.email,
+                        phone: formData.phone,
+                        address: formData.streetAddress,
+                        apartment: formData.apartment,
+                        city: formData.townCity,
+                        country: formData.country,
                     };
+                    
+                    const orderDetailsForEmail = {
+                        orderNumber,
+                        productName: orderDetails.productName,
+                        quantity: orderDetails.quantity,
+                        totalAmount: convertedAmount,
+                        currency: currentCurrency.currency,
+                        paymentMethod: "Cash on Delivery",
+                        orderStatus: "Pending",
+                    };
+
+                    // Data for formspree submission
+                    const formSubmitData = {
+                        customerDetails,
+                        orderDetails: orderDetailsForEmail
+                    };
+
+                    // First try sending the confirmation email
+                    const emailSent = await sendOrderConfirmationEmail(customerDetails, orderDetailsForEmail);
+                    
+                    if (!emailSent) {
+                        console.log('Email failed, proceeding with form submission anyway');
+                        // Consider notifying the user that email might not have been sent
+                    }
 
                     // Make sure to await the Formspree submission
                     const formResponse = await handleFormspreeSubmit(formSubmitData);
 
                     // Check if the submission was successful
                     if (formResponse && !formResponse.error) {
+                        // Update order number and show success
+                        incrementOrderNumber();
                         setPaymentSuccess(true);
                     } else {
                         throw new Error('Failed to submit form to Formspree');
@@ -189,30 +282,32 @@ const Checkout = ({ translations, currentLang }) => {
         }
     };
 
-    const renderFormField = (name, label, type = "text", required = true) => (
-        <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-                {label} {required && <span className="text-red-500">*</span>}
-            </label>
-            <input
-                type={type}
-                name={name}
-                value={formData[name]}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-3 rounded-lg border ${formErrors[name] ? 'border-red-500' : 'border-gray-300'
-                    } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            />
-            {formErrors[name] && (
-                <p className="text-red-500 text-sm mt-1">{formErrors[name]}</p>
-            )}
-        </div>
-    );
     const handleRazorpayPayment = async () => {
         try {
             setIsSubmitting(true);
             
+            // Store customer details for potential abandoned order emails
+            const customerDetails = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                phone: formData.phone,
+                address: formData.streetAddress,
+                apartment: formData.apartment,
+                city: formData.townCity,
+                country: formData.country,
+            };
+            
+            const tempOrderDetails = {
+                orderNumber,
+                productName: orderDetails.productName,
+                quantity: orderDetails.quantity,
+                totalAmount: convertedAmount,
+                currency: currentCurrency.currency,
+            };
+            
             // First create order on server
-            const response = await fetch('https://razorpaybackend-wgbh.onrender.com/create-order', {
+            const response = await fetch(`${API_BASE_URL}/create-order`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -239,7 +334,7 @@ const Checkout = ({ translations, currentLang }) => {
                 key: orderData.key,
                 amount: orderData.order.amount,
                 currency: orderData.order.currency,
-                name: 'Your Company Name',
+                name: 'Dr. Joints',
                 description: `Order for ${orderDetails.productName}`,
                 order_id: orderData.order.id,
                 prefill: {
@@ -250,7 +345,7 @@ const Checkout = ({ translations, currentLang }) => {
                 handler: async function (response) {
                     try {
                         // Verify payment on server
-                        const verifyResponse = await fetch('https://razorpaybackend-wgbh.onrender.com/verify-payment', {
+                        const verifyResponse = await fetch(`${API_BASE_URL}/verify-payment`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -268,28 +363,27 @@ const Checkout = ({ translations, currentLang }) => {
                             throw new Error("Payment verification failed");
                         }
                         
+                        // Order details for email - add payment info
+                        const orderDetailsForEmail = {
+                            ...tempOrderDetails,
+                            paymentMethod: "Online Payment (Razorpay)",
+                            paymentId: response.razorpay_payment_id,
+                            orderId: response.razorpay_order_id,
+                            orderStatus: "Paid",
+                        };
+
+                        // Send email confirmation immediately after payment verification
+                        try {
+                            await sendOrderConfirmationEmail(customerDetails, orderDetailsForEmail);
+                            console.log("Order confirmation email sent after successful payment");
+                        } catch (emailError) {
+                            console.error("Failed to send order confirmation email:", emailError);
+                        }
+
+                        // Proceed with form submission regardless of email status
                         const formSubmitData = {
-                            customerDetails: {
-                                firstName: formData.firstName,
-                                lastName: formData.lastName,
-                                email: formData.email,
-                                phone: formData.phone,
-                                address: formData.streetAddress,
-                                apartment: formData.apartment,
-                                city: formData.townCity,
-                                country: formData.country,
-                            },
-                            orderDetails: {
-                                orderNumber,
-                                productName: orderDetails.productName,
-                                quantity: orderDetails.quantity,
-                                totalAmount: convertedAmount,
-                                currency: currentCurrency.currency,
-                                paymentMethod: "Online Payment (Razorpay)",
-                                paymentId: response.razorpay_payment_id,
-                                orderId: response.razorpay_order_id,
-                                orderStatus: "Paid",
-                            },
+                            customerDetails,
+                            orderDetails: orderDetailsForEmail
                         };
 
                         const formResponse = await handleFormspreeSubmit(formSubmitData);
@@ -313,6 +407,13 @@ const Checkout = ({ translations, currentLang }) => {
                 },
                 modal: {
                     ondismiss: function () {
+                        // Send abandoned order email when customer dismisses payment modal
+                        console.log("Payment modal dismissed - sending abandoned order email");
+                        sendAbandonedOrderEmail(customerDetails, {
+                            ...tempOrderDetails,
+                            orderStatus: "Abandoned",
+                            paymentMethod: "Online Payment (Abandoned)"
+                        });
                         setIsSubmitting(false);
                     }
                 }
@@ -329,6 +430,25 @@ const Checkout = ({ translations, currentLang }) => {
             setIsSubmitting(false);
         }
     };
+
+    const renderFormField = (name, label, type = "text", required = true) => (
+        <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <input
+                type={type}
+                name={name}
+                value={formData[name]}
+                onChange={handleInputChange}
+                className={`w-full px-4 py-3 rounded-lg border ${formErrors[name] ? 'border-red-500' : 'border-gray-300'
+                    } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            />
+            {formErrors[name] && (
+                <p className="text-red-500 text-sm mt-1">{formErrors[name]}</p>
+            )}
+        </div>
+    );
 
     const renderOrderSummary = () => (
         <div className="bg-white rounded-lg shadow-lg p-6">

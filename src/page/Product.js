@@ -8,7 +8,7 @@ const Product = ({ translations, currentLang }) => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
-    const productPrice = 10; // Discounted price per unit
+    const productPrice = 5; // Discounted price per unit
     const originalPrice = 6990; // Original price per unit
 
     const handleCheckout = () => {
