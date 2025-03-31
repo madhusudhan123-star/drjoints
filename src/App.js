@@ -20,6 +20,7 @@ import whatsappLogo from './assets/call.png';
 import Checkout_two from './page/Checkout_two';
 import { FaPhoneAlt, } from 'react-icons/fa';
 import Checkout_test1 from './page/Checkout_test1';
+import Checkout_test2 from './page/Checkout_test2';
 
 
 
@@ -444,6 +445,7 @@ const App = () => {
           <Route path='/cancel' element={<CancelPolicy currentLang={currentLang} translations={translations} />} />
           <Route path='/shipping' element={<ShippingPolicy currentLang={currentLang} translations={translations} />} />
           <Route path='/checkout_test_two' element={<Checkout_test1 currentLang={currentLang} translations={translations} />} />
+          <Route path='/checkout_test_three' element={<Checkout_test2 currentLang={currentLang} translations={translations} />} />
           <Route path='*' element={<h1>Page Not Found</h1>} />
         </Routes>
         <Footer currentLang={currentLang} translations={translations} />
