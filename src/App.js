@@ -19,6 +19,7 @@ import ShippingPolicy from './page/Shipping';
 import whatsappLogo from './assets/call.png';
 import Checkout_two from './page/Checkout_two';
 import { FaPhoneAlt, } from 'react-icons/fa';
+import Checkout_test1 from './page/Checkout_test1';
 
 
 
@@ -442,6 +443,7 @@ const App = () => {
           <Route path='/terms' element={<TermsAndConditions currentLang={currentLang} translations={translations} />} />
           <Route path='/cancel' element={<CancelPolicy currentLang={currentLang} translations={translations} />} />
           <Route path='/shipping' element={<ShippingPolicy currentLang={currentLang} translations={translations} />} />
+          <Route path='/checkout_test_two' element={<Checkout_test1 currentLang={currentLang} translations={translations} />} />
           <Route path='*' element={<h1>Page Not Found</h1>} />
         </Routes>
         <Footer currentLang={currentLang} translations={translations} />
