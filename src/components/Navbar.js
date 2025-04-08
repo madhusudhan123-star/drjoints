@@ -79,29 +79,10 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                             className="text-gray-700 hover:text-blue-600 px-3 py-2">
                             {nav.contactUs}
                         </a>
-
-                        {/* Desktop Language Selector */}
-                        {/* <div className="relative">
-                            <button
-                                className="flex items-center space-x-1 text-gray-700 hover:text-blue-600"
-                                onClick={toggleLangMenu}
-                            >
-                                <Globe size={20} />
-                            </button>
-                            {isLangMenuOpen && (
-                                <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                                    {languages.map((lang) => (
-                                        <button
-                                            key={lang.code}
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                                            onClick={() => handleLangSelect(lang.code)}
-                                        >
-                                            {lang.name}
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
-                        </div> */}
+                        <a href={nav.bloglink || "#"}
+                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
+                            {nav.blog}
+                        </a>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -143,6 +124,10 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                         <a href={nav.contactUslink || "#"}
                             className="block text-gray-700 hover:text-blue-600 px-3 py-2">
                             {nav.contactUs}
+                        </a>
+                        <a href={nav.bloglink || "#"}
+                            className="block text-gray-700 hover:text-blue-600 px-3 py-2">
+                            {nav.blog}
                         </a>
 
                         {/* Mobile Language Selector */}

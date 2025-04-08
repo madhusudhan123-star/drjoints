@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Globe } from 'lucide-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -19,7 +19,9 @@ import two from '../assets/t_two.svg';
 import three from '../assets/t_three.svg';
 import four from '../assets/t_four.png';
 import pain3 from '../assets/home3.jpg';
-import whatsappLogo from '../assets/whats.png';
+import Secondsection from '../components/Secondsection';
+import BlogSection from '../components/BlogSection';
+import InstagramFeed from '../components/InstagramFeed';
 
 
 
@@ -80,57 +82,94 @@ const ProductSection = () => {
         {
             id: 1,
             image: card1,
-            alt: "Dr. Joints Body pain relief oil"
+            title: "Pain Relief Oil",
+            benefit: "Fast Acting Formula",
+            description: "Instant relief for muscle & joint pain",
+            alt: "Dr. Joints Pain Relief oil front view"
         },
         {
             id: 2,
             image: card2,
-            alt: "Dr. Joints Ayurvedic Body joints & Muscles Pain relief oil."
+            title: "Pain Relief Oil",
+            benefit: "Deep Penetration",
+            description: "Reaches deep muscle tissues",
+            alt: "Dr. Joints Pain Relief oil ingredients view"
         },
         {
             id: 3,
             image: card3,
-            alt: "Dr. Joints Ayurvedic Pain Relief oil."
+            title: "Pain Relief Oil",
+            benefit: "Natural Ingredients",
+            description: "100% Ayurvedic formulation",
+            alt: "Dr. Joints Pain Relief oil benefits view"
         },
         {
             id: 4,
             image: card4,
-            alt: "Dr. Joints Ayurvedic Body joints & Muscles Pain relief oil."
+            title: "Pain Relief Oil",
+            benefit: "Long Lasting Relief",
+            description: "Sustained pain relief action",
+            alt: "Dr. Joints Pain Relief oil usage view"
         }
     ];
 
     return (
-        <div className="w-full py-6 mt-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 px-20">
+        <div className="w-full py-16 bg-gradient-to-b from-white to-gray-50">
+            <h2 className="text-4xl font-bold text-center text-blue-900 mb-4">Dr. Joints Pain Relief Oil</h2>
+            <p className="text-center text-gray-600 mb-12">One Solution for All Your Pain Relief Needs</p>
+            
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 max-w-7xl mx-auto">
                 {cards.map((card) => (
                     <div
                         key={card.id}
-                        className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                        className="group relative overflow-hidden rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105"
                     >
-                        <div className="aspect-w-4 aspect-h-3">
-                            <a href='/product'>
-                                <img
-                                    src={card.image}
-                                    alt={card.alt}
-                                    className="w-full h-full object-cover"
-                                />
-                            </a>
+                        <div className="relative h-full">
+                            <img
+                                src={card.image}
+                                alt={card.alt}
+                                className="w-full h-full transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            
+                            <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                <h3 className="text-2xl font-bold text-white mb-2">{card.benefit}</h3>
+                                <p className="text-gray-200 mb-3">{card.description}</p>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-2xl font-bold text-white">₹3,990</span>
+                                    <a href="/product" 
+                                       className="px-6 py-2 bg-blue-600 text-white rounded-full 
+                                                hover:bg-blue-700 transform hover:scale-105 
+                                                transition-all duration-300 flex items-center gap-2">
+                                        Details
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full 
+                                      transform -translate-y-20 group-hover:translate-y-0 transition-transform duration-500">
+                            Featured
                         </div>
                     </div>
                 ))}
-            </div>
-            <div className="w-full px-4 sm:px-8 py-8 md:py-12 bg-white">
+            </div> */}
+            {/* trusted icons */}
+            <div className="w-full px-4 sm:px-8 py-8 md:py-12 mt-16">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center items-center mx-auto">
-                    <div data-aos="fade-right" data-aos-delay="0">
+                    <div>
                         <img src={one} alt="Trusted Brand 1" className="max-w-full h-auto" />
                     </div>
-                    <div data-aos="fade-right" data-aos-delay="200">
+                    <div>
                         <img src={two} alt="Trusted Brand 2" className="max-w-full h-auto" />
                     </div>
-                    <div data-aos="fade-right" data-aos-delay="400">
+                    <div>
                         <img src={three} alt="Trusted Brand 3" className="max-w-full h-auto" />
                     </div>
-                    <div data-aos="fade-right" data-aos-delay="600">
+                    <div>
                         <img src={four} alt="Trusted Brand 4" className="w-[8.5rem] h-auto" />
                     </div>
                 </div>
@@ -141,17 +180,111 @@ const ProductSection = () => {
 
 
 const Product = ({ currentLang, translations }) => {
+    const [showPopup, setShowPopup] = useState(false);
+    const productRef = useRef(null);
+
+    const prLinks = [
+        { 
+            title: 'PR Links',
+            link: 'https://www.facebook.com/DrJoints',
+            icon: '📱',
+            description: 'Follow us on Facebook'
+        },
+        { 
+            title: 'Instagram',
+            link: 'https://www.instagram.com/drjoints',
+            icon: '📸',
+            description: 'Join our Instagram community'
+        },
+        { 
+            title: 'YouTube',
+            link: 'https://youtube.com/@drjoints',
+            icon: '🎥',
+            description: 'Watch our videos'
+        },
+        { 
+            title: 'Twitter',
+            link: 'https://twitter.com/drjoints',
+            icon: '🐦',
+            description: 'Follow us on Twitter'
+        }
+    ];
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setShowPopup(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (productRef.current) {
+            observer.observe(productRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="min-h-screen bg-[#F0E7E5] p-8">
-            {/* Header Section */}
+        <div ref={productRef} className="min-h-screen bg-[#F0E7E5] p-8 relative">
+            <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                            bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-2xl p-6 z-50 
+                            transition-all duration-500 w-[90%] max-w-lg border border-blue-100
+                            ${showPopup ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+                <div className="relative">
+                    <button 
+                        onClick={() => setShowPopup(false)}
+                        className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full p-2
+                                 hover:bg-red-600 transition-colors z-10 shadow-lg"
+                    >
+                        <X size={20} />
+                    </button>
+                    
+                    <div className="text-center mb-6">
+                        <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 
+                                     text-transparent bg-clip-text">Connect With Us</h3>
+                        <p className="text-gray-600">Join our community for exclusive updates</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        {prLinks.map((item, index) => (
+                            <a 
+                                key={index}
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group bg-white hover:bg-blue-50 rounded-xl p-4 transition-all 
+                                         duration-300 transform hover:scale-105 hover:shadow-xl border
+                                         border-gray-100 hover:border-blue-200"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <span className="text-3xl group-hover:scale-125 transition-transform">
+                                        {item.icon}
+                                    </span>
+                                    <div>
+                                        <h4 className="font-bold text-gray-800 group-hover:text-blue-600 
+                                                     transition-colors">{item.title}</h4>
+                                        <p className="text-xs text-gray-500">{item.description}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-gray-100 text-center">
+                        <p className="text-sm text-gray-500">Follow us for health tips and offers</p>
+                    </div>
+                </div>
+            </div>
+
             <div className="text-center mb-8">
                 <h1 className="text-blue-900 text-4xl font-bold mb-4">{translations[currentLang].product.title}</h1>
                 <h2 className="text-amber-800 text-2xl font-semibold">{translations[currentLang].product.subtitle}</h2>
             </div>
 
-            {/* Main Content Section */}
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                {/* Text Content */}
                 <div className="space-y-6 pr-4">
                     <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content1}</p>
 
@@ -161,7 +294,6 @@ const Product = ({ currentLang, translations }) => {
                     <button className="px-8 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors" ><a href="/product">Buy Now</a></button>
                 </div>
 
-                {/* Product Image */}
                 <div className="relative">
                     <img
                         src={product}
@@ -178,41 +310,7 @@ const Product = ({ currentLang, translations }) => {
 const About = ({ currentLang, translations }) => {
     return (
         <div className="">
-            {/* Header */}
-            {/* <h1 className="text-4xl font-bold text-blue-900 text-center mb-10">{translations[currentLang].about.title}</h1> */}
-
-            {/* Main Content Grid */}
-            <div className="w-screen">  {/* grid grid-cols-1 lg:grid-cols-2 gap-8 */}
-                {/* Left Column - Text Content */}
-                {/* <div className="space-y-6">
-                    <p className="text-gray-800 leading-relaxed">{translations[currentLang].about.content1}</p>
-
-                    <p className="text-gray-800 leading-relaxed">{translations[currentLang].about.content2}</p>
-                    <div className="mt-8">
-                        <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                            {translations[currentLang].about.question1}
-                        </h2>
-
-                        <ul className="space-y-4">
-                            <li>
-                                <strong className="text-gray-900">{translations[currentLang].about.question2}</strong>
-                                <span className="text-gray-800">{translations[currentLang].about.answer1}</span>
-                            </li>
-
-                            <li>
-                                <strong className="text-gray-900">{translations[currentLang].about.question3}</strong>
-                                <span className="text-gray-800">{translations[currentLang].about.answer2}</span>
-                            </li>
-
-                            <li>
-                                <strong className="text-gray-900">{translations[currentLang].about.question4}</strong>
-                                <span className="text-gray-800">{translations[currentLang].about.answer3}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div> */}
-
-                {/* Right Column - Video */}
+            <div className="w-screen">
                 <div className="relative h-0 pb-[56.25%]">
                     <iframe
                         className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
@@ -223,20 +321,17 @@ const About = ({ currentLang, translations }) => {
                         allowFullScreen
                     />
                 </div>
-                <div className="w-full py-10 md:py-20 relative">
+                {/* <div className="w-full py-10 md:py-20 relative">
                     <img
                         src={pain3}
                         className={`w-screen md: lg:h-[50vh] sm:h-full }`}
                     />
                     <h1 className="text-center text-4xl mt-3 text-white">Buy Now</h1>
-                </div>
+                </div> */}
             </div>
         </div>
     );
 };
-
-
-
 
 const TestimonialCard = ({ image, text, name, role }) => {
     return (
@@ -287,27 +382,21 @@ const Home = ({ currentLang, translations }) => {
         }>
             <div className='overflow-x-hidden'>
                 <a href='/product'>
-                    <img src={producticon} className='fixed bottom-0 left-0 w-1/5' />
+                    <img src={producticon} className='fixed z-10 bottom-14 md:bottom-0 left-0 w-48' />
                 </a>
                 <Hero currentLang={currentLang} />
                 <ProductSection currentLang={currentLang} />
+                <Secondsection />
                 <Product currentLang={currentLang} translations={translations} />
                 <About currentLang={currentLang} translations={translations} />
                 <FAQ currentLang={currentLang} translations={translations} />
                 <Testimonials currentLang={currentLang} translations={translations} />
-                <div className="fixed bottom-10 right-10 animate-bounce-slow">
-                    <a
-                        href="https://wa.me/9908016333"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <img
-                            src={whatsappLogo}
-                            alt="WhatsApp"
-                            className="w-20 hover:scale-110 transition-transform duration-300"
-                        />
-                    </a>
-                </div>
+                <InstagramFeed />
+                <BlogSection 
+                    translations={translations}
+                    currentLang={currentLang}
+                    blogPosts={translations.en.blogPosts}
+                />
             </div>
         </div >
     );
