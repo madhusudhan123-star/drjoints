@@ -183,30 +183,48 @@ const Product = ({ currentLang, translations }) => {
     const [showPopup, setShowPopup] = useState(false);
     const productRef = useRef(null);
 
-    const prLinks = [
+    const mediaLinks = [
         { 
-            title: 'PR Links',
-            link: 'https://www.facebook.com/DrJoints',
-            icon: '📱',
-            description: 'Follow us on Facebook'
+            title: 'Daily Hunt',
+            link: 'http://m.dailyhunt.in/news/india/english/republic+news+india-epaper-dhfacc36dfce9c4bb68db0e89d033c921b/dr+joints+pain+relief+oil+expanding+indian+ayurveda+to+uae-newsid-dhfacc36dfce9c4bb68db0e89d033c921b_0195d5c0cd9611efbfff30234ee32bf7?sm=Y',
+            icon: '📰',
+            source: 'Daily Hunt'
         },
         { 
-            title: 'Instagram',
-            link: 'https://www.instagram.com/drjoints',
-            icon: '📸',
-            description: 'Join our Instagram community'
+            title: 'Republic News India',
+            link: 'https://republicnewsindia.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+            icon: '📰',
+            source: 'Republic News'
         },
         { 
-            title: 'YouTube',
-            link: 'https://youtube.com/@drjoints',
-            icon: '🎥',
-            description: 'Watch our videos'
+            title: 'Flipboard',
+            link: 'https://flipboard.com/@republicnewsind/-dr-joints-pain-relief-oil-expanding-ind/a-V8D2Oej2QgGHtagao7JlCQ%3Aa%3A3544623556-7947af09c2%2Frepublicnewsindia.com',
+            icon: '🔖',
+            source: 'Flipboard'
         },
         { 
-            title: 'Twitter',
-            link: 'https://twitter.com/drjoints',
-            icon: '🐦',
-            description: 'Follow us on Twitter'
+            title: 'The Indian Bulletin',
+            link: 'https://theindianbulletin.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+            icon: '📰',
+            source: 'Indian Bulletin'
+        },
+        { 
+            title: 'RD Times',
+            link: 'https://rdtimes.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+            icon: '📰',
+            source: 'RD Times'
+        },
+        { 
+            title: 'Abhyuday Times',
+            link: 'https://abhyudaytimes.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+            icon: '📰',
+            source: 'Abhyuday Times'
+        },
+        { 
+            title: 'Indian Sentinel',
+            link: 'https://indiansentinel.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+            icon: '📰',
+            source: 'Indian Sentinel'
         }
     ];
 
@@ -231,7 +249,7 @@ const Product = ({ currentLang, translations }) => {
         <div ref={productRef} className="min-h-screen bg-[#F0E7E5] p-8 relative">
             <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                             bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-2xl p-6 z-50 
-                            transition-all duration-500 w-[90%] max-w-lg border border-blue-100
+                            transition-all duration-500 w-[90%] max-w-2xl border border-blue-100
                             ${showPopup ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                 <div className="relative">
                     <button 
@@ -244,29 +262,43 @@ const Product = ({ currentLang, translations }) => {
                     
                     <div className="text-center mb-6">
                         <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 
-                                     text-transparent bg-clip-text">Connect With Us</h3>
-                        <p className="text-gray-600">Join our community for exclusive updates</p>
+                                     text-transparent bg-clip-text">Featured Media Coverage</h3>
+                        <p className="text-gray-600">Dr. Joints in the news</p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        {prLinks.map((item, index) => (
+                    <div className="max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                        {mediaLinks.map((item, index) => (
                             <a 
                                 key={index}
                                 href={item.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group bg-white hover:bg-blue-50 rounded-xl p-4 transition-all 
-                                         duration-300 transform hover:scale-105 hover:shadow-xl border
-                                         border-gray-100 hover:border-blue-200"
+                                className="group bg-white hover:bg-blue-50 rounded-xl p-4 mb-3 block
+                                         transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl 
+                                         border border-gray-100 hover:border-blue-200"
                             >
                                 <div className="flex items-center gap-3">
-                                    <span className="text-3xl group-hover:scale-125 transition-transform">
-                                        {item.icon}
-                                    </span>
-                                    <div>
+                                    <div className="bg-blue-100 text-blue-700 p-3 rounded-full flex-shrink-0
+                                                  group-hover:bg-blue-200 transition-colors">
+                                        <span className="text-2xl">{item.icon}</span>
+                                    </div>
+                                    <div className="flex-grow">
                                         <h4 className="font-bold text-gray-800 group-hover:text-blue-600 
-                                                     transition-colors">{item.title}</h4>
-                                        <p className="text-xs text-gray-500">{item.description}</p>
+                                                     transition-colors text-lg">{item.title}</h4>
+                                        <p className="text-sm text-gray-500">
+                                            Dr. Joints Pain Relief Oil: Expanding Indian Ayurveda to UAE
+                                        </p>
+                                        <div className="mt-1 flex items-center">
+                                            <span className="bg-blue-50 text-blue-700 text-xs py-1 px-2 rounded-full">
+                                                {item.source}
+                                            </span>
+                                            <span className="text-xs text-gray-400 ml-auto flex items-center">
+                                                View Article 
+                                                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -274,7 +306,7 @@ const Product = ({ currentLang, translations }) => {
                     </div>
 
                     <div className="mt-6 pt-4 border-t border-gray-100 text-center">
-                        <p className="text-sm text-gray-500">Follow us for health tips and offers</p>
+                        <p className="text-sm text-gray-500">Expanding Indian Ayurveda to UAE and beyond</p>
                     </div>
                 </div>
             </div>
