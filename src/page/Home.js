@@ -22,6 +22,14 @@ import pain3 from '../assets/home3.jpg';
 import Secondsection from '../components/Secondsection';
 import BlogSection from '../components/BlogSection';
 import InstagramFeed from '../components/InstagramFeed';
+import pr1 from '../assets/pr/card1.png';
+import pr2 from '../assets/pr/card2.png';
+import pr3 from '../assets/pr/card3.png';
+import pr4 from '../assets/pr/card4.png';
+import pr5 from '../assets/pr/card5.png';
+import pr6 from '../assets/pr/card6.png';
+import pr7 from '../assets/pr/card7.png';
+
 
 
 
@@ -187,43 +195,43 @@ const Product = ({ currentLang, translations }) => {
         { 
             title: 'Daily Hunt',
             link: 'http://m.dailyhunt.in/news/india/english/republic+news+india-epaper-dhfacc36dfce9c4bb68db0e89d033c921b/dr+joints+pain+relief+oil+expanding+indian+ayurveda+to+uae-newsid-dhfacc36dfce9c4bb68db0e89d033c921b_0195d5c0cd9611efbfff30234ee32bf7?sm=Y',
-            icon: '📰',
+            icon: pr1,
             source: 'Daily Hunt'
         },
         { 
             title: 'Republic News India',
             link: 'https://republicnewsindia.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: '📰',
+            icon: pr2,
             source: 'Republic News'
         },
         { 
             title: 'Flipboard',
             link: 'https://flipboard.com/@republicnewsind/-dr-joints-pain-relief-oil-expanding-ind/a-V8D2Oej2QgGHtagao7JlCQ%3Aa%3A3544623556-7947af09c2%2Frepublicnewsindia.com',
-            icon: '🔖',
+            icon: pr3,
             source: 'Flipboard'
         },
         { 
             title: 'The Indian Bulletin',
             link: 'https://theindianbulletin.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: '📰',
+            icon: pr4,
             source: 'Indian Bulletin'
         },
         { 
             title: 'RD Times',
             link: 'https://rdtimes.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: '📰',
+            icon: pr5,
             source: 'RD Times'
         },
         { 
             title: 'Abhyuday Times',
             link: 'https://abhyudaytimes.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: '📰',
+            icon: pr6,
             source: 'Abhyuday Times'
         },
         { 
             title: 'Indian Sentinel',
             link: 'https://indiansentinel.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: '📰',
+            icon: pr7,
             source: 'Indian Sentinel'
         }
     ];
@@ -278,9 +286,8 @@ const Product = ({ currentLang, translations }) => {
                                          border border-gray-100 hover:border-blue-200"
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="bg-blue-100 text-blue-700 p-3 rounded-full flex-shrink-0
-                                                  group-hover:bg-blue-200 transition-colors">
-                                        <span className="text-2xl">{item.icon}</span>
+                                    <div className="">
+                                        <img src={item.icon}  className="w-20"/>
                                     </div>
                                     <div className="flex-grow">
                                         <h4 className="font-bold text-gray-800 group-hover:text-blue-600 

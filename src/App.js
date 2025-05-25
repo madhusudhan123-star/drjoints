@@ -5,7 +5,7 @@ import Product from './page/Product';
 import Return from './page/Return';
 import Privacy from './page/Privacy';
 import Contact from './page/Contact';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Shield, Leaf, Brain, Hand } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -27,6 +27,9 @@ import BlogDetail from './page/BlogDetail';
 import blog1 from './assets/blogs/one.jpg'
 import blog2 from './assets/blogs/two.jpg'
 import blog3 from './assets/blogs/three.jpg'
+import Landing from './page/Landing';
+import ThankYou from './page/ThankYou';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 // Language options
 const languages = [
@@ -618,7 +621,9 @@ const App = () => {
           <Route path='/checkout_test_three' element={<Checkout_test2 currentLang={currentLang} translations={translations} />} />
           <Route path='/blog' element={<Blog currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
           <Route path='/blog/:id' element={<BlogDetail currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
-          <Route path='*' element={<h1>Page Not Found</h1>} />
+          <Route path='/Drjoints' element={<Landing currentLang={currentLang} translations={translations} />} />
+          <Route path='/thank-you' element={<ThankYou />} />
+          <Route path='*' element={<Navigate to="/" />} />
         </Routes>
         <Footer currentLang={currentLang} translations={translations} />
       </BrowserRouter>
