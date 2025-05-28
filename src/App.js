@@ -5,9 +5,10 @@ import Product from './page/Product';
 import Return from './page/Return';
 import Privacy from './page/Privacy';
 import Contact from './page/Contact';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Shield, Leaf, Brain, Hand } from 'lucide-react';
 import Navbar from './components/Navbar';
+import MinimalNavbar from './components/MinimalNavbar';
 import Footer from './components/Footer';
 import review from './assets/review.jpg';
 import review1 from './assets/review1.jpg';
@@ -569,6 +570,28 @@ const App = () => {
     window.location.href = 'tel:+919908016333';
   };
 
+  // Component to conditionally render Navbar
+  const ConditionalNavbar = () => {
+    const location = useLocation();
+    const isLandingPage = location.pathname === '/Drjoints';
+    
+    if (isLandingPage) {
+      return <MinimalNavbar />;
+    } else {
+      return <Navbar currentLang={currentLang} setCurrentLang={handleLanguageChange} translations={translations} languages={languages} />;
+    }
+  };
+
+  // Component to conditionally render Footer
+  const ConditionalFooter = () => {
+    const location = useLocation();
+    const shouldShowFooter = location.pathname !== '/Drjoints';
+    
+    return shouldShowFooter ? (
+      <Footer currentLang={currentLang} translations={translations} />
+    ) : null;
+  };
+
   return (
     <div>
       {/* <div className="fixed md:block hidden z-50 bottom-[2.5rem] right-[7rem] animate-bounce-slow">
@@ -604,7 +627,7 @@ const App = () => {
       </div>
 
       <BrowserRouter>
-        <Navbar currentLang={currentLang} setCurrentLang={handleLanguageChange} translations={translations} languages={languages} />
+        <ConditionalNavbar />
         <Routes>
           <Route path='/' element={<Home currentLang={currentLang} translations={translations} />} />
           <Route path='/about' element={<About currentLang={currentLang} translations={translations} />} />
@@ -625,7 +648,7 @@ const App = () => {
           <Route path='/thank-you' element={<ThankYou />} />
           <Route path='*' element={<Navigate to="/" />} />
         </Routes>
-        <Footer currentLang={currentLang} translations={translations} />
+        <ConditionalFooter />
       </BrowserRouter>
     </div>
   )

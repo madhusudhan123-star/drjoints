@@ -455,6 +455,37 @@ const Checkout = ({ translations, currentLang }) => {
             <h2 className="text-2xl font-bold text-gray-800 mb-6" >
                 {translations[currentLang].checkout.order}
             </h2>
+
+            {/* Trust Indicators */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                <div className="flex items-center space-x-2 mb-3">
+                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-semibold text-green-800">Secure Checkout</span>
+                </div>
+                <div className="grid grid-cols-1 gap-2 text-sm text-gray-700">
+                    <div className="flex items-center space-x-2">
+                        <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span>SSL Encrypted</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span>Also available on Amazon</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span>Money-back guarantee</span>
+                    </div>
+                </div>
+            </div>
+
             <div className="space-y-4">
                 <div className="flex justify-between py-2 border-t border-gray-200">
                     <label className="text-gray-700">
@@ -477,6 +508,25 @@ const Checkout = ({ translations, currentLang }) => {
                 {formErrors.promoCode && (
                     <p className="text-red-500 text-sm mt-1">{formErrors.promoCode}</p>
                 )}
+
+                {/* Alternative Purchase Options */}
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2">Alternative Purchase Options</h4>
+                    <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                                <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+                                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M13.12 2.06L7.58 7.6c-.37.37-.58.88-.58 1.41V19c0 1.1.9 2 2 2h9c.8 0 1.52-.48 1.84-1.21l3.26-7.61C23.94 10.2 22.49 8 20.34 8H14.5l1.76-5.24c.15-.45-.24-.81-.69-.81-.23 0-.45.09-.61.24z"/>
+                                    </svg>
+                                </div>
+                                <span className="text-sm text-gray-700">Amazon Prime eligible</span>
+                            </div>
+                            <a href="#" className="text-xs text-orange-600 underline">View on Amazon</a>
+                        </div>
+                        <p className="text-xs text-gray-600">Same product, multiple trusted platforms</p>
+                    </div>
+                </div>
 
                 {/* Rest of the order summary */}
                 <div className="flex justify-between py-4 border-t border-gray-200">
@@ -561,6 +611,29 @@ const Checkout = ({ translations, currentLang }) => {
                         translations[currentLang].checkout.order
                     )}
                 </button>
+
+                {/* Additional Trust Elements */}
+                <div className="grid grid-cols-3 gap-2 pt-4 text-center text-xs text-gray-600">
+                    <div className="flex flex-col items-center">
+                        <svg className="w-6 h-6 text-green-600 mb-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                        </svg>
+                        <span>Secure Payment</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <svg className="w-6 h-6 text-blue-600 mb-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                            <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"/>
+                        </svg>
+                        <span>Fast Delivery</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <svg className="w-6 h-6 text-yellow-600 mb-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        <span>4.8★ Rating</span>
+                    </div>
+                </div>
             </div>
         </div >
     );

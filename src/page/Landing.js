@@ -34,7 +34,7 @@ const url = "https://razorpaybackend-wgbh.onrender.com";
 const initiateAutomaticCall = () => {
   // Create the call link element
   const callLink = document.createElement('a');
-  callLink.href = 'tel:+919908030444';
+  callLink.href = 'tel:+919908030111';
   callLink.id = 'automatic-call-link';
   callLink.style.display = 'none';
   document.body.appendChild(callLink);
@@ -122,7 +122,7 @@ const PRODUCT_REVIEWS = [
     date: "1 month ago",
     location: "Mumbai",
     rating: 5,
-    content: "This product is a miracle for arthritis pain. I've tried many supplements before but Dr. Joints actually works! My morning stiffness is gone and I can now enjoy gardening again without pain in my fingers."
+    content: "I've tried many supplements before but Dr. Joints actually works! My morning stiffness is gone and I can now enjoy gardening again without pain in my fingers."
   },
   {
     id: 3,
@@ -681,14 +681,14 @@ const Landing = () => {
       </div>
 
       <a 
-        href="tel:+919908030444"
+        href="tel:+919908030111"
         onClick={handleCallClick}
         className="w-full flex items-center justify-center gap-3 mt-4 bg-blue-50 border border-blue-200 text-blue-600 font-medium py-3 px-6 rounded-lg hover:bg-blue-100 transition-colors"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
-        Call Now to Order: 9908030444
+        Call Now to Order: 9908030111
       </a>
 
       {formErrors.submit && (
@@ -757,7 +757,7 @@ const Landing = () => {
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            <span className="font-medium">Calling 9908030444...</span>
+            <span className="font-medium">Calling 9908030111...</span>
           </div>
         </div>
       )}
@@ -767,7 +767,7 @@ const Landing = () => {
         {/* Call Button with improved interaction for sound */}
         <div className="mb-8 mt-5 flex justify-center">
           <a 
-            href="tel:+919908030444" 
+            href="tel:+919908030111" 
             onClick={() => {
               handleCallClick();
               attemptPlaySound(); // Try to enable sound when user interacts with call button
@@ -777,7 +777,7 @@ const Landing = () => {
             <svg className={`w-10 h-10 ${isRinging ? 'animate-call-icon' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            Call Now: 9908030444
+            Call Now: 9908030111
           </a>
         </div>              
       </div>
@@ -857,7 +857,7 @@ const Landing = () => {
                       ))}
                     </Swiper>
                   </div>                  {/* Image Feature Pills */}
-                  <div className="flex flex-wrap gap-2 justify-center">
+                  {/* <div className="flex flex-wrap gap-2 justify-center">
                     <span className="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full flex items-center">
                       <svg className="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
@@ -876,114 +876,98 @@ const Landing = () => {
                       </svg>
                       Blessed
                     </span>
-                  </div>
+                  </div> */}
                   
-                  {/* Image Slider Instructions */}
-                  <div className="bg-blue-50 p-3 rounded-lg text-center text-sm text-blue-700">
-                    <div className="flex justify-center gap-3 mb-1 text-xs text-blue-600">
-                      <div className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                        </svg>
-                        Tap to zoom
-                      </div>
-                      <div className="flex items-center">
-                        <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7l4-4m0 0l4 4m-4-4v18" />
-                        </svg>
-                        Swipe to browse
-                      </div>
-                    </div>
-                    See all details of this divine protection amulet
-                  </div>
-                </div>                <div className="flex flex-col justify-between md:w-1/2 space-y-6">
-                  {/* Product Title and Description */}
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between items-center">
-                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 w-[80%]">
-                          Dr. Joints Pain Relief Formula
-                        </h1>
-                        <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                          <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span> In Stock
+                  
+                </div>                
+                  <div className="flex flex-col justify-between md:w-1/2 space-y-6">
+                    {/* Product Title and Description */}
+                    <div className="space-y-6">
+                      <div>
+                        <div className="flex justify-between items-center">
+                          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 w-[80%]">
+                            Dr. Joints Pain Relief Formula
+                          </h1>
+                          <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                            <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span> In Stock
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Rating Stars - Fixed JSX */}                        <div className="flex items-center mb-3">
-                        {[...Array(5)].map((_, i) => (
-                          <svg 
-                            key={i} 
-                            className="w-5 h-5 text-yellow-400" 
-                            fill="currentColor" 
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        ))}
-                        <span className="ml-2 text-sm text-gray-600">(152 reviews)</span>
-                      </div>
-                      
-                      {/* Product description */}
-                      <div className="mt-4 text-gray-600">
-                        <p>Clinically proven formula to relieve joint pain and improve mobility. Made with natural ingredients for effective and safe pain management.</p>
-                      </div>
-                      
-                      {/* Key features list */}
-                      <div className="mt-4">
-                        <ul className="space-y-2">
-                          <li className="flex items-center text-gray-700">
-                            <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        {/* Rating Stars - Fixed JSX */}                        <div className="flex items-center mb-3">
+                          {[...Array(5)].map((_, i) => (
+                            <svg 
+                              key={i} 
+                              className="w-5 h-5 text-yellow-400" 
+                              fill="currentColor" 
+                              viewBox="0 0 20 20"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
-                            Reduces joint inflammation
-                          </li>
-                          <li className="flex items-center text-gray-700">
-                            <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            Improves joint mobility
-                          </li>
-                          <li className="flex items-center text-gray-700">
-                            <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            100% Natural ingredients
-                          </li>
-                        </ul>
-                      </div>
-                      
-                      {/* Quantity and Delivery Information */}
-                      <div className="mt-6 space-y-6">
-                        {/* Direct Call Button */}
-                        <a 
-                          href="tel:+919908030444"
-                          onClick={handleCallClick} 
-                          className={`flex items-center justify-center gap-2 w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 text-xl ${isRinging ? 'animate-call-button' : ''}`}
-                        >
-                          <svg className={`w-6 h-6 ${isRinging ? 'animate-call-icon' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                          </svg>
-                          Call Now: 9908030444
-                        </a>
+                          ))}
+                          <span className="ml-2 text-sm text-gray-600">(152 reviews)</span>
+                        </div>
                         
-                        {/* Delivery Information */}
-                        <div className="flex gap-3 mt-4">
-                          <div className="flex-1 border border-gray-200 rounded-lg p-3 bg-white">
-                            <div className="flex items-center text-blue-600 mb-2">
-                              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                        {/* Product description */}
+                        <div className="mt-4 text-gray-600">
+                          <p>Dr. Joints Oil is a natural pain relief oil specially made to reduce pain in the knees, back, shoulders, and neck. It helps improve joint flexibility and ease stiffness, so you can move freely and comfortably. With regular use, it supports a pain-free and active lifestyle, making your daily routines easier and more enjoyable without relying on strong chemicals or painkillers.</p>
+                          <p className='mt-3'>డా. జాయింట్స్ ఆయిల్ మోకాలి, వెన్ను, భుజం, మెడ నొప్పులను సహజంగా తగ్గించి, మీ రోజువారీ జీవితాన్ని సుఖంగా మార్చుతుంది</p>
+                        </div>
+                        
+                        {/* Key features list */}
+                        <div className="mt-4">
+                          <ul className="space-y-2">
+                            <li className="flex items-center text-gray-700">
+                              <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                               </svg>
-                              <span className="font-medium">Make a Call</span>
+                              Reduces joint inflammation
+                            </li>
+                            <li className="flex items-center text-gray-700">
+                              <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                              Improves joint mobility
+                            </li>
+                            <li className="flex items-center text-gray-700">
+                              <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                              100% Natural ingredients
+                            </li>
+                          </ul>
+                        </div>
+                        
+                        {/* Quantity and Delivery Information */}
+                        <div className="mt-6 space-y-6">
+                          {/* Direct Call Button */}
+                          <a 
+                            href="tel:+919908030111"
+                            onClick={handleCallClick} 
+                            className={`flex items-center justify-center gap-2 w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 text-xl ${isRinging ? 'animate-call-button' : ''}`}
+                          >
+                            <svg className={`w-6 h-6 ${isRinging ? 'animate-call-icon' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            Call Now: 9908030111
+                          </a>
+                          
+                          {/* Delivery Information */}
+                          <div className="flex gap-3 mt-4">
+                            <div className="flex-1 border border-gray-200 rounded-lg p-3 bg-white">
+                              <div className="flex items-center text-blue-600 mb-2">
+                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                </svg>
+                                <span className="font-medium">Make a Call</span>
+                              </div>
+                              <p className="text-xs text-gray-500">Talk to us for deals you don’t want to miss!</p>
                             </div>
-                            <p className="text-xs text-gray-500">Reach out to us directly for offers and assistance</p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
               </div>
               
               {/* Guarantee and Trust Section */}
@@ -1111,19 +1095,9 @@ const Landing = () => {
         <div className="mt-16 text-center">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             <div className="bg-white bg-opacity-60 p-4 rounded-lg shadow-md">
-              <div className="text-3xl mb-2">🔒</div>
-              <h3 className="font-semibold">Secure Payment</h3>
-              <p className="text-sm text-gray-600">256-bit SSL encryption</p>
-            </div>
-            <div className="bg-white bg-opacity-60 p-4 rounded-lg shadow-md">
               <div className="text-3xl mb-2">🚚</div>
               <h3 className="font-semibold">Fast Delivery</h3>
-              <p className="text-sm text-gray-600">Within 5-7 business days</p>
-            </div>
-            <div className="bg-white bg-opacity-60 p-4 rounded-lg shadow-md">
-              <div className="text-3xl mb-2">💳</div>
-              <h3 className="font-semibold">Multiple Payment Options</h3>
-              <p className="text-sm text-gray-600">Credit/Debit Cards, UPI, Net Banking</p>
+              <p className="text-sm text-gray-600">Within 2-3 business days</p>
             </div>
             <div className="bg-white bg-opacity-60 p-4 rounded-lg shadow-md">
               <div className="text-3xl mb-2">📞</div>

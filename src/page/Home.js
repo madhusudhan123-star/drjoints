@@ -188,7 +188,7 @@ const ProductSection = () => {
 
 
 const Product = ({ currentLang, translations }) => {
-    const [showPopup, setShowPopup] = useState(false);
+    const [currentMediaSlide, setCurrentMediaSlide] = useState(0);
     const productRef = useRef(null);
 
     const mediaLinks = [
@@ -236,109 +236,150 @@ const Product = ({ currentLang, translations }) => {
         }
     ];
 
+    // Auto-slide functionality
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setShowPopup(true);
-                }
-            },
-            { threshold: 0.3 }
-        );
+        const slideTimer = setInterval(() => {
+            setCurrentMediaSlide((prev) => (prev + 1) % mediaLinks.length);
+        }, 3000); // Change slide every 3 seconds
 
-        if (productRef.current) {
-            observer.observe(productRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
+        return () => clearInterval(slideTimer);
+    }, [mediaLinks.length]);
 
     return (
-        <div ref={productRef} className="min-h-screen bg-[#F0E7E5] p-8 relative">
-            <div className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                            bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-2xl p-6 z-50 
-                            transition-all duration-500 w-[90%] max-w-2xl border border-blue-100
-                            ${showPopup ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-                <div className="relative">
-                    <button 
-                        onClick={() => setShowPopup(false)}
-                        className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full p-2
-                                 hover:bg-red-600 transition-colors z-10 shadow-lg"
-                    >
-                        <X size={20} />
-                    </button>
-                    
-                    <div className="text-center mb-6">
-                        <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 
-                                     text-transparent bg-clip-text">Featured Media Coverage</h3>
-                        <p className="text-gray-600">Dr. Joints in the news</p>
-                    </div>
+        <div ref={productRef} className="min-h-screen bg-[#F0E7E5] relative">
+            {/* Featured Media Coverage Slider */}
+            <div className="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-8 mb-8">
+                <div className="text-center mb-6">
+                    <h3 className="text-3xl font-bold text-white mb-2">Featured Media Coverage</h3>
+                    <p className="text-blue-100">Dr. Joints in the news</p>
+                </div>
 
-                    <div className="max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                <div className="relative w-full overflow-hidden">
+                    <div 
+                        className="flex transition-transform duration-1000 ease-in-out"
+                        style={{ transform: `translateX(-${currentMediaSlide * 100}%)` }}
+                    >
                         {mediaLinks.map((item, index) => (
-                            <a 
-                                key={index}
-                                href={item.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group bg-white hover:bg-blue-50 rounded-xl p-4 mb-3 block
-                                         transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl 
-                                         border border-gray-100 hover:border-blue-200"
-                            >
-                                <div className="flex items-center gap-3">
-                                    <div className="">
-                                        <img src={item.icon}  className="w-20"/>
-                                    </div>
-                                    <div className="flex-grow">
-                                        <h4 className="font-bold text-gray-800 group-hover:text-blue-600 
-                                                     transition-colors text-lg">{item.title}</h4>
-                                        <p className="text-sm text-gray-500">
-                                            Dr. Joints Pain Relief Oil: Expanding Indian Ayurveda to UAE
-                                        </p>
-                                        <div className="mt-1 flex items-center">
-                                            <span className="bg-blue-50 text-blue-700 text-xs py-1 px-2 rounded-full">
-                                                {item.source}
-                                            </span>
-                                            <span className="text-xs text-gray-400 ml-auto flex items-center">
-                                                View Article 
-                                                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                </svg>
-                                            </span>
+                            <div key={index} className="w-full flex-shrink-0 px-4">
+                                <a 
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group block"
+                                >
+                                    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl p-8 
+                                                  transform hover:scale-105 transition-all duration-300 
+                                                  hover:shadow-2xl border border-gray-100">
+                                        <div className="text-center">
+                                            {/* Title */}
+                                            <h4 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 
+                                                         group-hover:text-blue-600 transition-colors">
+                                                {item.title}
+                                            </h4>
+                                            
+                                            {/* Subtitle */}
+                                            <p className="text-lg text-gray-600 mb-6">
+                                                Dr. Joints Pain Relief Oil: Expanding Indian Ayurveda to UAE
+                                            </p>
+                                            
+                                            {/* Icon Image */}
+                                            <div className="flex justify-center mb-6">
+                                                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full 
+                                                              bg-gradient-to-br from-blue-50 to-purple-50 
+                                                              flex items-center justify-center shadow-lg
+                                                              group-hover:shadow-xl transition-all duration-300">
+                                                    <img 
+                                                        src={item.icon} 
+                                                        alt={item.source}
+                                                        className="w-24 h-24 md:w-32 md:h-32 object-contain
+                                                                 group-hover:scale-110 transition-transform duration-300"
+                                                    />
+                                                </div>
+                                            </div>
+                                            
+                                            {/* Source and CTA */}
+                                            <div className="flex items-center justify-center space-x-4">
+                                                <span className="text-blue-600 font-medium flex items-center
+                                                               group-hover:text-blue-800 transition-colors">
+                                                    Read Article 
+                                                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" 
+                                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
+                                                              d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                    </svg>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         ))}
                     </div>
+                </div>
 
-                    <div className="mt-6 pt-4 border-t border-gray-100 text-center">
-                        <p className="text-sm text-gray-500">Expanding Indian Ayurveda to UAE and beyond</p>
+                {/* Slider Indicators */}
+                <div className="flex justify-center mt-6 space-x-2">
+                    {mediaLinks.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                index === currentMediaSlide 
+                                    ? 'bg-white scale-125' 
+                                    : 'bg-white/50 hover:bg-white/75'
+                            }`}
+                            onClick={() => setCurrentMediaSlide(index)}
+                        />
+                    ))}
+                </div>
+
+                {/* Navigation Arrows */}
+                <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+                    <button
+                        onClick={() => setCurrentMediaSlide(
+                            currentMediaSlide === 0 ? mediaLinks.length - 1 : currentMediaSlide - 1
+                        )}
+                        className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full
+                                 backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                </div>
+                
+                <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
+                    <button
+                        onClick={() => setCurrentMediaSlide((currentMediaSlide + 1) % mediaLinks.length)}
+                        className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full
+                                 backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
+                </div>
+            </div>
+
+            {/* Rest of the Product section */}
+            <div className="p-8">
+                <div className="text-center mb-8">
+                    <h1 className="text-blue-900 text-4xl font-bold mb-4">{translations[currentLang].product.title}</h1>
+                    <h2 className="text-amber-800 text-2xl font-semibold">{translations[currentLang].product.subtitle}</h2>
+                </div>
+
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div className="space-y-6 pr-4">
+                        <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content1}</p>
+                        <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content2}</p>
+                        <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content3}</p>
+                        <button className="px-8 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+                            <a href="/product">Buy Now</a>
+                        </button>
                     </div>
-                </div>
-            </div>
 
-            <div className="text-center mb-8">
-                <h1 className="text-blue-900 text-4xl font-bold mb-4">{translations[currentLang].product.title}</h1>
-                <h2 className="text-amber-800 text-2xl font-semibold">{translations[currentLang].product.subtitle}</h2>
-            </div>
-
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div className="space-y-6 pr-4">
-                    <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content1}</p>
-
-                    <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content2}</p>
-
-                    <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content3}</p>
-                    <button className="px-8 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors" ><a href="/product">Buy Now</a></button>
-                </div>
-
-                <div className="relative">
-                    <img
-                        src={product}
-                        alt="Dr. Joints Pain Relief Oil Product"
-                        className="w-full h-auto"
-                    />
+                    <div className="relative">
+                        <img
+                            src={product}
+                            alt="Dr. Joints Pain Relief Oil Product"
+                            className="w-full h-auto"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
