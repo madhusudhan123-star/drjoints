@@ -12,21 +12,16 @@ const COUNTRY_CURRENCY_MAP = {
 const DEFAULT_COUNTRY = 'India';
 const DEFAULT_CURRENCY = COUNTRY_CURRENCY_MAP[DEFAULT_COUNTRY];
 const VALID_PROMO_CODE = "FLASH70";
-const ACCESS_PASSWORD = "630979"; // Password to access the page
 
 const Agent = ({ translations = {}, currentLang = 'en' }) => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    // Password protection state
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [passwordInput, setPasswordInput] = useState("");
-    const [passwordError, setPasswordError] = useState("");
-    
     const [orderDetails, setOrderDetails] = useState(null);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [orderPlaced, setOrderPlaced] = useState(false);
     const [currentCurrency, setCurrentCurrency] = useState(DEFAULT_CURRENCY);
     const [convertedAmount, setConvertedAmount] = useState(0);
     const [promoCode, setPromoCode] = useState("");
@@ -39,6 +34,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
     const [callNotes, setCallNotes] = useState("");
     const [customerSource, setCustomerSource] = useState("");
     const [agentName, setAgentName] = useState("");
+    const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
 
     useEffect(() => {
         // Simulate fetching the latest order number from the backend
@@ -50,6 +46,34 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         const nextOrderNumber = orderNumber + 1;
         setOrderNumber(nextOrderNumber);
         localStorage.setItem("orderNumber", nextOrderNumber); // Persist order number locally
+    };
+
+    // Add reset form function
+    const resetForm = () => {
+        setFormData({
+            firstName: '',
+            lastName: '',
+            companyName: '',
+            country: DEFAULT_COUNTRY,
+            streetAddress: '',
+            apartment: '',
+            townCity: '',
+            pincode: '',
+            phone: '',
+            paymentMode: ''
+        });
+        setQuantity(1);
+        setTotalOrderAmount(3999);
+        setAdvanceAmount(0);
+        setCallNotes("");
+        setCustomerSource("");
+        setAgentName("");
+        setFormErrors({});
+        setPaymentSuccess(false);
+        setOrderPlaced(false);
+        setIsSubmitting(false);
+        setPromoCode("");
+        setIsPromoApplied(false);
     };
 
     const [formData, setFormData] = useState({
@@ -78,7 +102,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         }
     }, [formData.country, orderDetails]);
 
-    // Original useEffects for initialization and script loading...
+    // Update the script loading useEffect
     useEffect(() => {
         if (!location.state) {
             // Instead of redirecting, set default order details for direct navigation
@@ -91,14 +115,44 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
             setOrderDetails(location.state);
         }
 
-        const script = document.createElement('script');
-        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-        script.async = true;
-        document.body.appendChild(script);
+        // Load Razorpay script with proper error handling
+        const loadRazorpayScript = () => {
+            return new Promise((resolve, reject) => {
+                // Check if Razorpay is already loaded
+                if (window.Razorpay) {
+                    setIsRazorpayLoaded(true);
+                    resolve();
+                    return;
+                }
+
+                const script = document.createElement('script');
+                script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+                script.async = true;
+                
+                script.onload = () => {
+                    setIsRazorpayLoaded(true);
+                    resolve();
+                };
+                
+                script.onerror = () => {
+                    console.error('Failed to load Razorpay script');
+                    reject(new Error('Failed to load Razorpay script'));
+                };
+                
+                document.body.appendChild(script);
+            });
+        };
+
+        loadRazorpayScript().catch(error => {
+            console.error('Razorpay script loading error:', error);
+            setFormErrors(prev => ({ ...prev, submit: 'Payment system unavailable. Please try again later.' }));
+        });
 
         return () => {
-            if (document.body.contains(script)) {
-                document.body.removeChild(script);
+            // Clean up script if component unmounts
+            const existingScript = document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]');
+            if (existingScript && document.body.contains(existingScript)) {
+                document.body.removeChild(existingScript);
             }
         };
     }, [location.state]);
@@ -119,13 +173,17 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         } else if (!/^\d{6}$/.test(formData.pincode)) {
             errors.pincode = 'Pin code must be exactly 6 digits';
         }
-        if (!agentName.trim()) errors.agentName = 'Agent name is required';
+        // Removed agentName validation since we removed the agent section
         if (totalOrderAmount <= 0) {
             errors.totalOrderAmount = 'Order amount must be greater than 0';
         } else if (totalOrderAmount < 2500) {
             errors.totalOrderAmount = 'Negotiated price must be at least ₹2,500';
         }
-        if (advanceAmount > totalOrderAmount * quantity) errors.advanceAmount = 'Advance amount cannot exceed total order amount';
+        if (advanceAmount <= 0) {
+            errors.advanceAmount = 'Advance payment amount is required and must be greater than 0';
+        } else if (advanceAmount > totalOrderAmount) {
+            errors.advanceAmount = 'Advance amount cannot exceed negotiated unit price';
+        }
 
         return errors;
     };
@@ -177,27 +235,9 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
     const renderOrderSummary = () => (
         <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                📞 Call Center Order Summary
             </h2>
 
             <div className="space-y-4">
-                {/* Agent Information */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                    <h4 className="font-semibold text-blue-800 mb-2">Agent Information</h4>
-                    <div className="space-y-2">
-                        <input
-                            type="text"
-                            value={agentName}
-                            onChange={(e) => setAgentName(e.target.value)}
-                            placeholder="Agent Name *"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
-                        />
-                        {formErrors.agentName && (
-                            <p className="text-red-500 text-xs">{formErrors.agentName}</p>
-                        )}
-                    </div>
-                </div>
-
                 {/* Product & Pricing Details */}
                 <div className="border-b border-gray-200 pb-4">
                     <div className="flex justify-between items-start mb-4">
@@ -210,7 +250,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                                         {/* Negotiated Price Input */}
                     <div className="space-y-2 mb-4">
                         <label className="block text-sm font-medium text-gray-700">
-                            💰 Negotiated Unit Price ({currentCurrency.currency}) *
+                            Negotiated Unit Price ({currentCurrency.currency}) *
                         </label>
                         <div className="flex space-x-2">
                             <input
@@ -229,7 +269,11 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                                 }}
                                 min="2500"
                                 step="0.01"
-                                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                className={`flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                                    totalOrderAmount > 0 && totalOrderAmount < 2500 
+                                        ? 'border-red-500 text-red-600 bg-red-50' 
+                                        : 'border-gray-300'
+                                }`}
                                 placeholder="Enter negotiated price per unit (min ₹2,500)"
                             />
                             <button
@@ -243,7 +287,11 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                         {formErrors.totalOrderAmount && (
                             <p className="text-red-500 text-xs">{formErrors.totalOrderAmount}</p>
                         )}
-                        <p className="text-xs text-green-600">
+                        <p className={`text-xs ${
+                            totalOrderAmount > 0 && totalOrderAmount < 2500 
+                                ? 'text-red-600' 
+                                : 'text-green-600'
+                        }`}>
                             MRP: ₹4,999 | Current: ₹{totalOrderAmount} | Discount: ₹{3999 - totalOrderAmount} | Min Required: ₹2,500
                         </p>
                     </div>
@@ -279,9 +327,9 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
 
 
                     {/* Advance Payment Section */}
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 space-y-2">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 space-y-2">
                         <label className="block text-sm font-medium text-gray-700">
-                            💳 Advance Payment Amount ({currentCurrency.currency})
+                            💳 Advance Payment Amount ({currentCurrency.currency}) *
                         </label>
                         <input
                             type="number"
@@ -291,23 +339,27 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                                 if (value === '') {
                                     setAdvanceAmount(0);
                                 } else {
-                                    const numericValue = parseFloat(value);
+                                    const numericValue = parseInt(value);
                                     if (!isNaN(numericValue) && numericValue >= 0) {
                                         setAdvanceAmount(numericValue);
                                     }
                                 }
                             }}
-                            min="0"
-                            step="0.01"
-                            max={totalOrderAmount * quantity}
+                            min="1"
+                            step="1"
+                            max={totalOrderAmount}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            placeholder="Enter advance amount to collect now"
+                            placeholder="Enter advance amount (required)"
+                            required
                         />
                         {formErrors.advanceAmount && (
                             <p className="text-red-500 text-xs">{formErrors.advanceAmount}</p>
                         )}
                         <p className="text-xs text-gray-600">
-                            💰 Advance: ₹{advanceAmount} | 🚚 COD: ₹{((totalOrderAmount * quantity) - advanceAmount).toFixed(2)}
+                            💰 Advance: ₹{advanceAmount} | 🚚 Remaining per unit: ₹{(totalOrderAmount - advanceAmount)}
+                        </p>
+                        <p className="text-xs text-blue-600 font-medium">
+                            * Advance payment cannot exceed negotiated unit price (₹{totalOrderAmount})
                         </p>
                     </div>
                 </div>
@@ -324,7 +376,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                             <span className="font-semibold text-green-700">₹{advanceAmount.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
-                            <span>Cash on Delivery:</span>
+                            <span>Remaining Amount:</span>
                             <span>₹{((totalOrderAmount * quantity) - advanceAmount).toFixed(2)}</span>
                         </div>
                         <hr className="my-2" />
@@ -333,7 +385,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                             <span className="text-green-700">₹{advanceAmount.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between font-semibold">
-                            <span>Balance Amount (COD):</span>
+                            <span>Balance Amount:</span>
                             <span className="text-orange-600">₹{((totalOrderAmount * quantity) - advanceAmount).toFixed(2)}</span>
                         </div>
                     </div>
@@ -343,30 +395,47 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                 <button
                     type="submit"
                     onClick={handleSubmit}
-                    disabled={isSubmitting || advanceAmount <= 0}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg
+                    disabled={isSubmitting || !isRazorpayLoaded || advanceAmount <= 0 || orderPlaced}
+                    className={`w-full font-medium py-3 px-6 rounded-lg
                         transition-all duration-200 transform hover:scale-105
-                        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 ${
+                        orderPlaced 
+                            ? 'bg-green-600 text-white' 
+                            : 'bg-green-600 hover:bg-green-700 text-white'
+                    }`}
                 >
-                    {isSubmitting ? (
+                    {orderPlaced ? (
+                        <div className="flex items-center justify-center">
+                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            ✅ Order Placed Successfully!
+                        </div>
+                    ) : isSubmitting ? (
                         <div className="flex items-center justify-center">
                             <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                             </svg>
-                            Processing Order...
+                            Processing Payment...
                         </div>
-                    ) : advanceAmount > 0 ? (
-                        `🔗 Generate Payment Link for ₹${advanceAmount}`
+                    ) : !isRazorpayLoaded ? (
+                        'Loading Payment System...'
+                    ) : advanceAmount <= 0 ? (
+                        'Enter Advance Amount to Continue'
                     ) : (
-                        '📋 Create COD Order'
+                        `🔗 Generate Payment Link for ₹${advanceAmount}`
                     )}
                 </button>
 
                 <p className="text-xs text-gray-500 text-center">
-                    {advanceAmount > 0 
-                        ? "Customer will receive payment link via SMS/WhatsApp to pay advance amount"
-                        : "Complete COD order will be created without advance payment"
+                    {orderPlaced 
+                        ? "Order placed successfully! Form will reset in 2 seconds..."
+                        : !isRazorpayLoaded 
+                        ? "Loading payment system..."
+                        : advanceAmount <= 0
+                        ? "Please enter advance payment amount to proceed"
+                        : "Customer will receive payment link via SMS/WhatsApp to pay advance amount"
                     }
                 </p>
             </div>
@@ -409,13 +478,8 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         }
 
         try {
-            if (advanceAmount > 0) {
-                // Handle advance payment with Razorpay
-                await handleRazorpayPayment();
-            } else {
-                // Handle full COD order
-                await handleCODOrder();
-            }
+            // Only handle advance payment with Razorpay (COD option removed)
+            await handleRazorpayPayment();
         } catch (error) {
             console.error('Order submission error:', error);
             setFormErrors(prev => ({ ...prev, submit: 'Order submission failed. Please try again.' }));
@@ -426,6 +490,14 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
 
     const handleRazorpayPayment = async () => {
         try {
+            // Check if Razorpay is loaded
+            if (!window.Razorpay || !isRazorpayLoaded) {
+                throw new Error('Payment system is not ready. Please refresh the page and try again.');
+            }
+
+            console.log('Creating order with amount:', advanceAmount);
+            console.log('API Base URL:', API_BASE_URL);
+
             // Create order on backend first
             const orderResponse = await fetch(`${API_BASE_URL}/create-order`, {
                 method: 'POST',
@@ -436,29 +508,56 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                     amount: advanceAmount,
                     currency: currentCurrency.currency,
                     receipt: `CC_${orderNumber}_${Date.now()}`,
+                    paymentMethod: {
+                        type: 'advance_payment',
+                        advanceAmount: advanceAmount,
+                        totalOrderAmount: totalOrderAmount * quantity,
+                        remainingAmount: (totalOrderAmount * quantity) - advanceAmount,
+                        currency: currentCurrency.currency,
+                        paymentMode: 'online'
+                    },
                     notes: {
-                        agent_name: agentName,
-                        customer_source: customerSource,
-                        call_notes: callNotes,
+                        agent_name: agentName || 'Call Center Agent',
+                        customer_source: customerSource || 'call_center',
+                        call_notes: callNotes || 'Direct order',
                         order_type: 'call_center_order',
                         order_number: orderNumber,
                         customer_name: `${formData.firstName} ${formData.lastName}`,
-                        customer_email: formData.email,
-                        customer_phone: formData.phone
+                        customer_phone: formData.phone,
+                        total_order_value: totalOrderAmount * quantity,
+                        advance_amount: advanceAmount,
+                        remaining_amount: (totalOrderAmount * quantity) - advanceAmount,
+                        payment_method: 'advance_payment'
                     }
                 })
             });
 
-            const orderData = await orderResponse.json();
+            console.log('Order response status:', orderResponse.status);
 
             if (!orderResponse.ok) {
-                throw new Error(orderData.message || 'Failed to create order');
+                const errorText = await orderResponse.text();
+                console.error('Order creation failed with response:', errorText);
+                
+                let errorData;
+                try {
+                    errorData = JSON.parse(errorText);
+                } catch (e) {
+                    errorData = { message: errorText };
+                }
+                
+                throw new Error(errorData.message || `HTTP error! status: ${orderResponse.status}`);
+            }
+
+            const orderData = await orderResponse.json();
+
+            if (!orderData.success || !orderData.order || !orderData.key) {
+                throw new Error('Invalid order response from server');
             }
 
             // Use the order ID from backend
             const options = {
                 key: orderData.key,
-                amount: Math.round(advanceAmount * 100),
+                amount: Math.round(advanceAmount * 100), // Amount in paise
                 currency: currentCurrency.currency,
                 name: 'Dr. Joints - Call Center Order',
                 description: `${orderDetails.productName} - Advance Payment`,
@@ -474,7 +573,21 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                             body: JSON.stringify({
                                 razorpay_order_id: response.razorpay_order_id,
                                 razorpay_payment_id: response.razorpay_payment_id,
-                                razorpay_signature: response.razorpay_signature
+                                razorpay_signature: response.razorpay_signature,
+                                paymentMethod: {
+                                    type: 'advance_payment',
+                                    advanceAmount: advanceAmount,
+                                    totalOrderAmount: totalOrderAmount * quantity,
+                                    remainingAmount: (totalOrderAmount * quantity) - advanceAmount,
+                                    currency: currentCurrency.currency,
+                                    paymentMode: 'online'
+                                },
+                                orderDetails: {
+                                    orderNumber,
+                                    customerName: `${formData.firstName} ${formData.lastName}`,
+                                    customerPhone: formData.phone,
+                                    agentName: agentName || 'Call Center Agent'
+                                }
                             })
                         });
 
@@ -484,9 +597,15 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                             // Send order confirmation email
                             await sendOrderConfirmationEmail(response.razorpay_payment_id);
                             // Submit to Formspree
-                            await submitOrderToFormspree();
+                            await submitOrderToFormspree(response.razorpay_payment_id);
                             incrementOrderNumber();
                             setPaymentSuccess(true);
+                            setOrderPlaced(true);
+                            
+                            // Auto-reset after 2 seconds
+                            setTimeout(() => {
+                                resetForm();
+                            }, 2000);
                         } else {
                             throw new Error(verificationData.message || 'Payment verification failed');
                         }
@@ -505,6 +624,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                 modal: {
                     ondismiss: () => {
                         setFormErrors(prev => ({ ...prev, submit: 'Payment cancelled by customer' }));
+                        setIsSubmitting(false);
                     }
                 }
             };
@@ -515,20 +635,8 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         } catch (error) {
             console.error('Order creation error:', error);
             setFormErrors(prev => ({ ...prev, submit: error.message || 'Failed to initiate payment. Please try again.' }));
+            setIsSubmitting(false);
             throw error;
-        }
-    };
-
-    const handleCODOrder = async () => {
-        try {
-            // Send order confirmation email for COD orders
-            await sendOrderConfirmationEmail();
-            await submitOrderToFormspree();
-            incrementOrderNumber();
-            setPaymentSuccess(true);
-        } catch (error) {
-            console.error('COD order creation error:', error);
-            setFormErrors(prev => ({ ...prev, submit: 'Failed to create COD order. Please try again.' }));
         }
     };
 
@@ -542,8 +650,8 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                     quantity,
                     totalAmount: (totalOrderAmount * quantity).toFixed(2),
                     currency: currentCurrency.symbol,
-                    paymentMethod: advanceAmount > 0 ? 'Partial Payment (Advance + COD)' : 'Cash on Delivery',
-                    paymentId: paymentId || 'COD Order'
+                    paymentMethod: 'Partial Payment (Advance + Remaining)',
+                    paymentId: paymentId || 'Advance Payment'
                 },
                 customerDetails: {
                     firstName: formData.firstName,
@@ -575,7 +683,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         }
     };
 
-    const submitOrderToFormspree = async () => {
+    const submitOrderToFormspree = async (paymentId = null) => {
         const orderData = {
             // Customer Details
             ...formData,
@@ -588,14 +696,23 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
             totalOrderValue: totalOrderAmount * quantity,
             
             // Payment Details
+            paymentMethod: {
+                type: 'advance_payment',
+                advanceAmount: advanceAmount,
+                totalOrderAmount: totalOrderAmount * quantity,
+                remainingAmount: (totalOrderAmount * quantity) - advanceAmount,
+                currency: currentCurrency.currency,
+                paymentMode: 'online'
+            },
             advanceAmount,
-            codAmount: (totalOrderAmount * quantity) - advanceAmount,
-            paymentType: advanceAmount > 0 ? 'partial_advance' : 'full_cod',
+            remainingAmount: (totalOrderAmount * quantity) - advanceAmount,
+            paymentType: 'partial_advance',
+            paymentId: paymentId || 'N/A',
             
             // Call Center Details
-            agentName,
-            customerSource,
-            callNotes,
+            agentName: agentName || 'Call Center Agent',
+            customerSource: customerSource || 'call_center',
+            callNotes: callNotes || 'Direct order',
             orderType: 'call_center_order',
             
             // System Details
@@ -605,6 +722,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
             createdBy: 'call_center'
         };
 
+        console.log('Submitting to Formspree:', orderData);
         return handleFormspreeSubmit(orderData);
     };
 
@@ -627,108 +745,6 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         </div>
     );
 
-    // Check for stored authentication on component mount
-    useEffect(() => {
-        const storedAuth = localStorage.getItem('agentPageAuth');
-        if (storedAuth === ACCESS_PASSWORD) {
-            setIsAuthenticated(true);
-        }
-    }, []);
-
-    // Password verification function
-    const handlePasswordSubmit = (e) => {
-        e.preventDefault();
-        if (passwordInput === ACCESS_PASSWORD) {
-            setIsAuthenticated(true);
-            localStorage.setItem('agentPageAuth', ACCESS_PASSWORD);
-            setPasswordError("");
-        } else {
-            setPasswordError("Invalid password. Please try again.");
-            setPasswordInput("");
-        }
-    };
-
-    // Logout function
-    const handleLogout = () => {
-        setIsAuthenticated(false);
-        localStorage.removeItem('agentPageAuth');
-        setPasswordInput("");
-    };
-
-    // Password protection screen
-    if (!isAuthenticated) {
-        return (
-            <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-                <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-                    <div className="text-center mb-6">
-                        <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                            🔒 Access Required
-                        </h1>
-                        <p className="text-gray-600">
-                            Enter the password to access the Call Center Order System
-                        </p>
-                    </div>
-                    
-                    <form onSubmit={handlePasswordSubmit}>
-                        <div className="mb-4">
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                value={passwordInput}
-                                onChange={(e) => setPasswordInput(e.target.value)}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Enter access password"
-                                required
-                            />
-                            {passwordError && (
-                                <p className="text-red-500 text-sm mt-2">{passwordError}</p>
-                            )}
-                        </div>
-                        
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-                        >
-                            Access System
-                        </button>
-                    </form>
-                    
-                    <div className="mt-6 text-center">
-                        <button
-                            onClick={() => navigate('/')}
-                            className="text-gray-500 hover:text-gray-700 text-sm"
-                        >
-                            ← Back to Website
-                        </button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    // Add logout button to the main page header
-    const renderHeader = () => (
-        <div className="text-center mb-8">
-            <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-bold text-gray-900">
-                    📞 Call Center Order Creation
-                </h1>
-                <button
-                    onClick={handleLogout}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
-                >
-                    🔒 Logout
-                </button>
-            </div>
-            <p className="text-gray-600">
-                Create orders for customers over phone with price negotiation and advance payment collection
-            </p>
-        </div>
-    );
-
     if (!orderDetails) {
         return (
             <div className="flex items-center justify-center min-h-screen">
@@ -737,33 +753,14 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         );
     }
 
-    if (paymentSuccess || state.succeeded) {
-        return (
-            <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-                <div className="bg-green-50 rounded-lg p-8 border border-green-200">
-                    <h2 className="text-3xl font-bold text-green-600 mb-4">
-                        {getTranslation('checkout.successfully') || 'Order Placed Successfully!'}
-                    </h2>
-                    <p className="text-gray-600 mb-2">
-                        {getTranslation('checkout.orderNumber') || 'Order Number'}: {orderNumber}
-                    </p>
-                    <p className="text-gray-600 mb-6">
-                        {getTranslation('checkout.thank') || 'Thank you for your order!'}
-                    </p>
-                    <button
-                        onClick={() => navigate('/')}
-                        className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
-                    >
-                        {getTranslation('checkout.continue') || 'Continue Shopping'}
-                    </button>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12">
-            {renderHeader()}
+            <div className="text-center mb-8">
+                <p className="text-gray-600">
+                    Create orders for customers with price negotiation and advance payment collection
+                </p>
+            </div>
 
             {formErrors.submit && (
                 <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg mb-8">
@@ -785,23 +782,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                             </div>
                             {renderFormField("phone", "Customer Phone Number", "tel")}
                             
-                            <div className="space-y-2">
-                                <label className="block text-sm font-medium text-gray-700">
-                                    Delivery Country<span className="text-red-500">*</span>
-                                </label>
-                                <select
-                                    name="country"
-                                    value={formData.country}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                >
-                                    {Object.keys(COUNTRY_CURRENCY_MAP).map(country => (
-                                        <option key={country} value={country}>
-                                            {country} ({COUNTRY_CURRENCY_MAP[country].currency})
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                            {renderFormField("country", "Delivery Country")}
 
                             {renderFormField("streetAddress", "Delivery Address")}
                             {renderFormField("apartment", "Apartment/Suite/Floor", "text", false)}

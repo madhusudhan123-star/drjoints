@@ -575,9 +575,10 @@ const App = () => {
   const ConditionalNavbar = () => {
     const location = useLocation();
     const isLandingPage = location.pathname === '/Drjoints';
+    const isAgentPage = location.pathname === '/agent';
     
-    if (isLandingPage) {
-      return <MinimalNavbar />;
+    if (isLandingPage || isAgentPage) {
+      return isLandingPage ? <MinimalNavbar /> : null;
     } else {
       return <Navbar currentLang={currentLang} setCurrentLang={handleLanguageChange} translations={translations} languages={languages} />;
     }
@@ -586,7 +587,7 @@ const App = () => {
   // Component to conditionally render Footer
   const ConditionalFooter = () => {
     const location = useLocation();
-    const shouldShowFooter = location.pathname !== '/Drjoints';
+    const shouldShowFooter = location.pathname !== '/Drjoints' && location.pathname !== '/agent';
     
     return shouldShowFooter ? (
       <Footer currentLang={currentLang} translations={translations} />
