@@ -31,6 +31,7 @@ import blog3 from './assets/blogs/three.jpg'
 import Landing from './page/Landing';
 import ThankYou from './page/ThankYou';
 import { LanguageProvider } from './contexts/LanguageContext';
+import Agent from './page/Agent';
 
 // Language options
 const languages = [
@@ -594,19 +595,6 @@ const App = () => {
 
   return (
     <div>
-      {/* <div className="fixed md:block hidden z-50 bottom-[2.5rem] right-[7rem] animate-bounce-slow">
-        <a
-          href="tel:+919908016333"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src={callLogo}
-            alt="WhatsApp"
-            className="w-16 hover:scale-110 transition-transform duration-300"
-          />
-        </a>
-      </div> */}
       <div className="fixed bottom-10 z-50 right-10 animate-bounce-slow">
         <a href="https://wa.me/9908016333" target="_blank" rel="noopener noreferrer">
           <img src={whatsappLogo} alt="WhatsApp" className="w-16 hover:scale-110 transition-transform duration-300"/>
@@ -646,6 +634,7 @@ const App = () => {
           <Route path='/blog/:id' element={<BlogDetail currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
           <Route path='/Drjoints' element={<Landing currentLang={currentLang} translations={translations} />} />
           <Route path='/thank-you' element={<ThankYou />} />
+          <Route path='/agent' element={<Agent />} />
           <Route path='*' element={<Navigate to="/" />} />
         </Routes>
         <ConditionalFooter />
