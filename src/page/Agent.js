@@ -107,9 +107,9 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         if (!location.state) {
             // Instead of redirecting, set default order details for direct navigation
             setOrderDetails({
-                productName: 'Dr. Joints Pain Relief Supplement',
+                productName: '',
                 totalAmount: 3999, // Default price in INR
-                description: 'Natural joint pain relief supplement'
+                description: ''
             });
         } else {
             setOrderDetails(location.state);
