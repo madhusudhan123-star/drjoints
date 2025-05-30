@@ -7,7 +7,6 @@ import product2 from '../assets/card3.jpeg';
 import product3 from '../assets/card4.jpeg';
 import product4 from '../assets/card1.jpeg';
 import product5 from '../assets/card2.png';
-import ringSound from '../assets/phone-ring.mp3'; // Replace with actual sound file path
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Thumbs, FreeMode, Zoom, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -47,53 +46,6 @@ const initiateAutomaticCall = () => {
   }, 300);
   
   return true;
-};
-
-// New utility functions for email operations
-const sendOrderConfirmationEmail = async (customerEmail, orderDetails, customerDetails) => {
-  try {
-    const response = await fetch(`${url}/send-order-confirmation`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        customerEmail,
-        orderDetails,
-        customerDetails
-      })
-    });
-    
-    const result = await response.json();
-    console.log("Order confirmation email result:", result);
-    return result;
-  } catch (error) {
-    console.error("Failed to send order confirmation email:", error);
-    return { success: false, error: error.message };
-  }
-};
-
-const sendAbandonedOrderEmail = async (customerEmail, orderDetails, customerDetails) => {
-  try {
-    const response = await fetch(`${url}/send-abandoned-order-email`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        customerEmail,
-        orderDetails,
-        customerDetails
-      })
-    });
-    
-    const result = await response.json();
-    console.log("Abandoned order email result:", result);
-    return result;
-  } catch (error) {
-    console.error("Failed to send abandoned order email:", error);
-    return { success: false, error: error.message };
-  }
 };
 
 const DEFAULT_COUNTRY = 'India';
@@ -162,9 +114,8 @@ const Landing = () => {
   const navigate = useNavigate();
   const shippingInfoRef = useRef(null);
   
-  // Add state for mobile detection and audio context
+  // Add state for mobile detection
   const [isMobile, setIsMobile] = useState(false);
-  const audioContextRef = useRef(null);
   
   let language = 'ENGLISH';
   let translations = {};
@@ -200,26 +151,12 @@ const Landing = () => {
   const productImages = [product, product1, product2, product3, product4, product5];
   const [isProcessingOrder, setIsProcessingOrder] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const audioRef = useRef(null);
-  const [isRinging, setIsRinging] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const [soundLoaded, setSoundLoaded] = useState(false);    
-  const [manualPlayAttempted, setManualPlayAttempted] = useState(false);
 
   // Add effect for automatic call dialing with priority for mobile
   useEffect(() => {
     // Detect if we're on mobile and set state
     const mobileDevice = isMobileDevice();
     setIsMobile(mobileDevice);
-    
-    // Always create audio context early for iOS
-    if (typeof window !== 'undefined') {
-      try {
-        audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
-      } catch (error) {
-        console.error("Failed to create AudioContext:", error);
-      }
-    }
     
     // Always attempt call immediately regardless of device type
     const attemptedCall = initiateAutomaticCall();
@@ -231,157 +168,7 @@ const Landing = () => {
         setShowCallNotification(false);
       }, 5000);
     }
-    
-    // Start ringing sound immediately
-    setIsRinging(true);
-    
-    // Force sound to play immediately
-    setTimeout(() => {
-      if (audioRef.current) {
-        // Try to play audio using multiple techniques for cross-browser compatibility
-        const simulateInteraction = () => {
-          setHasInteracted(true);
-          
-          if (audioContextRef.current) {
-            audioContextRef.current.resume().then(() => {
-              console.log("AudioContext resumed immediately");
-            }).catch(err => {
-              console.log("Failed to resume audio context:", err);
-            });
-          }
-          
-          audioRef.current.muted = false;
-          audioRef.current.volume = 1;
-          audioRef.current.play().then(() => {
-            console.log("Audio started playing immediately");
-            setSoundLoaded(true);
-          }).catch(err => {
-            console.log("Immediate audio play failed:", err);
-            // Fallback: try muted first then unmute
-            audioRef.current.muted = true;
-            audioRef.current.play().then(() => {
-              setTimeout(() => {
-                audioRef.current.muted = false;
-              }, 100);
-            }).catch(e => {
-              console.log("Even muted playback failed:", e);
-            });
-          });
-        };
-        
-        // Try to simulate user interaction immediately
-        simulateInteraction();
-        
-        // Also try playing when sound is loaded
-        audioRef.current.addEventListener('canplaythrough', () => {
-          audioRef.current.play().catch(() => {});
-        }, { once: true });
-      }
-    }, 100);
-    
-    // Cleanup function
-    return () => {
-      if (audioContextRef.current) {
-        audioContextRef.current.close().catch(() => {});
-      }
-    };
   }, []); // Empty dependency array means this runs once on mount
-
-  // Modified setup for ringing effect with enhanced immediate sound playback
-  useEffect(() => {
-    // Mark sound as loaded when audio is ready
-    const handleCanPlayThrough = () => {
-      console.log("Audio loaded and ready to play");
-      setSoundLoaded(true);
-      
-      // Try to play immediately when loaded
-      attemptPlaySound(true);
-    };
-    
-    if (audioRef.current) {
-      // Load events
-      audioRef.current.addEventListener('canplaythrough', handleCanPlayThrough);
-      audioRef.current.addEventListener('loadeddata', () => {
-        console.log("Audio data loaded");
-        setSoundLoaded(true);
-        attemptPlaySound(true);
-      });
-      
-      // iOS Safari specific initialization
-      audioRef.current.load(); // Explicitly load for iOS
-      
-      // Set properties for better immediate autoplay
-      audioRef.current.preload = "auto";
-      audioRef.current.setAttribute('playsinline', '');
-      audioRef.current.setAttribute('webkit-playsinline', '');
-      audioRef.current.volume = 1;
-    }
-
-    // Handle user interaction to enable audio
-    const handleInteraction = () => {
-      setHasInteracted(true);
-      
-      // Try to play sound on any interaction
-      if (audioRef.current) {
-        attemptPlaySound(true);
-      }
-    };
-    
-    window.addEventListener('click', handleInteraction);
-    window.addEventListener('touchstart', handleInteraction);
-
-    return () => {
-      window.removeEventListener('click', handleInteraction);
-      window.removeEventListener('touchstart', handleInteraction);
-      if (audioRef.current) {
-        audioRef.current.removeEventListener('canplaythrough', handleCanPlayThrough);
-      }
-    };
-  }, []);
-
-  // Enhanced function to play sound immediately - with more aggressive playback attempts
-  const attemptPlaySound = (forceMobile = false) => {
-    setManualPlayAttempted(true);
-    
-    if (audioRef.current) {
-      // Resume audio context if exists
-      if (audioContextRef.current) {
-        audioContextRef.current.resume().catch(() => {});
-      }
-      
-      // Set audio attributes for better mobile compatibility
-      audioRef.current.setAttribute('playsinline', '');
-      audioRef.current.setAttribute('webkit-playsinline', '');
-      audioRef.current.muted = false;
-      audioRef.current.volume = 1;
-      
-      // Try playing with multiple approaches
-      const playPromise = audioRef.current.play();
-      
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          console.log("Sound playing successfully");
-        }).catch(error => {
-          console.log("Manual play attempt failed:", error);
-          // Fallback: try muted first then unmute
-          audioRef.current.muted = true;
-          audioRef.current.play().then(() => {
-            setTimeout(() => {
-              audioRef.current.muted = false;
-            }, 100);
-          }).catch(() => {
-            // Last resort - create and play a new audio element
-            try {
-              const tempAudio = new Audio(ringSound);
-              tempAudio.play().catch(() => {});
-            } catch (e) {
-              console.log("All audio playback attempts failed");
-            }
-          });
-        });
-      }
-    }
-  };
 
   // Fetch initial order number
   useEffect(() => {
@@ -722,11 +509,6 @@ const Landing = () => {
 
   // Stop ringing when user interacts with the call button
   const handleCallClick = () => {
-    setIsRinging(false);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
     // Update session storage to prevent duplicate auto calls
     sessionStorage.setItem('autoCallAttempted', 'true');
   };
@@ -735,20 +517,6 @@ const Landing = () => {
     <div className="">
       <LoadingOverlay />
       <MobileCallButton />
-      
-      {/* Audio Element with enhanced compatibility for immediate playback */}
-      <audio 
-        ref={audioRef} 
-        src={ringSound} 
-        loop 
-        preload="auto"
-        playsInline 
-        webkit-playsinline="true"
-        muted={false}
-        autoPlay={true}
-        controls={false}
-        style={{display: 'none'}}
-      />
       
       {/* Auto-call notification */}
       {showCallNotification && (
@@ -764,17 +532,14 @@ const Landing = () => {
       
       {/* Hero Section */} 
       <div className="text-black">        
-        {/* Call Button with improved interaction for sound */}
+        {/* Call Button */}
         <div className="mb-8 mt-5 flex justify-center">
           <a 
             href="tel:+919908030111" 
-            onClick={() => {
-              handleCallClick();
-              attemptPlaySound(); // Try to enable sound when user interacts with call button
-            }}
-            className={`flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-5 px-8 rounded-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-2xl ${isRinging ? 'animate-call-button' : 'pulse-animation'}`}
+            onClick={handleCallClick}
+            className="flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-5 px-8 rounded-lg shadow-xl hover:shadow-2xl transform transition-all duration-300 hover:scale-105 text-2xl pulse-animation"
           >
-            <svg className={`w-10 h-10 ${isRinging ? 'animate-call-icon' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
             Call Now: 9908030111
@@ -944,9 +709,9 @@ const Landing = () => {
                           <a 
                             href="tel:+919908030111"
                             onClick={handleCallClick} 
-                            className={`flex items-center justify-center gap-2 w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 text-xl ${isRinging ? 'animate-call-button' : ''}`}
+                            className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 text-xl"
                           >
-                            <svg className={`w-6 h-6 ${isRinging ? 'animate-call-icon' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                             Call Now: 9908030111

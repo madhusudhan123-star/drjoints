@@ -32,6 +32,8 @@ import Landing from './page/Landing';
 import ThankYou from './page/ThankYou';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Agent from './page/Agent';
+import Landing_two from './page/Landing_two';
+import Landing_three from './page/Landing_three';
 
 // Language options
 const languages = [
@@ -575,10 +577,12 @@ const App = () => {
   const ConditionalNavbar = () => {
     const location = useLocation();
     const isLandingPage = location.pathname === '/Drjoints';
+    const isLandingPage2 = location.pathname === '/Drjoints2';
+    const isLandingPage3 = location.pathname === '/Drjoints3';
     const isAgentPage = location.pathname === '/agent';
     
-    if (isLandingPage || isAgentPage) {
-      return isLandingPage ? <MinimalNavbar /> : null;
+    if (isLandingPage || isLandingPage2 || isLandingPage3 || isAgentPage) {
+      return (isLandingPage || isLandingPage2 || isLandingPage3) ? <MinimalNavbar /> : null;
     } else {
       return <Navbar currentLang={currentLang} setCurrentLang={handleLanguageChange} translations={translations} languages={languages} />;
     }
@@ -587,7 +591,10 @@ const App = () => {
   // Component to conditionally render Footer
   const ConditionalFooter = () => {
     const location = useLocation();
-    const shouldShowFooter = location.pathname !== '/Drjoints' && location.pathname !== '/agent';
+    const shouldShowFooter = location.pathname !== '/Drjoints' && 
+                           location.pathname !== '/Drjoints2' && 
+                           location.pathname !== '/Drjoints3' && 
+                           location.pathname !== '/agent';
     
     return shouldShowFooter ? (
       <Footer currentLang={currentLang} translations={translations} />
@@ -634,6 +641,8 @@ const App = () => {
           <Route path='/blog' element={<Blog currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
           <Route path='/blog/:id' element={<BlogDetail currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
           <Route path='/Drjoints' element={<Landing currentLang={currentLang} translations={translations} />} />
+          <Route path='/Drjoints2' element={<Landing_two currentLang={currentLang} translations={translations} />} />
+          <Route path='/Drjoints3' element={<Landing_three currentLang={currentLang} translations={translations} />} />
           <Route path='/thank-you' element={<ThankYou />} />
           <Route path='/agent' element={<Agent />} />
           <Route path='*' element={<Navigate to="/" />} />

@@ -35,6 +35,23 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
     const [customerSource, setCustomerSource] = useState("");
     const [agentName, setAgentName] = useState("");
     const [isRazorpayLoaded, setIsRazorpayLoaded] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState("drjoints-original");
+
+    // Add product options
+    const productOptions = [
+        {
+            id: "drjoints-original",
+            name: "Dr. Joints Original Pain Relief Oil"
+        },
+        {
+            id: "Beyond Slim",
+            name: "Beyond Slim"
+        },
+        {
+            id: "Sampoorn Arogya",
+            name: "Sampoorn Arogya",
+        }
+    ];
 
     useEffect(() => {
         // Simulate fetching the latest order number from the backend
@@ -231,23 +248,62 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         }
     };
 
-    // Update renderOrderSummary to include quantity selector
+    // Add handler for product selection
+    const handleProductChange = (e) => {
+        const productId = e.target.value;
+        setSelectedProduct(productId);
+        
+        const selectedProductData = productOptions.find(p => p.id === productId);
+        if (selectedProductData) {
+            setTotalOrderAmount(selectedProductData.price);
+            // Update order details
+            setOrderDetails(prev => ({
+                ...prev,
+                productName: selectedProductData.name,
+                totalAmount: selectedProductData.price
+            }));
+        }
+    };
+
+    // Update renderOrderSummary to include product dropdown
     const renderOrderSummary = () => (
         <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
             </h2>
 
             <div className="space-y-4">
+                {/* Product Selection Dropdown */}
+                <div className="border-b border-gray-200 pb-4">
+                    <div className="space-y-2 mb-4">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Product Name *
+                        </label>
+                        <select
+                            value={selectedProduct}
+                            onChange={handleProductChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        >
+                            {productOptions.map((product) => (
+                                <option key={product.id} value={product.id}>
+                                    {product.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
                 {/* Product & Pricing Details */}
                 <div className="border-b border-gray-200 pb-4">
                     <div className="flex justify-between items-start mb-4">
                         <div className="flex-1">
-                            <h3 className="font-medium text-gray-900">{orderDetails?.productName}</h3>
+                            <h3 className="font-medium text-gray-900">
+                                {productOptions.find(p => p.id === selectedProduct)?.name}
+                            </h3>
                             <p className="text-sm text-gray-600">Negotiated Unit Price: {currentCurrency.symbol} {(totalOrderAmount * currentCurrency.rate).toFixed(2)}</p>
                         </div>
                     </div>
 
-                                        {/* Negotiated Price Input */}
+                    {/* Negotiated Price Input */}
                     <div className="space-y-2 mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Negotiated Unit Price ({currentCurrency.currency}) *
@@ -278,10 +334,15 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                             />
                             <button
                                 type="button"
-                                onClick={() => setTotalOrderAmount(3999)}
+                                onClick={() => {
+                                    const selectedProductData = productOptions.find(p => p.id === selectedProduct);
+                                    if (selectedProductData) {
+                                        setTotalOrderAmount(selectedProductData.price);
+                                    }
+                                }}
                                 className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm"
                             >
-                                Reset to MRP
+                                Reset to Price
                             </button>
                         </div>
                         {formErrors.totalOrderAmount && (
@@ -292,7 +353,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                                 ? 'text-red-600' 
                                 : 'text-green-600'
                         }`}>
-                            MRP: ₹4,999 | Current: ₹{totalOrderAmount} | Discount: ₹{3999 - totalOrderAmount} | Min Required: ₹2,500
+                            MRP: ₹{productOptions.find(p => p.id === selectedProduct)?.mrp} | Current: ₹{totalOrderAmount} | Discount: ₹{productOptions.find(p => p.id === selectedProduct)?.price - totalOrderAmount} | Min Required: ₹2,500
                         </p>
                     </div>
                     
@@ -323,8 +384,6 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                             Total: {currentCurrency.symbol} {(totalOrderAmount * quantity * currentCurrency.rate).toFixed(2)}
                         </span>
                     </div>
-
-
 
                     {/* Advance Payment Section */}
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 space-y-2">
@@ -644,11 +703,13 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
         try {
             const emailData = {
                 customerEmail: `${formData.firstName}.${formData.lastName}@drjoints.com`, // Use a default email format
+                productName: selectedProduct,
                 orderDetails: {
                     orderNumber,
                     productName: orderDetails.productName,
                     quantity,
                     totalAmount: (totalOrderAmount * quantity).toFixed(2),
+                    Advance_Amount: advanceAmount.toFixed(2),
                     currency: currentCurrency.symbol,
                     paymentMethod: 'Partial Payment (Advance + Remaining)',
                     paymentId: paymentId || 'Advance Payment'
@@ -667,7 +728,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                 }
             };
 
-            const emailResponse = await fetch(`${API_BASE_URL}/send-order-confirmation`, {
+            const emailResponse = await fetch(`${API_BASE_URL}/agent_to_customer`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -732,7 +793,7 @@ const Agent = ({ translations = {}, currentLang = 'en' }) => {
                 {label}{required && <span className="text-red-500">*</span>}
             </label>
             <input
-                type={type}
+                type={type}s
                 name={name}
                 value={formData[name]}
                 onChange={handleInputChange}
