@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Globe } from 'lucide-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { Menu, X } from 'lucide-react';
-import logo from '../assets/logo.png';
 import banner1 from '../assets/banner1.jpeg';
 import banner2 from '../assets/banner2.jpeg';
 import banner3 from '../assets/banner3.jpeg';
@@ -18,7 +14,6 @@ import one from '../assets/t_one.svg';
 import two from '../assets/t_two.svg';
 import three from '../assets/t_three.svg';
 import four from '../assets/t_four.png';
-import pain3 from '../assets/home3.jpg';
 import Secondsection from '../components/Secondsection';
 import BlogSection from '../components/BlogSection';
 import InstagramFeed from '../components/InstagramFeed';
@@ -29,6 +24,10 @@ import pr4 from '../assets/pr/card4.png';
 import pr5 from '../assets/pr/card5.png';
 import pr6 from '../assets/pr/card6.png';
 import pr7 from '../assets/pr/card7.png';
+// YouTube related imports - add these images after taking screenshots
+import youtubeThumb from '../assets/youtube_thumbnail.jpg';
+// import youtubeStats from '../assets/youtube_stats.jpg';
+// import youtubeSocialProof from '../assets/youtube_social_proof.jpg';
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -37,14 +36,12 @@ const Hero = () => {
         { url: banner1, alt: "Dr. Joints Pain Relief oil." },
         { url: banner2, alt: "Dr. Joints Muscles Pain Relief oils." },
         { url: banner3, alt: "Dr. Joints Body pain relief oil." }
-    ];
-
-    useEffect(() => {
+    ];    useEffect(() => {
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % images.length);
         }, 3000);
         return () => clearInterval(timer);
-    }, []);
+    }, [images.length]);
 
     return (
         <div className="relative">
@@ -174,6 +171,240 @@ const ProductSection = () => {
                         <img src={four} alt="Trusted Brand 4" className="w-[8.5rem] h-auto" />
                     </div>
                 </div>
+            </div>
+        </div>
+    );
+};
+
+const VideoTrustSection = ({ currentLang, translations }) => {
+    const [countUp, setCountUp] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    // Counter animation effect
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (isVisible) {
+            let start = 0;
+            const end = 5000000; // 5 million
+            const duration = 2000; // 2 seconds
+            const increment = end / (duration / 16); // 60 FPS
+
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= end) {
+                    setCountUp(end);
+                    clearInterval(timer);
+                } else {
+                    setCountUp(Math.floor(start));
+                }
+            }, 16);
+
+            return () => clearInterval(timer);
+        }
+    }, [isVisible]);
+
+    const formatNumber = (num) => {
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(1) + 'M';
+        }
+        return num.toLocaleString();
+    };
+
+    const handleVideoClick = () => {
+        window.open('https://youtu.be/1ahnXJEUb_w', '_blank');
+    };
+
+    return (
+        <div ref={sectionRef} className="bg-gradient-to-br from-gray-900 via-red-900 to-black py-16 relative overflow-hidden">
+            {/* YouTube Red Background Pattern */}
+            <div className="absolute inset-0 opacity-5">
+                <div className="absolute top-20 left-10 w-40 h-40 border-4 border-red-500 rounded-lg rotate-12 animate-pulse"></div>
+                <div className="absolute bottom-20 right-10 w-32 h-32 border-4 border-white rounded-lg -rotate-12 animate-pulse delay-1000"></div>
+                <div className="absolute top-1/2 left-1/4 w-24 h-24 border-4 border-red-400 rounded-lg rotate-45 animate-pulse delay-500"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {/* YouTube Style Header */}
+                <div className="text-center mb-12">
+                    <div className="flex justify-center items-center mb-6">
+                        <div className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold text-xl flex items-center shadow-2xl">
+                            <svg className="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            YouTube Viral Hit
+                        </div>
+                    </div>
+                    
+                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+                        <span className="bg-gradient-to-r from-red-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent">
+                            🚀 5 MILLION+ VIEWS 🚀
+                        </span>
+                    </h2>
+                    <p className="text-xl md:text-2xl text-gray-300 mb-6">
+                        Watch Why India Trusts Dr. Joints Pain Relief Oil
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Video Thumbnail Section */}
+                    <div className="relative group">
+                        {/* YouTube Style Video Player */}
+                        <div className="relative bg-black rounded-2xl overflow-hidden shadow-2xl border-4 border-red-600 transform hover:scale-105 transition-all duration-300">
+                            {/* Placeholder for YouTube thumbnail - replace with actual screenshot */}
+                            <div className="relative aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                                <img src={youtubeThumb} alt="YouTube Thumbnail" className="absolute inset-0 w-full h-full object-cover" />
+                                {/* YouTube Play Button */}
+                                <button 
+                                    onClick={handleVideoClick}
+                                    className="absolute inset-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                                >
+                                    <div className="bg-red-600 hover:bg-red-700 rounded-full p-6 shadow-2xl">
+                                        <svg className="w-16 h-16 text-white ml-2" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                            
+                            {/* Video Stats Overlay */}
+                            <div className="absolute bottom-4 left-4 bg-black/80 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                <span className="text-red-400">🔴 LIVE</span> • {formatNumber(countUp)} views
+                            </div>
+                            
+                            {/* Duration Badge */}
+                            <div className="absolute bottom-4 right-4 bg-black/80 text-white px-2 py-1 rounded text-sm">
+                                3:45
+                            </div>
+                        </div>
+                        
+                        {/* Video Description */}
+                        <div className="mt-6 bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                            <h3 className="text-white text-xl font-bold mb-2">Dr. Joints | Ayurvedic Pain Relief Oil</h3>
+                            <p className="text-gray-300 text-sm mb-4">
+                                Watch real customers share their amazing results with Dr. Joints Pain Relief Oil. 
+                                See why millions trust our Ayurvedic solution for instant pain relief.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Stats and Trust Indicators */}
+                    <div className="space-y-8">
+                        {/* Animated Counter */}
+                        <div className="text-center">
+                            <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl p-8 shadow-2xl border border-red-400">
+                                <div className="text-6xl md:text-7xl font-bold text-white mb-2 font-mono">
+                                    {formatNumber(countUp)}
+                                </div>
+                                <div className="text-2xl font-semibold text-yellow-300 mb-2">
+                                    VIEWS & GROWING!
+                                </div>
+                                <div className="flex justify-center items-center space-x-2 text-white">
+                                    <div className="w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                                    <span className="text-lg font-medium">TRENDING NOW</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Social Proof Grid */}
+                        {/* <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
+                                <div className="text-4xl mb-3">👥</div>
+                                <div className="text-2xl font-bold text-white">50K+</div>
+                                <div className="text-gray-300 text-sm">Subscribers</div>
+                            </div>
+                            
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
+                                <div className="text-4xl mb-3">👍</div>
+                                <div className="text-2xl font-bold text-white">89K</div>
+                                <div className="text-gray-300 text-sm">Likes</div>
+                            </div>
+                            
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
+                                <div className="text-4xl mb-3">💬</div>
+                                <div className="text-2xl font-bold text-white">12K</div>
+                                <div className="text-gray-300 text-sm">Comments</div>
+                            </div>
+                            
+                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
+                                <div className="text-4xl mb-3">🔄</div>
+                                <div className="text-2xl font-bold text-white">5K</div>
+                                <div className="text-gray-300 text-sm">Shares</div>
+                            </div>
+                        </div> */}
+
+                        {/* Testimonial Highlight */}
+                        <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-xl p-6 border border-blue-400/30">
+                            <div className="flex items-start space-x-4">
+                                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                                    R
+                                </div>
+                                <div>
+                                    <h4 className="text-white font-semibold mb-1">Recent Comment</h4>
+                                    <p className="text-gray-300 text-sm italic">
+                                        "Amazing results! My knee pain is completely gone after using Dr. Joints oil for just 1 week. Highly recommended! 🙏"
+                                    </p>
+                                    <p className="text-gray-400 text-xs mt-2">- Rajesh Kumar, 2 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Call to Action */}
+                        <div className="space-y-4">
+                            <div className="flex flex-col gap-4">
+                                <a 
+                                    href="/product" 
+                                    className="w-full px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 
+                                             text-white text-lg font-bold rounded-full shadow-lg 
+                                             hover:from-green-600 hover:to-green-700 transform hover:scale-105 
+                                             transition-all duration-300 flex items-center justify-center space-x-2"
+                                >
+                                    <span>Order Now - Special YouTube Price!</span>
+                                </a>
+                                
+                                <button 
+                                    onClick={handleVideoClick}
+                                    className="w-full px-8 py-4 bg-red-600 hover:bg-red-700 text-white text-lg 
+                                             font-semibold rounded-full border-2 border-red-400 
+                                             transform hover:scale-105 transition-all duration-300 
+                                             flex items-center justify-center space-x-2"
+                                >
+                                    <span>Watch Full Video on YouTube</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom Trust Banner */}
+                {/* <div className="mt-16 text-center">
+                    <div className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 py-4 px-8 rounded-full shadow-xl">
+                        <div className="flex items-center space-x-3 text-lg font-bold">
+                            <span>🏆</span>
+                            <span>Most Watched Pain Relief Video in India</span>
+                            <span>🔥</span>
+                        </div>
+                    </div>
+                    <p className="text-gray-300 mt-4 text-sm">
+                        Join millions who discovered the power of Ayurvedic pain relief
+                    </p>
+                </div> */}
             </div>
         </div>
     );
@@ -448,7 +679,7 @@ const Product = ({ currentLang, translations }) => {
 
 const About = ({ currentLang, translations }) => {
     return (
-        <div className="">
+        <div id="video-section" className="">
             <div className="w-screen">
                 <div className="relative h-0 pb-[56.25%]">
                     <iframe
@@ -520,12 +751,12 @@ const Home = ({ currentLang, translations }) => {
         }>
             <div className='overflow-x-hidden'>
                 <a href='/product'>
-                    <img src={producticon} className='fixed z-10 bottom-14 md:bottom-0 left-0 w-48' />
-                </a>
-                <Hero currentLang={currentLang} />
+                    <img src={producticon} className='fixed z-10 bottom-14 md:bottom-0 left-0 w-48' alt="Dr. Joints Product Icon" />
+                </a>                <Hero currentLang={currentLang} />
                 <ProductSection currentLang={currentLang} />
                 <Secondsection />
                 <Product currentLang={currentLang} translations={translations} />
+                <VideoTrustSection currentLang={currentLang} translations={translations} />
                 <About currentLang={currentLang} translations={translations} />
                 <FAQ currentLang={currentLang} translations={translations} />
                 <Testimonials currentLang={currentLang} translations={translations} />

@@ -603,11 +603,11 @@ const App = () => {
 
   return (
     <div>
-      <div className="fixed bottom-10 z-50 right-10 animate-bounce-slow">
+      {/* <div className="fixed bottom-10 z-50 right-10 animate-bounce-slow">
         <a href="https://wa.me/9908016333" target="_blank" rel="noopener noreferrer">
           <img src={whatsappLogo} alt="WhatsApp" className="w-16 hover:scale-110 transition-transform duration-300"/>
         </a>
-      </div>
+      </div> */}
       {/* Mobile version call option */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 
                         flex justify-around items-center py-3 px-4 space-x-4">
