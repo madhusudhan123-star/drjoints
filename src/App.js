@@ -10,24 +10,24 @@ import { Shield, Leaf, Brain, Hand } from 'lucide-react';
 import Navbar from './components/Navbar';
 import MinimalNavbar from './components/MinimalNavbar';
 import Footer from './components/Footer';
-import review from './assets/review.jpg';
-import review1 from './assets/review1.jpg';
-import about from './assets/about.jpg';
+import review from './assets/review.webp';
+import review1 from './assets/review1.webp';
+import about from './assets/about.webp';
 import Checkout from './page/Checkout';
 import TermsAndConditions from './page/Terms';
 import CancelPolicy from './page/Cancel';
 import ShippingPolicy from './page/Shipping';
-import callLogo from './assets/call.png';
+import callLogo from './assets/call.webp';
 import Checkout_two from './page/Checkout_two';
 import { FaPhoneAlt, } from 'react-icons/fa';
 import Checkout_test1 from './page/Checkout_test1';
 import Checkout_test2 from './page/Checkout_test2';
-import whatsappLogo from './assets/whats.png';
+// import whatsappLogo from './assets/whats.png';
 import Blog from './page/Blog';
 import BlogDetail from './page/BlogDetail';
-import blog1 from './assets/blogs/one.jpg'
-import blog2 from './assets/blogs/two.jpg'
-import blog3 from './assets/blogs/three.jpg'
+import blog1 from './assets/blogs/one.webp'
+import blog2 from './assets/blogs/two.webp'
+import blog3 from './assets/blogs/three.webp'
 import Landing from './page/Landing';
 import ThankYou from './page/ThankYou';
 import { LanguageProvider } from './contexts/LanguageContext';

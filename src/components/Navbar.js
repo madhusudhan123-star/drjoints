@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Globe } from 'lucide-react';
 import { Menu, X } from 'lucide-react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import product1 from '../assets/card1.jpeg';
-import product2 from '../assets/card2.png';
-import product3 from '../assets/card3.jpeg';
-import product4 from '../assets/card4.jpeg';
+import product1 from '../assets/card1.webp';
+import product2 from '../assets/card2.webp';
+import product3 from '../assets/card3.webp';
+import product4 from '../assets/card4.webp';
 
 const InstagramFeed = () => {
     const posts = [

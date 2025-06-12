@@ -1,33 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import banner1 from '../assets/banner1.jpeg';
-import banner2 from '../assets/banner2.jpeg';
-import banner3 from '../assets/banner3.jpeg';
-import card1 from '../assets/card1.jpeg';
-import card2 from '../assets/card2.png';
-import card3 from '../assets/card3.jpeg';
-import card4 from '../assets/card4.jpeg';
-import product from '../assets/product.png';
+import banner1 from '../assets/banner1.webp';
+import banner2 from '../assets/banner2.webp';
+import banner3 from '../assets/banner3.webp';
+import card1 from '../assets/card1.webp';
+import card2 from '../assets/card2.webp';
+import card3 from '../assets/card3.webp';
+import card4 from '../assets/card4.webp';
+import product from '../assets/product.webp';
 import FAQ from '../components/FAQ';
-import producticon from '../assets/product_icons.png';
-import one from '../assets/t_one.svg';
-import two from '../assets/t_two.svg';
-import three from '../assets/t_three.svg';
-import four from '../assets/t_four.png';
+import producticon from '../assets/product_icons.webp';
+import one from '../assets/t_one.webp';
+import two from '../assets/t_two.webp';
+import three from '../assets/t_three.webp';
+import four from '../assets/t_four.webp';
 import Secondsection from '../components/Secondsection';
 import BlogSection from '../components/BlogSection';
 import InstagramFeed from '../components/InstagramFeed';
-import pr1 from '../assets/pr/card1.png';
-import pr2 from '../assets/pr/card2.png';
-import pr3 from '../assets/pr/card3.png';
-import pr4 from '../assets/pr/card4.png';
-import pr5 from '../assets/pr/card5.png';
-import pr6 from '../assets/pr/card6.png';
-import pr7 from '../assets/pr/card7.png';
+import pr1 from '../assets/pr/card1.webp';
+import pr2 from '../assets/pr/card2.webp';
+import pr3 from '../assets/pr/card3.webp';
+import pr4 from '../assets/pr/card4.webp';
+import pr5 from '../assets/pr/card5.webp';
+import pr6 from '../assets/pr/card6.webp';
+import pr7 from '../assets/pr/card7.webp';
 // YouTube related imports - add these images after taking screenshots
-import youtubeThumb from '../assets/youtube_thumbnail.jpg';
-// import youtubeStats from '../assets/youtube_stats.jpg';
-// import youtubeSocialProof from '../assets/youtube_social_proof.jpg';
+import youtubeThumb from '../assets/youtube_thumbnail.webp';
+// import youtubeStats from '../assets/youtube_stats.webp';
+// import youtubeSocialProof from '../assets/youtube_social_proof.webp';
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -290,7 +290,7 @@ const VideoTrustSection = ({ currentLang, translations }) => {
                             
                             {/* Duration Badge */}
                             <div className="absolute bottom-4 right-4 bg-black/80 text-white px-2 py-1 rounded text-sm">
-                                3:45
+                                0:15
                             </div>
                         </div>
                         

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import product from '../assets/product_icons.png'
+import product from '../assets/product_icons.webp'
 
 const Checkout_test2 = () => {
   const [paymentMethod, setPaymentMethod] = useState('razorpay');

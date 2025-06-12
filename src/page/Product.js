@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import product from '../assets/product.png';
-import product1 from '../assets/product1.jpeg';
-import product2 from '../assets/product2.png';
-import amazon from '../assets/amazon.png';
+import product from '../assets/product.webp';
+import product1 from '../assets/product1.webp';
+import product2 from '../assets/product2.webp';
+import amazon from '../assets/amazon.webp';
 
 const Product = ({ translations, currentLang }) => {
     const navigate = useNavigate();

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '@formspree/react';
-import product from '../assets/product.png';
-import product1 from '../assets/product1.jpeg';
-import product2 from '../assets/product2.png';
-import visa from '../assets/visa.svg';  // You'll need to add these images
-import mastercard from '../assets/mastercard.svg';
-import rupay from '../assets/upi-id.svg';
-import razorpay from '../assets/paypal.svg';
+import product from '../assets/product.webp';
+import product1 from '../assets/product1.webp';
+import product2 from '../assets/product2.webp';
+import visa from '../assets/visa.webp';  // You'll need to add these images
+import mastercard from '../assets/mastercard.webp';
+import rupay from '../assets/upi-id.webp';
+import razorpay from '../assets/paypal.webp';
 import AwardsSection from '../components/Awaid';
 // import secure from '';
 

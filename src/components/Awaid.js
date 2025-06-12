@@ -1,10 +1,10 @@
-import one from '../assets/awaid/t_one.svg';
-import two from '../assets/awaid/t_two.svg'
-import three from '../assets/awaid/t_three.svg'
-import four from '../assets/awaid/t_four.png'
-import five from '../assets/awaid/hala.png'
-import six from '../assets/awaid/t_six.png'
-import seven from '../assets/awaid/t_seven.avif'
+import one from '../assets/awaid/t_one.webp';
+import two from '../assets/awaid/t_two.webp'
+import three from '../assets/awaid/t_three.webp'
+import four from '../assets/awaid/t_four.webp'
+import five from '../assets/awaid/hala.webp'
+import six from '../assets/awaid/t_six.webp'
+import seven from '../assets/awaid/t_seven.webp'
 
 export default function AwardsSection() {
     const awards = [

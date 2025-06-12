@@ -1,8 +1,8 @@
 import React from 'react'
-import one from '../assets/images/one.jpg'
+import one from '../assets/images/one.webp'
 import two from '../assets/images/two.webp'  
-import three from '../assets/images/three.jpg'
-import four from '../assets/images/four.jpg'
+import three from '../assets/images/three.webp'
+import four from '../assets/images/four.webp'
 
 const Secondsection = () => {
   return (

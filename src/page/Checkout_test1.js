@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from '@formspree/react'; // Added Formspree import
-import drjoints_product from '../assets/drjoints_product.png'; // Updated image import
+import drjoints_product from '../assets/drjoints_product.webp'; // Updated image import
 
 // Update API_BASE_URL to use a working endpoint in development mode
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
