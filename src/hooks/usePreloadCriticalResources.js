@@ -18,9 +18,11 @@ const usePreloadCriticalResources = () => {
       document.head.appendChild(link);
     });
 
-    // Preload critical images (hero images, logos)
+    // Preload critical images (hero images, logos, product images)
     const criticalImages = [
-      // Add your critical image paths here
+      '/static/media/hero-image.webp', // Add your actual hero image path
+      '/static/media/logo.webp',       // Add your actual logo path
+      '/static/media/product-main.webp' // Add your main product image path
     ];
 
     criticalImages.forEach(imageSrc => {
@@ -30,6 +32,34 @@ const usePreloadCriticalResources = () => {
       link.href = imageSrc;
       document.head.appendChild(link);
     });
+
+    // Preload critical JavaScript chunks
+    const criticalChunks = [
+      'home', // Home page chunk
+      'product' // Product page chunk (likely high traffic)
+    ];
+
+    criticalChunks.forEach(chunkName => {
+      // This will be handled by webpack's prefetch/preload
+      import(/* webpackChunkName: "[request]", webpackPrefetch: true */ `../page/${chunkName.charAt(0).toUpperCase() + chunkName.slice(1)}`).catch(() => {
+        // Silently fail if chunk doesn't exist
+      });
+    });
+
+    // Prevent YouTube from loading until needed
+    const preventYouTubePreload = () => {
+      // Block YouTube's heavy resources from auto-loading
+      const style = document.createElement('style');
+      style.textContent = `
+        iframe[src*="youtube.com"] {
+          pointer-events: none;
+        }
+      `;
+      document.head.appendChild(style);
+    };
+
+    preventYouTubePreload();
+
   }, []);
 };
 
