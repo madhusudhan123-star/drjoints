@@ -1,39 +1,46 @@
-import React, { useState, useEffect } from 'react'
-import Home from './page/Home';
-import About from './page/About';
-import Product from './page/Product';
-import Return from './page/Return';
-import Privacy from './page/Privacy';
-import Contact from './page/Contact';
+import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Shield, Leaf, Brain, Hand } from 'lucide-react';
+import { FaPhoneAlt, } from 'react-icons/fa';
 import Navbar from './components/Navbar';
 import MinimalNavbar from './components/MinimalNavbar';
 import Footer from './components/Footer';
 import review from './assets/review.webp';
 import review1 from './assets/review1.webp';
 import about from './assets/about.webp';
-import Checkout from './page/Checkout';
-import TermsAndConditions from './page/Terms';
-import CancelPolicy from './page/Cancel';
-import ShippingPolicy from './page/Shipping';
-import callLogo from './assets/call.webp';
-import Checkout_two from './page/Checkout_two';
-import { FaPhoneAlt, } from 'react-icons/fa';
-import Checkout_test1 from './page/Checkout_test1';
-import Checkout_test2 from './page/Checkout_test2';
-// import whatsappLogo from './assets/whats.png';
-import Blog from './page/Blog';
-import BlogDetail from './page/BlogDetail';
 import blog1 from './assets/blogs/one.webp'
 import blog2 from './assets/blogs/two.webp'
 import blog3 from './assets/blogs/three.webp'
-import Landing from './page/Landing';
-import ThankYou from './page/ThankYou';
 import { LanguageProvider } from './contexts/LanguageContext';
-import Agent from './page/Agent';
-import Landing_two from './page/Landing_two';
-import Landing_three from './page/Landing_three';
+
+// Lazy load page components for code splitting
+const Home = lazy(() => import('./page/Home'));
+const About = lazy(() => import('./page/About'));
+const Product = lazy(() => import('./page/Product'));
+const Return = lazy(() => import('./page/Return'));
+const Privacy = lazy(() => import('./page/Privacy'));
+const Contact = lazy(() => import('./page/Contact'));
+const Checkout = lazy(() => import('./page/Checkout'));
+const TermsAndConditions = lazy(() => import('./page/Terms'));
+const CancelPolicy = lazy(() => import('./page/Cancel'));
+const ShippingPolicy = lazy(() => import('./page/Shipping'));
+const Checkout_two = lazy(() => import('./page/Checkout_two'));
+const Checkout_test1 = lazy(() => import('./page/Checkout_test1'));
+const Checkout_test2 = lazy(() => import('./page/Checkout_test2'));
+const Blog = lazy(() => import('./page/Blog'));
+const BlogDetail = lazy(() => import('./page/BlogDetail'));
+const Landing = lazy(() => import('./page/Landing'));
+const ThankYou = lazy(() => import('./page/ThankYou'));
+const Agent = lazy(() => import('./page/Agent'));
+const Landing_two = lazy(() => import('./page/Landing_two'));
+const Landing_three = lazy(() => import('./page/Landing_three'));
+
+// Loading component for better UX
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-500"></div>
+  </div>
+);
 
 // Language options
 const languages = [
@@ -624,29 +631,31 @@ const App = () => {
 
       <BrowserRouter>
         <ConditionalNavbar />
-        <Routes>
-          <Route path='/' element={<Home currentLang={currentLang} translations={translations} />} />
-          <Route path='/about' element={<About currentLang={currentLang} translations={translations} />} />
-          <Route path='/product' element={<Product currentLang={currentLang} translations={translations} />} />
-          <Route path='/return' element={<Return currentLang={currentLang} translations={translations} />} />
-          <Route path='/privacy' element={<Privacy currentLang={currentLang} translations={translations} />} />
-          <Route path='/contact' element={<Contact currentLang={currentLang} translations={translations} />} />
-          <Route path='/checkout' element={<Checkout currentLang={currentLang} translations={translations} />} />
-          <Route path='/checkouts' element={<Checkout_two currentLang={currentLang} translations={translations} />} />
-          <Route path='/terms' element={<TermsAndConditions currentLang={currentLang} translations={translations} />} />
-          <Route path='/cancel' element={<CancelPolicy currentLang={currentLang} translations={translations} />} />
-          <Route path='/shipping' element={<ShippingPolicy currentLang={currentLang} translations={translations} />} />
-          <Route path='/checkout_test_two' element={<Checkout_test1 currentLang={currentLang} translations={translations} />} />
-          <Route path='/checkout_test_three' element={<Checkout_test2 currentLang={currentLang} translations={translations} />} />
-          <Route path='/blog' element={<Blog currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
-          <Route path='/blog/:id' element={<BlogDetail currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
-          <Route path='/Drjoints' element={<Landing currentLang={currentLang} translations={translations} />} />
-          <Route path='/Drjoints2' element={<Landing_two currentLang={currentLang} translations={translations} />} />
-          <Route path='/Drjoints3' element={<Landing_three currentLang={currentLang} translations={translations} />} />
-          <Route path='/thank-you' element={<ThankYou />} />
-          <Route path='/agent' element={<Agent />} />
-          <Route path='*' element={<Navigate to="/" />} />
-        </Routes>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path='/' element={<Home currentLang={currentLang} translations={translations} />} />
+            <Route path='/about' element={<About currentLang={currentLang} translations={translations} />} />
+            <Route path='/product' element={<Product currentLang={currentLang} translations={translations} />} />
+            <Route path='/return' element={<Return currentLang={currentLang} translations={translations} />} />
+            <Route path='/privacy' element={<Privacy currentLang={currentLang} translations={translations} />} />
+            <Route path='/contact' element={<Contact currentLang={currentLang} translations={translations} />} />
+            <Route path='/checkout' element={<Checkout currentLang={currentLang} translations={translations} />} />
+            <Route path='/checkouts' element={<Checkout_two currentLang={currentLang} translations={translations} />} />
+            <Route path='/terms' element={<TermsAndConditions currentLang={currentLang} translations={translations} />} />
+            <Route path='/cancel' element={<CancelPolicy currentLang={currentLang} translations={translations} />} />
+            <Route path='/shipping' element={<ShippingPolicy currentLang={currentLang} translations={translations} />} />
+            <Route path='/checkout_test_two' element={<Checkout_test1 currentLang={currentLang} translations={translations} />} />
+            <Route path='/checkout_test_three' element={<Checkout_test2 currentLang={currentLang} translations={translations} />} />
+            <Route path='/blog' element={<Blog currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
+            <Route path='/blog/:id' element={<BlogDetail currentLang={currentLang} translations={translations} blogPosts={blogPosts} />} />
+            <Route path='/Drjoints' element={<Landing currentLang={currentLang} translations={translations} />} />
+            <Route path='/Drjoints2' element={<Landing_two currentLang={currentLang} translations={translations} />} />
+            <Route path='/Drjoints3' element={<Landing_three currentLang={currentLang} translations={translations} />} />
+            <Route path='/thank-you' element={<ThankYou />} />
+            <Route path='/agent' element={<Agent />} />
+            <Route path='*' element={<Navigate to="/" />} />
+          </Routes>
+        </Suspense>
         <ConditionalFooter />
       </BrowserRouter>
     </div>
