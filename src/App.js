@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { FaPhoneAlt } from 'react-icons/fa';
+import './App.css';
 
 // Keep only essential imports
 import Navbar from './components/Navbar';

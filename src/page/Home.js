@@ -115,46 +115,7 @@ const ProductSection = () => {
         <div className="w-full py-16 bg-gradient-to-b from-white to-gray-50">
             <h2 className="text-4xl font-bold text-center text-blue-900 mb-4">Dr. Joints Pain Relief Oil</h2>
             <p className="text-center text-gray-600 mb-12">One Solution for All Your Pain Relief Needs</p>
-            
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 max-w-7xl mx-auto">
-                {cards.map((card) => (
-                    <div
-                        key={card.id}
-                        className="group relative overflow-hidden rounded-xl shadow-lg transform transition-all duration-500 hover:scale-105"
-                    >
-                        <div className="relative h-full">
-                            <img
-                                src={card.image}
-                                alt={card.alt}
-                                className="w-full h-full transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            
-                            <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                                <h3 className="text-2xl font-bold text-white mb-2">{card.benefit}</h3>
-                                <p className="text-gray-200 mb-3">{card.description}</p>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-2xl font-bold text-white">₹3,990</span>
-                                    <a href="/product" 
-                                       className="px-6 py-2 bg-blue-600 text-white rounded-full 
-                                                hover:bg-blue-700 transform hover:scale-105 
-                                                transition-all duration-300 flex items-center gap-2">
-                                        Details
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full 
-                                      transform -translate-y-20 group-hover:translate-y-0 transition-transform duration-500">
-                            Featured
-                        </div>
-                    </div>
-                ))}
-            </div> */}
+
             {/* trusted icons */}
             <div className="w-full px-4 sm:px-8 py-8 md:py-12 mt-16">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center items-center mx-auto">
@@ -620,31 +581,6 @@ const Product = ({ currentLang, translations }) => {
                         />
                     ))}
                 </div>
-
-                {/* Enhanced Navigation Arrows */}
-                <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
-                    <button
-                        onClick={() => setCurrentMediaSlide(
-                            currentMediaSlide === 0 ? mediaLinks.length - 1 : currentMediaSlide - 1
-                        )}
-                        className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full
-                                 backdrop-blur-sm transition-all duration-300 hover:scale-110
-                                 border border-white/30 shadow-lg"
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
-                </div>
-                
-                <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
-                    <button
-                        onClick={() => setCurrentMediaSlide((currentMediaSlide + 1) % mediaLinks.length)}
-                        className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full
-                                 backdrop-blur-sm transition-all duration-300 hover:scale-110
-                                 border border-white/30 shadow-lg"
-                    >
-                        <ChevronRight size={24} />
-                    </button>
-                </div>
             </div>
 
             {/* Rest of the Product section */}
@@ -703,33 +639,161 @@ const About = ({ currentLang, translations }) => {
     );
 };
 
-const TestimonialCard = ({ image, text, name, role }) => {
+const TestimonialCard = ({ image, text, name, role, rating = 5, location, beforeAfter }) => {
     return (
-        <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center space-x-4">
-                {image && (
-                    <div className="w-12 h-12 rounded-full bg-gray-300">
-                        <img src={image} alt={name} className="w-full h-full object-cover rounded-full" />
+        <div className="bg-white rounded-2xl shadow-xl p-8 relative overflow-hidden border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+            {/* Decorative Ayurvedic Pattern */}
+            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-orange-200 to-yellow-200 rounded-bl-full opacity-50"></div>
+            <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-green-200 to-emerald-200 rounded-tr-full opacity-50"></div>
+            
+            {/* Lotus Pattern Background */}
+            <div className="absolute inset-0 opacity-5">
+                <svg className="w-full h-full" viewBox="0 0 100 100" fill="none">
+                    <path d="M50 20C45 25 40 35 40 45C40 55 45 65 50 70C55 65 60 55 60 45C60 35 55 25 50 20Z" fill="currentColor" className="text-orange-500"/>
+                    <path d="M30 50C35 45 45 40 55 40C65 40 75 45 80 50C75 55 65 60 55 60C45 60 35 55 30 50Z" fill="currentColor" className="text-green-500"/>
+                </svg>
+            </div>
+
+            <div className="relative z-10">
+                {/* Header with Rating */}
+                <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center space-x-1">
+                        {[...Array(rating)].map((_, i) => (
+                            <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        ))}
+                    </div>
+                    <div className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                        ✓ Verified
+                    </div>
+                </div>
+
+                {/* Testimonial Text */}
+                <div className="mb-6">
+                    <div className="text-4xl text-orange-400 mb-2 font-serif">"</div>
+                    <p className="text-gray-700 leading-relaxed text-lg italic">
+                        {text}
+                    </p>
+                    <div className="text-4xl text-orange-400 text-right font-serif -mt-2">"</div>
+                </div>
+
+                {/* Before/After or Benefits */}
+                {beforeAfter && (
+                    <div className="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border-l-4 border-green-500">
+                        <h5 className="font-semibold text-green-800 mb-2">Results Achieved:</h5>
+                        <div className="space-y-1">
+                            {beforeAfter.map((benefit, index) => (
+                                <div key={index} className="flex items-center text-sm text-green-700">
+                                    <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                                    {benefit}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 )}
-                <div>
-                    <h3 className="text-lg font-medium text-gray-900">{name}</h3>
-                    <p className="text-gray-600">{role}</p>
+
+                {/* User Info */}
+                <div className="flex items-center space-x-4">
+                    <div className="relative">
+                        {image ? (
+                            <img src={image} alt={name} className="w-16 h-16 object-cover rounded-full border-4 border-gradient-to-r from-orange-400 to-yellow-400" />
+                        ) : (
+                            <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                                {name.charAt(0)}
+                            </div>
+                        )}
+                        <div className="absolute -bottom-1 -right-1 bg-green-500 text-white rounded-full p-1">
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div className="flex-1">
+                        <h3 className="text-lg font-bold text-gray-900">{name}</h3>
+                        <p className="text-orange-600 font-medium">{role}</p>
+                        {location && (
+                            <p className="text-gray-500 text-sm flex items-center">
+                                <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                </svg>
+                                {location}
+                            </p>
+                        )}
+                    </div>
+                </div>
+
+                {/* Ayurvedic Seal */}
+                <div className="mt-4 flex justify-center">
+                    <div className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-4 py-2 rounded-full text-xs font-semibold flex items-center">
+                        <span className="mr-2">🕉️</span>
+                        Ayurvedic Success Story
+                    </div>
                 </div>
             </div>
-            <p className="mt-4 text-gray-700">{text}</p>
         </div>
     );
 };
 
 const Testimonials = ({ currentLang, translations }) => {
-
-
     return (
-        <div className="bg-gray-100 py-12">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-8">{translations[currentLang].testimonials.title}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="bg-gradient-to-b from-orange-50 via-yellow-50 to-green-50 py-20 relative overflow-hidden">
+            {/* Decorative Background Elements */}
+            <div className="absolute inset-0">
+                {/* Mandala Pattern */}
+                <div className="absolute top-10 left-10 w-32 h-32 opacity-10">
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-orange-500">
+                        <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="2"/>
+                        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1"/>
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                    </svg>
+                </div>
+                <div className="absolute bottom-10 right-10 w-40 h-40 opacity-10">
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-green-500">
+                        <path d="M50 10 L60 40 L90 40 L68 58 L78 88 L50 70 L22 88 L32 58 L10 40 L40 40 Z" fill="currentColor"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {/* Header */}
+                <div className="text-center mb-16">
+                    <div className="inline-flex items-center bg-white rounded-full px-6 py-3 shadow-lg border border-orange-200 mb-6">
+                        <span className="text-2xl mr-3">🌿</span>
+                        <span className="text-orange-600 font-semibold">Real Stories, Real Relief</span>
+                    </div>
+                    
+                    <h2 className="text-5xl font-bold mb-6">
+                        <span className="bg-gradient-to-r from-orange-600 via-yellow-600 to-green-600 bg-clip-text text-transparent">
+                            Ayurvedic Success Stories
+                        </span>
+                    </h2>
+                    
+                    <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                        Discover how thousands have found natural relief through the ancient wisdom of Ayurveda. 
+                        <br />
+                        <span className="text-orange-600 font-semibold">Join the movement towards pain-free living</span>
+                    </p>
+                    
+                    {/* Statistics */}
+                    <div className="flex justify-center space-x-8 mt-8">
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-orange-600">50,000+</div>
+                            <div className="text-gray-600">Happy Customers</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-green-600">95%</div>
+                            <div className="text-gray-600">Success Rate</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-3xl font-bold text-yellow-600">4.9★</div>
+                            <div className="text-gray-600">Average Rating</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Testimonials Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                     {translations[currentLang].testimonials.testimonial.map((testimonial, index) => (
                         <TestimonialCard
                             key={index}
@@ -737,8 +801,35 @@ const Testimonials = ({ currentLang, translations }) => {
                             text={testimonial.text}
                             name={testimonial.name}
                             role={testimonial.role}
+                            rating={testimonial.rating || 5}
+                            location={testimonial.location}
+                            beforeAfter={testimonial.beforeAfter}
                         />
                     ))}
+                </div>
+
+                {/* Call to Action */}
+                <div className="text-center bg-white rounded-2xl shadow-xl p-8 border border-orange-200">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                        Ready to Start Your Healing Journey?
+                    </h3>
+                    <p className="text-gray-600 mb-6">
+                        Join thousands who have discovered the power of Ayurvedic pain relief
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a 
+                            href="/product"
+                            className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                        >
+                            🛒 Order Now - ₹3,990
+                        </a>
+                        <a 
+                            href="tel:+919908030111"
+                            className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                        >
+                            📞 Call for Free Consultation
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

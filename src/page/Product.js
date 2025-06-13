@@ -1,16 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import product from '../assets/product.webp';
+// import product from '../assets/product.webp';
 import product1 from '../assets/product1.webp';
 import product2 from '../assets/product2.webp';
-import amazon from '../assets/amazon.webp';
+import amazon from '../assets/icons/amazon.webp';
+import flipkart from '../assets/icons/flipkart.webp';
+import stamps from '../assets/icons/stamps.webp';
+import pain from '../assets/icons/pain.webp';
+
+// Import ingredient images
+// import "https://via.placeholder.com/500x500/10b981/ffffff?text=" from '../assets/ingredients/madar.jpg';
+// import sonthImg from '../assets/ingredients/sonth."https://via.placeholder.com/500x500/10b981/ffffff?text=';
+// import giloyImg from '../assets/ingredients/giloy."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
+// import ajwainImg from '../assets/ingredients/ajwain."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
+// import ashwagandhaImg from '../assets/ingredients/ashwagandha."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
+// import suranjanImg from '../assets/ingredients/suranjan."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
+// import gulebebunaImg from '../assets/ingredients/gulebebuna."https://via.placeholder.com/500x500/10b981/ffffff?text=';
+// import narkachurImg from '../assets/ingredients/narkachur."https://via.placeholder.com/500x500/10b981/ffffff?text=';
+// import kalounjiImg from '../assets/ingredients/kalonji."https://via.placeholder.com/500x500/10b981/ffffff?text=';
+// import methiImg from '../assets/ingredients/methi."https://via.placeholder.com/500x500/10b981/ffffff?text=';
+// import phasporasImg from '../assets/ingredients/phasphoras.jpg"https://via.placeholder.com/500x500/10b981/ffffff?text=
+// import tiloilImg from '../assets/ingredients/tiloil."https://via.placeholder.com/500x500/10b981/ffffff?text=';
+// import alsiImg from '../assets/ingredients/alsi."https://via.placeholder.com/500x500/10b981/ffffff?text=';
+// import peppermintImg from '../assets/ingredients/peppermint."https://via.placeholder.com/500x500/10b981/ffffff?"https://via.placeholder.com/500x500/10b981/ffffff?text="=';
+// import arandioilImg from '../assets/ingredients/arandioil.jpg';
+
+// Import how-to-use images
+// import cleanAreaImg from '../assets/howto/clean-area.jpg';
+// import applyOilImg from '../assets/howto/apply-oil.jpg';
+// import massageImg from '../assets/howto/massage.jpg';
+// import repeatDailyImg from '../assets/howto/repeat-daily.jpg';
 
 const Product = ({ translations, currentLang }) => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
+    const [selectedOffer, setSelectedOffer] = useState(0);
     const productPrice = 3990; // Discounted price per unit
     const originalPrice = 6990; // Original price per unit
+
+    // Auto-slide offers every 2 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSelectedOffer((prev) => (prev + 1) % 3);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
 
     const handleCheckout = () => {
         navigate('/checkout', {
@@ -23,41 +58,57 @@ const Product = ({ translations, currentLang }) => {
         });
     };
 
-    const productImages = [product, product1, product2, product];
+    const productImages = [product1, product2];
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12">
-            <h1 className="text-3xl font-bold text-center mb-12">
-                {translations[currentLang].productpage.title}
-            </h1>
-
+        <div className="w-full">
             {/* Trust Indicators Banner */}
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 mb-8 border border-green-200">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-lg p-6 mb-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                     <div className="flex items-center justify-center space-x-2">
-                        <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
-                        <span className="font-semibold text-gray-800">100% Natural Ingredients</span>
+                        <span className="font-semibold text-gray-800">COD Available</span>
                     </div>
                     <div className="flex items-center justify-center space-x-2">
                         <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
-                        <span className="font-semibold text-gray-800">Clinically Tested</span>
+                        <span className="font-semibold text-gray-800">Quick Delivery</span>
                     </div>
                     <div className="flex items-center justify-center space-x-2">
-                        <svg className="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
-                        <span className="font-semibold text-gray-800">10,000+ Happy Customers</span>
+                        <span className="font-semibold text-gray-800">World-wide Shipping</span>
                     </div>
                 </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="flex flex-col md:flex-row gap-8">
+                {/* Mobile: Title, Description, Reviews - Shows first on mobile only */}
+                <div className="md:hidden w-full">
+                    <h1 className="text-3xl font-bold montserrat text-gray-800 mb-2">Pain Relief Oil For Muscles</h1>
+                    <p className='text-blue-600 scada-regular text-sm mb-4'>Helps Relieve All Types of Joint & Nerve Pain | With Castor Oil, Gaultheria Oil, Eucalyptus Oil, Arnica Oil & Myrrh Oil | 100% Natural</p>
+                    <div className='flex items-center gap-2 mb-6 scada-regular'>
+                        <span className="text-lg font-medium text-gray-600">4.5/5</span>
+                        <div className="flex">
+                            {[...Array(5)].map((_, index) => (
+                            <span key={index} className={`text-2xl ${index < 4.5 ? 'text-yellow-400' : 'text-gray-300'}`}>
+                                ★
+                            </span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className='flex items-center gap-4'>
+                        <img src={amazon} alt="Amazon Logo" className="h-20" />
+                        <img src={flipkart} alt="Flipkart Logo" className="h-20" />
+                    </div>
+                </div>
+
                 {/* Product Images Section */}
-                <div className="space-y-4">
+                <div className="md:w-1/2 w-full md:order-1">
                     {/* Main Image */}
                     <div className="bg-gray-100 rounded-lg overflow-hidden">
                         <img
@@ -68,13 +119,12 @@ const Product = ({ translations, currentLang }) => {
                     </div>
 
                     {/* Thumbnail Gallery */}
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-4 gap-2 mt-4">
                         {productImages.map((img, index) => (
                             <button
                                 key={index}
                                 onClick={() => setSelectedImage(index)}
-                                className={`border-2 rounded-lg overflow-hidden ${selectedImage === index ? 'border-blue-500' : 'border-gray-200'
-                                    }`}
+                                className={`border-2 rounded-lg overflow-hidden ${selectedImage === index ? 'border-blue-500' : 'border-gray-200'}`}
                             >
                                 <img
                                     src={img}
@@ -86,119 +136,381 @@ const Product = ({ translations, currentLang }) => {
                     </div>
                 </div>
 
-                {/* Product Info Section */}
-                <div className="space-y-8">
-                    {/* Availability Section */}
-                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                        <div className="flex items-center justify-between mb-3">
-                            <h3 className="text-lg font-bold text-gray-800">Available on Multiple Platforms</h3>
-                            <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">In Stock</span>
-                        </div>
-                        <div className="space-y-3">
-                            <div className="flex items-center justify-between bg-white p-3 rounded-lg border">
-                                <div className="flex items-center space-x-3">
-                                    <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-                                        <img src={amazon} alt="Amazon Logo" className="h-10 w-10" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-800">Amazon India</p>
-                                        <p className="text-sm text-gray-600">Fast delivery available</p>
-                                    </div>
-                                </div>
-                                <a 
-                                    href="https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB/ref=sr_1_1_sspa?crid=1B72Y8L8SA326&dib=eyJ2IjoiMSJ9.mrDgKwaYgLGF0L21kbU4oaudtOe2E6susg0oT9w7ZiiQZ6HKsj4fax3w_ODQnkU3LkwjrVeHV8EQDoox0FhivrUHJNjl_6tmLQ9NWFjB9GA3a_xhV0a5CN7XmWVfREN1r_WKtFY-EtitI51XTvrwtFMstYPtf5q3qFrKJAhoo30_kFFDC_D7tfwoWUxtQUm2dt8upvWegomg8vXywicVJulWkNZjUcTG5CsbZWI22LvClkm6P1_OSNGN46d9ZWBnEAHJIhY8PFetmwiCmDPJPQouFXNnhoQ1I3Ba-_uZNHc.Sw97rwGSg_pBsn47BCnq56bo1dB5VDhzbBSojYtu1i8&dib_tag=se&keywords=dr+joints&nsdOptOutParam=true&qid=1748414833&sprefix=drjoints%2Caps%2C231&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1" 
-                                    className="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-600 transition-colors"
-                                >
-                                    View on Amazon
-                                </a>
-                            </div>
-                            <div className="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-200">
-                                <div className="flex items-center space-x-3">
-                                    <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">
-                                        <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-800">Direct from Dr. Joints</p>
-                                        <p className="text-sm text-gray-600">Best price & exclusive offers</p>
-                                    </div>
-                                </div>
-                                <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Recommended</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Product Description */}
-                    <div className="prose max-w-none">
-                        <p className="text-gray-700 mb-6">
-                            {translations[currentLang].productpage.content}
-                        </p>
-                    </div>
-
-                    {/* Price Section */}
-                    <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-                        <div className="text-2xl font-bold text-gray-800 flex items-center space-x-4 mb-2">
-                            <span className="line-through text-red-500">₹ {originalPrice}</span>
-                            <span className="text-green-600">₹ {productPrice}</span>
-                            <span className="bg-red-500 text-white text-sm px-2 py-1 rounded">43% OFF</span>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-2">Online payment can have a 10% discount.</p>
-                        <div className="flex items-center space-x-2">
-                            <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            <span className="text-sm text-green-600 font-medium">Free shipping on all orders</span>
-                        </div>
-                    </div>
-
-                    {/* Quantity and Buy Button */}
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center">
-                            <label htmlFor="quantity" className="mr-2 text-gray-700">{translations[currentLang].productpage.secondtitle}</label>
-                            <input
-                                type="number"
-                                id="quantity"
-                                min="1"
-                                value={quantity}
-                                onChange={(e) => setQuantity(parseInt(e.target.value))}
-                                className="w-16 px-3 py-2 border border-gray-300 rounded-md"
-                            />
-                        </div>
-                        <button
-                            onClick={handleCheckout}
-                            className="px-8 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-                        >
-                            {translations[currentLang].productpage.buy}
-                        </button>
-                    </div>
-
-                    {/* Customer Reviews Summary */}
-                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                        <div className="flex items-center space-x-2 mb-2">
-                            <div className="flex text-yellow-400">
-                                {[...Array(5)].map((_, i) => (
-                                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                    </svg>
+                {/* Desktop: Complete Product Info Section */}
+                <div className="hidden md:block md:w-1/2 w-full md:order-2">
+                    <div>
+                        <h1 className="text-3xl font-bold montserrat text-gray-800 mb-2">Pain Relief Oil For Muscles</h1>
+                        <p className='text-blue-600 scada-regular text-sm'>Helps Relieve All Types of Joint & Nerve Pain | With Castor Oil, Gaultheria Oil, Eucalyptus Oil, Arnica Oil & Myrrh Oil | 100% Natural</p>
+                        <div className='flex items-center gap-2 my-4 scada-regular'>
+                            <span className="text-lg font-medium text-gray-600">4.5/5</span>
+                            <div className="flex">
+                                {[...Array(5)].map((_, index) => (
+                                <span key={index} className={`text-2xl ${index < 4.5 ? 'text-yellow-400' : 'text-gray-300'}`}>
+                                    ★
+                                </span>
                                 ))}
                             </div>
-                            <span className="font-semibold text-gray-800">4.8/5</span>
-                            <span className="text-sm text-gray-600">(2,847 reviews)</span>
                         </div>
-                        <p className="text-sm text-gray-700">"Excellent results for joint pain relief" - Most common review</p>
+                        <div className=' flex items-start gap-5 flex-col'>
+                            <div className='flex items-center gap-2'>
+                                <p className='line-through text-gray-400 text-3xl'>₹ {originalPrice}</p>
+                                <p className='text-xl font-bold text-red-600'>₹ {productPrice}</p>
+                                <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Lowest price</span>
+                            </div>
+                            <p className='text-gray-500'>Incl. of all taxes</p>
+                            <div className='flex items-center gap-4'>
+                                <img src={amazon} alt="Amazon Logo" className="h-20" />
+                                <img src={flipkart} alt="Flipkart Logo" className="h-20" />
+                            </div>
+                            <div className='w-full h-[1px] bg-black'></div>
+                            <div className='w-1/2'>
+                                <p className='text-lg text-gray-500'>Select Variant</p>
+                                <div className='flex items-center gap-2'>
+                                    <div className='border border-green-600 rounded-lg border-2 w-full cursor-pointer'>
+                                        <div className='bg-green-500 text-white p-2 rounded-t-lg'>
+                                            100 ml
+                                        </div>
+                                        <div>
+                                            <div className='flex items-center gap-2 p-2'>
+                                                    <p className='line-through text-gray-400 text-xl'>₹ {originalPrice}</p>
+                                                    <p className='text-lg text-black'>₹ {productPrice}</p>
+                                            </div>
+                                            <p className='text-2xl text-green-500'> 3 Bottles</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <img src={stamps} alt="Stamps" className="" />
+                            </div>
+                            {/* Desktop Quantity and Buy Button */}
+                            <div className="w-full space-y-4">
+                                <div className="flex items-center gap-4">
+                                    <label htmlFor="quantity" className="text-lg text-gray-700">Quantity:</label>
+                                    <input
+                                        type="number"
+                                        id="quantity"
+                                        min="1"
+                                        value={quantity}
+                                        onChange={(e) => setQuantity(parseInt(e.target.value))}
+                                        className="w-20 px-3 py-2 border border-gray-300 rounded-md"
+                                    />
+                                </div>
+                                
+                                <button
+                                    onClick={handleCheckout}
+                                    className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
+                                >
+                                    Buy Now - ₹ {productPrice * quantity}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Desktop slider section */}
+                    <div className="bg-white rounded-lg p-4 mt-6 overflow-hidden relative">
+                        <div className="flex transition-transform duration-500 ease-in-out"
+                            style={{
+                                transform: `translateX(-${selectedOffer * 100}%)`,
+                                width: '400%'
+                            }}>
+                            { [
+                                {
+                                    title: "Available offer",
+                                    subtitle: "10% Off on Online Payment",
+                                    description: "Extra discount on prepaid orders",
+                                    color: "bg-white"
+                                },
+                                {
+                                    title: "Available offer",
+                                    subtitle: "15 Days Return Policy",
+                                    description: "Hassle-free returns within 15 days",
+                                    color: "bg-white"
+                                },
+                                {
+                                    title: "Available offer",
+                                    subtitle: "Buy 3 Bottles Pack",
+                                    description: "Best value for money deal",
+                                    color: "bg-white"
+                                }
+                            ].map((offer, index) => (
+                                <div key={index} className={`w-full flex-shrink-0 ${offer.color} p-4 rounded-lg border border-gray-200`}>
+                                    <div className="pdp-coupon">
+                                        <h3 className="text-lg font-semibold text-gray-800 mb-2">{offer.title}</h3>
+                                        <h4 className="text-xl text-gray-900 mb-2">{offer.subtitle}</h4>
+                                        <p className="text-gray-700">{offer.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Mobile: Price and Variant Selection - Shows after images on mobile */}
+                <div className="md:hidden w-full">
+                    <div className=' flex items-start gap-5 flex-col'>
+                        <div className='flex items-center gap-2'>
+                            <p className='line-through text-gray-400 text-3xl'>₹ {originalPrice}</p>
+                            <p className='text-xl font-bold text-red-600'>₹ {productPrice}</p>
+                            <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Lowest price</span>
+                        </div>
+                        <p className='text-gray-500'>Incl. of all taxes</p>
+                        <div>
+                            <img src={stamps} alt="Stamps" className="" />
+                        </div>
+                        <div className='w-full'>
+                            <p className='text-lg text-gray-500'>Select Variant</p>
+                            <div className='flex items-center gap-2'>
+                                <div className='border border-green-600 rounded-lg border-2 w-full cursor-pointer'>
+                                    <div className='bg-green-500 text-white p-2 rounded-t-lg'>
+                                        100 ml
+                                    </div>
+                                    <div>
+                                        <div className='flex items-center gap-2 p-2'>
+                                                <p className='line-through text-gray-400 text-xl'>₹ {originalPrice}</p>
+                                                <p className='text-lg text-black'>₹ {productPrice}</p>
+                                        </div>
+                                        <p className='text-2xl text-green-500'> 3 Bottles</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {/* Mobile Buy Button */}
+                        <div className="w-full space-y-4">
+                            <div className="flex items-center gap-4">
+                                <label htmlFor="quantity-mobile" className="text-lg text-gray-700">Quantity:</label>
+                                <input
+                                    type="number"
+                                    id="quantity-mobile"
+                                    min="1"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(parseInt(e.target.value))}
+                                    className="w-20 px-3 py-2 border border-gray-300 rounded-md"
+                                />
+                            </div>
+                            
+                            <button
+                                onClick={handleCheckout}
+                                className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
+                            >
+                                Buy Now - ₹ {productPrice * quantity}
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Features List */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                        {translations[currentLang].features.map((feature, index) => (
-                            <div key={index} className="flex items-center gap-3">
-                                <div className={`p-2 rounded-full bg-gray-100 ${feature.color}`}>
-                                    <feature.icon className="w-6 h-6" />
+                    {/* Mobile slider section */}
+                    <div className="bg-white rounded-lg p-4 mt-6 overflow-hidden relative">
+                        <div className="flex transition-transform duration-500 ease-in-out"
+                            style={{
+                                transform: `translateX(-${selectedOffer * 100}%)`,
+                                width: '400%'
+                            }}>
+                            { [
+                                {
+                                    title: "Available offer",
+                                    subtitle: "10% Off on Online Payment",
+                                    description: "Extra discount on prepaid orders",
+                                    color: "bg-white"
+                                },
+                                {
+                                    title: "Available offer",
+                                    subtitle: "15 Days Return Policy",
+                                    description: "Hassle-free returns within 15 days",
+                                    color: "bg-white"
+                                },
+                                {
+                                    title: "Available offer",
+                                    subtitle: "Buy 3 Bottles Pack",
+                                    description: "Best value for money deal",
+                                    color: "bg-white"
+                                }
+                            ].map((offer, index) => (
+                                <div key={index} className={`w-full flex-shrink-0 ${offer.color} p-4 rounded-lg border border-gray-200`}>
+                                    <div className="pdp-coupon">
+                                        <h3 className="text-lg font-semibold text-gray-800 mb-2">{offer.title}</h3>
+                                        <h4 className="text-xl text-gray-900 mb-2">{offer.subtitle}</h4>
+                                        <p className="text-gray-700">{offer.description}</p>
+                                    </div>
                                 </div>
-                                <span className="font-medium">{feature.title}</span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Product Benefits Section */}
+            <div className="container mx-auto px-4 py-12">
+                <div className="text-center mb-12">
+                    <h2 className="text-6xl font-bold text-blue-800 mb-4">SYMPTOMS</h2>
+                </div>
+                <img src={pain} alt="Pain Relief" className="w-full h-auto" />
+            </div>
+
+            {/* Key Ingredients Section */}
+            <div className="bg-gray-50 py-16">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold text-gray-800 mb-4">Key Ingredients</h2>
+                        <p className="text-xl text-gray-600">Powerful natural ingredients with precise quantities for maximum effectiveness</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        { [
+                            { name: "Madar", quantity: "400 mg", benefit: "Anti-inflammatory", description: "Reduces inflammation and swelling", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Sonth (Ginger)", quantity: "350 mg", benefit: "Pain relief", description: "Natural analgesic properties", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Giloy", quantity: "1200 mg", benefit: "Immunity booster", description: "Enhances natural healing process", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Ajwain", quantity: "800 mg", benefit: "Muscle relaxant", description: "Relieves muscle tension and spasms", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Ashwagandha", quantity: "600 mg", benefit: "Stress relief", description: "Reduces stress-related pain", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Suranjan Talkh", quantity: "650 mg", benefit: "Joint health", description: "Supports joint mobility and flexibility", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Gule Bebuna", quantity: "600 mg", benefit: "Anti-rheumatic", description: "Effective against rheumatic pain", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Narkachur", quantity: "400 mg", benefit: "Nerve pain", description: "Soothes nerve-related discomfort", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Kalonji", quantity: "1400 mg", benefit: "Healing properties", description: "Promotes faster tissue repair", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Methi (Fenugreek)", quantity: "850 mg", benefit: "Anti-inflammatory", description: "Reduces chronic inflammation", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Bhasm Phasphoras", quantity: "1.00 mg", benefit: "Bone health", description: "Strengthens bones and joints", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Til Oil (Sesame)", quantity: "7.50 ml", benefit: "Deep penetration", description: "Carrier oil for better absorption", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Alsi (Flaxseed)", quantity: "20 ml", benefit: "Omega fatty acids", description: "Nourishes and repairs tissues", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Peppermint", quantity: "2.5 ml", benefit: "Cooling effect", description: "Provides instant cooling relief", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Arandi Oil (Castor)", quantity: "q.s to 100 ml", benefit: "Base oil", description: "Primary carrier with healing properties", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" }
+                        ].map((ingredient, index) => (
+                            <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-green-500">
+                                {/* Ingredient Image */}
+                                <div className="w-full h-48 mb-4 rounded-lg overflow-hidden bg-gray-100">
+                                    <img 
+                                        src={ingredient.image} 
+                                        alt={ingredient.name}
+                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                        style={{ width: '500px', height: '500px', objectFit: 'cover' }}
+                                        onError={(e) => {
+                                            e.target.src = 'https://via.placeholder.com/500x500/10b981/ffffff?text=' + encodeURIComponent(ingredient.name);
+                                        }}
+                                    />
+                                </div>
+                                
+                                <div className="flex items-start justify-between mb-3">
+                                    <div className="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+                                        {ingredient.quantity}
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-800 mb-2">{ingredient.name}</h3>
+                                <p className="text-green-600 font-semibold mb-2">{ingredient.benefit}</p>
+                                <p className="text-gray-600 text-sm">{ingredient.description}</p>
                             </div>
                         ))}
+                    </div>
+                    
+                    {/* Ingredient Summary */}
+                    <div className="mt-12 bg-gradient-to-r from-green-100 to-blue-100 rounded-xl p-8 text-center">
+                        <h3 className="text-2xl font-bold text-gray-800 mb-4">Complete Natural Formula</h3>
+                        <p className="text-lg text-gray-700 mb-4">
+                            Our pain relief oil contains 15 carefully selected natural ingredients, 
+                            each in precise quantities for optimal therapeutic effect.
+                        </p>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                            <div className="text-center">
+                                <div className="text-3xl font-bold text-green-600">15</div>
+                                <div className="text-sm text-gray-600">Natural Ingredients</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl font-bold text-blue-600">100ml</div>
+                                <div className="text-sm text-gray-600">Total Volume</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl font-bold text-purple-600">0%</div>
+                                <div className="text-sm text-gray-600">Chemical Additives</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl font-bold text-orange-600">100%</div>
+                                <div className="text-sm text-gray-600">Natural & Safe</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* How to Use Section */}
+            <div className="py-16">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold text-gray-800 mb-4">How to Use</h2>
+                        <p className="text-xl text-gray-600">Simple steps for maximum effectiveness</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        { [
+                            {
+                                step: "2",
+                                title: "Apply Oil",
+                                description: "Take 3-4 drops and apply to the painful area",
+                                image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
+                            },
+                            {
+                                step: "3",
+                                title: "Massage Gently",
+                                description: "Massage in circular motions for 5-10 minutes",
+                                image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
+                            },
+                            {
+                                step: "4",
+                                title: "Repeat Daily",
+                                description: "Use 2-3 times daily for best results",
+                                image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
+                            }
+                        ].map((step, index) => (
+                            <div key={index} className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                                {/* Step Image */}
+                                <div className="w-full h-48 mb-6 rounded-lg overflow-hidden bg-gray-100">
+                                    <img 
+                                        src={step.image} 
+                                        alt={step.title}
+                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                        style={{ width: '500px', height: '500px', objectFit: 'cover' }}
+                                        onError={(e) => {
+                                            e.target.src = 'https://via.placeholder.com/500x500/3b82f6/ffffff?text=Step+' + step.step;
+                                        }}
+                                    />
+                                </div>
+                                
+                                <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                                    {step.step}
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-800 mb-2">{step.title}</h3>
+                                <p className="text-gray-600">{step.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Call to Action Section */}
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 py-16">
+                <div className="container mx-auto px-4 text-center">
+                    <h2 className="text-4xl font-bold text-white mb-4">Ready to Experience Pain-Free Life?</h2>
+                    <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Join thousands of satisfied customers who have found relief with Dr. Joints Pain Relief Oil</p>
+                    <button
+                        onClick={handleCheckout}
+                        className="bg-white text-blue-600 px-12 py-4 rounded-full text-xl font-bold hover:bg-gray-100 transition-colors shadow-xl"
+                    >
+                        Order Now - ₹ {productPrice}
+                    </button>
+                    <div className="flex items-center justify-center mt-6 gap-8 text-blue-100">
+                        <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            <span>Free Shipping</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            <span>15 Days Return</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            <span>100% Natural</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -207,3 +519,5 @@ const Product = ({ translations, currentLang }) => {
 };
 
 export default Product;
+
+
