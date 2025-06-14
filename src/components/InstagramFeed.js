@@ -67,14 +67,14 @@ const InstagramFeed = () => {
                 </div>
 
                 {/* Instagram Widget */}
-                <div className="flex justify-center mb-12">
+                {/* <div className="flex justify-center mb-12">
                     <iframe
                         src="https://www.instagram.com/drjointsofficial/embed"
                         className="w-full max-w-xl h-[600px] border-none rounded-xl shadow-lg"
                         title="Instagram Feed"
                         loading="lazy"
                     ></iframe>
-                </div>
+                </div> */}
 
                 {/* Follow Button */}
                 <div className="text-center">

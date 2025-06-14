@@ -24,10 +24,13 @@ import pr4 from '../assets/pr/card4.webp';
 import pr5 from '../assets/pr/card5.webp';
 import pr6 from '../assets/pr/card6.webp';
 import pr7 from '../assets/pr/card7.webp';
+
 // YouTube related imports - add these images after taking screenshots
 import youtubeThumb from '../assets/youtube_thumbnail.webp';
 // import youtubeStats from '../assets/youtube_stats.webp';
 // import youtubeSocialProof from '../assets/youtube_social_proof.webp';
+import TestimonialSection from '../components/TestimonialSection';
+
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -639,102 +642,6 @@ const About = ({ currentLang, translations }) => {
     );
 };
 
-const TestimonialCard = ({ image, text, name, role, rating = 5, location, beforeAfter }) => {
-    return (
-        <div className="bg-white rounded-2xl shadow-xl p-8 relative overflow-hidden border border-orange-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-            {/* Decorative Ayurvedic Pattern */}
-            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-orange-200 to-yellow-200 rounded-bl-full opacity-50"></div>
-            <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-green-200 to-emerald-200 rounded-tr-full opacity-50"></div>
-            
-            {/* Lotus Pattern Background */}
-            <div className="absolute inset-0 opacity-5">
-                <svg className="w-full h-full" viewBox="0 0 100 100" fill="none">
-                    <path d="M50 20C45 25 40 35 40 45C40 55 45 65 50 70C55 65 60 55 60 45C60 35 55 25 50 20Z" fill="currentColor" className="text-orange-500"/>
-                    <path d="M30 50C35 45 45 40 55 40C65 40 75 45 80 50C75 55 65 60 55 60C45 60 35 55 30 50Z" fill="currentColor" className="text-green-500"/>
-                </svg>
-            </div>
-
-            <div className="relative z-10">
-                {/* Header with Rating */}
-                <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-1">
-                        {[...Array(rating)].map((_, i) => (
-                            <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                        ))}
-                    </div>
-                    <div className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                        ✓ Verified
-                    </div>
-                </div>
-
-                {/* Testimonial Text */}
-                <div className="mb-6">
-                    <div className="text-4xl text-orange-400 mb-2 font-serif">"</div>
-                    <p className="text-gray-700 leading-relaxed text-lg italic">
-                        {text}
-                    </p>
-                    <div className="text-4xl text-orange-400 text-right font-serif -mt-2">"</div>
-                </div>
-
-                {/* Before/After or Benefits */}
-                {beforeAfter && (
-                    <div className="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border-l-4 border-green-500">
-                        <h5 className="font-semibold text-green-800 mb-2">Results Achieved:</h5>
-                        <div className="space-y-1">
-                            {beforeAfter.map((benefit, index) => (
-                                <div key={index} className="flex items-center text-sm text-green-700">
-                                    <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                                    {benefit}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* User Info */}
-                <div className="flex items-center space-x-4">
-                    <div className="relative">
-                        {image ? (
-                            <img src={image} alt={name} className="w-16 h-16 object-cover rounded-full border-4 border-gradient-to-r from-orange-400 to-yellow-400" />
-                        ) : (
-                            <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                                {name.charAt(0)}
-                            </div>
-                        )}
-                        <div className="absolute -bottom-1 -right-1 bg-green-500 text-white rounded-full p-1">
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div className="flex-1">
-                        <h3 className="text-lg font-bold text-gray-900">{name}</h3>
-                        <p className="text-orange-600 font-medium">{role}</p>
-                        {location && (
-                            <p className="text-gray-500 text-sm flex items-center">
-                                <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                                </svg>
-                                {location}
-                            </p>
-                        )}
-                    </div>
-                </div>
-
-                {/* Ayurvedic Seal */}
-                <div className="mt-4 flex justify-center">
-                    <div className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-4 py-2 rounded-full text-xs font-semibold flex items-center">
-                        <span className="mr-2">🕉️</span>
-                        Ayurvedic Success Story
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
 const Testimonials = ({ currentLang, translations }) => {
     return (
         <div className="bg-gradient-to-b from-orange-50 via-yellow-50 to-green-50 py-20 relative overflow-hidden">
@@ -792,21 +699,8 @@ const Testimonials = ({ currentLang, translations }) => {
                     </div>
                 </div>
 
-                {/* Testimonials Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                    {translations[currentLang].testimonials.testimonial.map((testimonial, index) => (
-                        <TestimonialCard
-                            key={index}
-                            image={testimonial.image}
-                            text={testimonial.text}
-                            name={testimonial.name}
-                            role={testimonial.role}
-                            rating={testimonial.rating || 5}
-                            location={testimonial.location}
-                            beforeAfter={testimonial.beforeAfter}
-                        />
-                    ))}
-                </div>
+                {/* Testimonials Grid - Using our new component */}
+                <TestimonialSection testimonials={translations[currentLang].testimonials.testimonial} />
 
                 {/* Call to Action */}
                 <div className="text-center bg-white rounded-2xl shadow-xl p-8 border border-orange-200">
@@ -843,20 +737,21 @@ const Home = ({ currentLang, translations }) => {
             <div className='overflow-x-hidden'>
                 <a href='/product'>
                     <img src={producticon} className='fixed z-10 bottom-14 md:bottom-0 left-0 w-48' alt="Dr. Joints Product Icon" />
-                </a>                <Hero currentLang={currentLang} />
+                </a>
+                <Hero currentLang={currentLang} />
                 <ProductSection currentLang={currentLang} />
                 <Secondsection />
                 <Product currentLang={currentLang} translations={translations} />
                 <VideoTrustSection currentLang={currentLang} translations={translations} />
                 <About currentLang={currentLang} translations={translations} />
                 <FAQ currentLang={currentLang} translations={translations} />
-                <Testimonials currentLang={currentLang} translations={translations} />
                 <InstagramFeed />
                 <BlogSection 
                     translations={translations}
                     currentLang={currentLang}
                     blogPosts={translations.en.blogPosts}
                 />
+                <Testimonials currentLang={currentLang} translations={translations} />
             </div>
         </div >
     );

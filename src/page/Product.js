@@ -8,28 +8,19 @@ import flipkart from '../assets/icons/flipkart.webp';
 import stamps from '../assets/icons/stamps.webp';
 import pain from '../assets/icons/pain.webp';
 
-// Import ingredient images
-// import "https://via.placeholder.com/500x500/10b981/ffffff?text=" from '../assets/ingredients/madar.jpg';
-// import sonthImg from '../assets/ingredients/sonth."https://via.placeholder.com/500x500/10b981/ffffff?text=';
-// import giloyImg from '../assets/ingredients/giloy."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
-// import ajwainImg from '../assets/ingredients/ajwain."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
-// import ashwagandhaImg from '../assets/ingredients/ashwagandha."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
-// import suranjanImg from '../assets/ingredients/suranjan."https://via.placeholder.com/500x500/10b981/ffffff?text=g';
-// import gulebebunaImg from '../assets/ingredients/gulebebuna."https://via.placeholder.com/500x500/10b981/ffffff?text=';
-// import narkachurImg from '../assets/ingredients/narkachur."https://via.placeholder.com/500x500/10b981/ffffff?text=';
-// import kalounjiImg from '../assets/ingredients/kalonji."https://via.placeholder.com/500x500/10b981/ffffff?text=';
-// import methiImg from '../assets/ingredients/methi."https://via.placeholder.com/500x500/10b981/ffffff?text=';
-// import phasporasImg from '../assets/ingredients/phasphoras.jpg"https://via.placeholder.com/500x500/10b981/ffffff?text=
-// import tiloilImg from '../assets/ingredients/tiloil."https://via.placeholder.com/500x500/10b981/ffffff?text=';
-// import alsiImg from '../assets/ingredients/alsi."https://via.placeholder.com/500x500/10b981/ffffff?text=';
-// import peppermintImg from '../assets/ingredients/peppermint."https://via.placeholder.com/500x500/10b981/ffffff?"https://via.placeholder.com/500x500/10b981/ffffff?text="=';
-// import arandioilImg from '../assets/ingredients/arandioil.jpg';
+import one from '../assets/ing/8.webp';
+import two from '../assets/ing/4.webp';
+import three from '../assets/ing/4.webp';
+import four from '../assets/ing/3.webp';
+import five from '../assets/ing/6.webp';
+import six from '../assets/ing/5.webp';
+import seven from '../assets/ing/11.webp';
+import eight from '../assets/ing/12.webp';
+import nine from '../assets/ing/7.webp';
+import ten from '../assets/ing/1.webp';
+import eleven from '../assets/ing/2.webp';
+import twelve from '../assets/ing/9.webp';
 
-// Import how-to-use images
-// import cleanAreaImg from '../assets/howto/clean-area.jpg';
-// import applyOilImg from '../assets/howto/apply-oil.jpg';
-// import massageImg from '../assets/howto/massage.jpg';
-// import repeatDailyImg from '../assets/howto/repeat-daily.jpg';
 
 const Product = ({ translations, currentLang }) => {
     const navigate = useNavigate();
@@ -356,30 +347,29 @@ const Product = ({ translations, currentLang }) => {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         { [
-                            { name: "Madar", quantity: "400 mg", benefit: "Anti-inflammatory", description: "Reduces inflammation and swelling", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Sonth (Ginger)", quantity: "350 mg", benefit: "Pain relief", description: "Natural analgesic properties", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Giloy", quantity: "1200 mg", benefit: "Immunity booster", description: "Enhances natural healing process", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Ajwain", quantity: "800 mg", benefit: "Muscle relaxant", description: "Relieves muscle tension and spasms", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Ashwagandha", quantity: "600 mg", benefit: "Stress relief", description: "Reduces stress-related pain", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Suranjan Talkh", quantity: "650 mg", benefit: "Joint health", description: "Supports joint mobility and flexibility", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Gule Bebuna", quantity: "600 mg", benefit: "Anti-rheumatic", description: "Effective against rheumatic pain", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Narkachur", quantity: "400 mg", benefit: "Nerve pain", description: "Soothes nerve-related discomfort", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Kalonji", quantity: "1400 mg", benefit: "Healing properties", description: "Promotes faster tissue repair", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Methi (Fenugreek)", quantity: "850 mg", benefit: "Anti-inflammatory", description: "Reduces chronic inflammation", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Bhasm Phasphoras", quantity: "1.00 mg", benefit: "Bone health", description: "Strengthens bones and joints", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Til Oil (Sesame)", quantity: "7.50 ml", benefit: "Deep penetration", description: "Carrier oil for better absorption", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Alsi (Flaxseed)", quantity: "20 ml", benefit: "Omega fatty acids", description: "Nourishes and repairs tissues", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Peppermint", quantity: "2.5 ml", benefit: "Cooling effect", description: "Provides instant cooling relief", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
-                            { name: "Arandi Oil (Castor)", quantity: "q.s to 100 ml", benefit: "Base oil", description: "Primary carrier with healing properties", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" }
+                            { name: "Madar", quantity: "400 mg", benefit: "Anti-inflammatory", description: "Reduces inflammation and swelling", image: one },
+                            // { name: "Sonth (Ginger)", quantity: "350 mg", benefit: "Pain relief", description: "Natural analgesic properties", image: two },
+                            { name: "Giloy", quantity: "1200 mg", benefit: "Immunity booster", description: "Enhances natural healing process", image: three },
+                            { name: "Ajwain", quantity: "800 mg", benefit: "Muscle relaxant", description: "Relieves muscle tension and spasms", image: four },
+                            { name: "Ashwagandha", quantity: "600 mg", benefit: "Stress relief", description: "Reduces stress-related pain", image: five },
+                            { name: "Suranjan Talkh", quantity: "650 mg", benefit: "Joint health", description: "Supports joint mobility and flexibility", image: six },
+                            // { name: "Gule Bebuna", quantity: "600 mg", benefit: "Anti-rheumatic", description: "Effective against rheumatic pain", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Narkachur", quantity: "400 mg", benefit: "Nerve pain", description: "Soothes nerve-related discomfort", image: seven },
+                            { name: "Kalonji", quantity: "1400 mg", benefit: "Healing properties", description: "Promotes faster tissue repair", image: eight },
+                            { name: "Methi (Fenugreek)", quantity: "850 mg", benefit: "Anti-inflammatory", description: "Reduces chronic inflammation", image: nine },
+                            // { name: "Bhasm Phasphoras", quantity: "1.00 mg", benefit: "Bone health", description: "Strengthens bones and joints", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" },
+                            { name: "Til Oil (Sesame)", quantity: "7.50 ml", benefit: "Deep penetration", description: "Carrier oil for better absorption", image: ten },
+                            { name: "Alsi (Flaxseed)", quantity: "20 ml", benefit: "Omega fatty acids", description: "Nourishes and repairs tissues", image: eleven },
+                            { name: "Peppermint", quantity: "2.5 ml", benefit: "Cooling effect", description: "Provides instant cooling relief", image: twelve },
+                            // { name: "Arandi Oil (Castor)", quantity: "q.s to 100 ml", benefit: "Base oil", description: "Primary carrier with healing properties", image: "https://via.placeholder.com/500x500/10b981/ffffff?text=" }
                         ].map((ingredient, index) => (
                             <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow border-l-4 border-green-500">
                                 {/* Ingredient Image */}
-                                <div className="w-full h-48 mb-4 rounded-lg overflow-hidden bg-gray-100">
+                                <div className="w-full h-64 mb-4 rounded-lg overflow-hidden bg-gray-100">
                                     <img 
                                         src={ingredient.image} 
                                         alt={ingredient.name}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                        style={{ width: '500px', height: '500px', objectFit: 'cover' }}
+                                        className="w-full h-full  hover:scale-105 transition-transform duration-300"
                                         onError={(e) => {
                                             e.target.src = 'https://via.placeholder.com/500x500/10b981/ffffff?text=' + encodeURIComponent(ingredient.name);
                                         }}

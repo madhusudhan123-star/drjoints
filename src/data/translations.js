@@ -7,6 +7,7 @@ import blog2 from '../assets/blogs/two.webp'
 import blog3 from '../assets/blogs/three.webp'
 import blog4 from '../assets/blogs/three.webp'
 import blog5 from '../assets/blogs/three.webp'
+import review3 from '../assets/review/review3.webp';
 
 export const translations = {
   en: {
@@ -111,7 +112,7 @@ export const translations = {
       title: 'Ayurvedic Success Stories',
       testimonial: [
         {
-          image: review,
+          image: review3,
           text: "I was suffering from severe knee pain for over 3 years. After using Dr. Joints oil for just 2 weeks, I experienced incredible relief. Now I can climb stairs, walk long distances, and even started my morning yoga again. This Ayurvedic formula truly works wonders!",
           name: 'Sanjay Sharma',
           role: 'Business Owner & Yoga Practitioner',
@@ -124,76 +125,76 @@ export const translations = {
             'Improved sleep quality'
           ]
         },
-        {
-          image: review1,
-          text: "As a teacher, I stand for hours daily which caused severe back and shoulder pain. Dr. Joints oil has been a blessing! The natural ingredients provide long-lasting relief without any side effects. I recommend it to all my colleagues who face similar issues.",
-          name: 'Ahmed Shaikh',
-          role: 'Senior Mathematics Teacher',
-          rating: 5,
-          location: 'Mysore, Karnataka',
-          beforeAfter: [
-            'Back pain completely gone',
-            'No more shoulder stiffness',
-            'Can teach full day comfortably',
-            'Better posture and mobility'
-          ]
-        },
-        {
-          image: null,
-          text: "At 68, I thought chronic joint pain was just part of aging. Dr. Joints oil proved me wrong! Within a month, my arthritis pain reduced significantly. I can now garden, play with my grandchildren, and live an active life. This Ayurvedic miracle gave me my independence back!",
-          name: 'Srinivas Reddy',
-          role: 'Retired Government Officer',
-          rating: 5,
-          location: 'Vijayawada, Andhra Pradesh',
-          beforeAfter: [
-            'Arthritis pain reduced by 80%',
-            'Improved joint flexibility',
-            'Can lift grandchildren again',
-            'Reduced dependency on painkillers'
-          ]
-        },
-        {
-          image: null,
-          text: "Being a software engineer, I developed severe wrist and neck pain from long hours at the computer. Dr. Joints oil not only relieved my pain but also improved my work productivity. The natural formula is perfect for young professionals like me.",
-          name: 'Priya Patel',
-          role: 'Software Engineer',
-          rating: 5,
-          location: 'Kochi, Kerala',
-          beforeAfter: [
-            'Wrist pain completely eliminated',
-            'No more neck stiffness',
-            'Improved work focus',
-            'Better sleep patterns'
-          ]
-        },
-        {
-          image: null,
-          text: "As a professional athlete, muscle recovery is crucial for my performance. Dr. Joints oil has become an essential part of my training routine. It speeds up recovery, prevents injuries, and keeps me at peak performance. Highly recommended for all athletes!",
-          name: 'Rajesh Kumar',
-          role: 'Professional Athlete',
-          rating: 5,
-          location: 'Thiruvananthapuram, Kerala',
-          beforeAfter: [
-            'Faster muscle recovery',
-            'Reduced injury risk',
-            'Enhanced performance',
-            'Better training consistency'
-          ]
-        },
-        {
-          image: null,
-          text: "After my knee surgery, doctors recommended physiotherapy and pain management. Dr. Joints oil accelerated my recovery process naturally. The combination of traditional Ayurvedic herbs helped me heal faster than expected. Now I'm back to my normal activities!",
-          name: 'Lakshmi Iyer',
-          role: 'Homemaker & Classical Dancer',
-          rating: 5,
-          location: 'Madurai, Tamil Nadu',
-          beforeAfter: [
-            'Post-surgery recovery accelerated',
-            'Returned to classical dance',
-            'Full knee mobility restored',
-            'Reduced scar tissue formation'
-          ]
-        }
+        // {
+        //   image: review3,
+        //   text: "As a teacher, I stand for hours daily which caused severe back and shoulder pain. Dr. Joints oil has been a blessing! The natural ingredients provide long-lasting relief without any side effects. I recommend it to all my colleagues who face similar issues.",
+        //   name: 'Ahmed Shaikh',
+        //   role: 'Senior Mathematics Teacher',
+        //   rating: 5,
+        //   location: 'Mysore, Karnataka',
+        //   beforeAfter: [
+        //     'Back pain completely gone',
+        //     'No more shoulder stiffness',
+        //     'Can teach full day comfortably',
+        //     'Better posture and mobility'
+        //   ]
+        // },
+        // {
+        //   image: null,
+        //   text: "At 68, I thought chronic joint pain was just part of aging. Dr. Joints oil proved me wrong! Within a month, my arthritis pain reduced significantly. I can now garden, play with my grandchildren, and live an active life. This Ayurvedic miracle gave me my independence back!",
+        //   name: 'Srinivas Reddy',
+        //   role: 'Retired Government Officer',
+        //   rating: 5,
+        //   location: 'Vijayawada, Andhra Pradesh',
+        //   beforeAfter: [
+        //     'Arthritis pain reduced by 80%',
+        //     'Improved joint flexibility',
+        //     'Can lift grandchildren again',
+        //     'Reduced dependency on painkillers'
+        //   ]
+        // },
+        // {
+        //   image: null,
+        //   text: "Being a software engineer, I developed severe wrist and neck pain from long hours at the computer. Dr. Joints oil not only relieved my pain but also improved my work productivity. The natural formula is perfect for young professionals like me.",
+        //   name: 'Priya Patel',
+        //   role: 'Software Engineer',
+        //   rating: 5,
+        //   location: 'Kochi, Kerala',
+        //   beforeAfter: [
+        //     'Wrist pain completely eliminated',
+        //     'No more neck stiffness',
+        //     'Improved work focus',
+        //     'Better sleep patterns'
+        //   ]
+        // },
+        // {
+        //   image: null,
+        //   text: "As a professional athlete, muscle recovery is crucial for my performance. Dr. Joints oil has become an essential part of my training routine. It speeds up recovery, prevents injuries, and keeps me at peak performance. Highly recommended for all athletes!",
+        //   name: 'Rajesh Kumar',
+        //   role: 'Professional Athlete',
+        //   rating: 5,
+        //   location: 'Thiruvananthapuram, Kerala',
+        //   beforeAfter: [
+        //     'Faster muscle recovery',
+        //     'Reduced injury risk',
+        //     'Enhanced performance',
+        //     'Better training consistency'
+        //   ]
+        // },
+        // {
+        //   image: null,
+        //   text: "After my knee surgery, doctors recommended physiotherapy and pain management. Dr. Joints oil accelerated my recovery process naturally. The combination of traditional Ayurvedic herbs helped me heal faster than expected. Now I'm back to my normal activities!",
+        //   name: 'Lakshmi Iyer',
+        //   role: 'Homemaker & Classical Dancer',
+        //   rating: 5,
+        //   location: 'Madurai, Tamil Nadu',
+        //   beforeAfter: [
+        //     'Post-surgery recovery accelerated',
+        //     'Returned to classical dance',
+        //     'Full knee mobility restored',
+        //     'Reduced scar tissue formation'
+        //   ]
+        // }
       ]
     },
     contact: {
