@@ -1,4 +1,5 @@
 const path = require('path');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   optimization: {
@@ -26,7 +27,19 @@ module.exports = {
           reuseExistingChunk: true
         }
       }
-    }
+    },
+    minimizer: [
+      '...', // Keep default minimizers
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: ['default', {
+            discardComments: { removeAll: true },
+            cssDeclarationSorter: false,
+            reduceIdents: false,
+          }]
+        }
+      })
+    ]
   },
   resolve: {
     alias: {
@@ -52,6 +65,20 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: false,
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ]
       }
     ]
   }
