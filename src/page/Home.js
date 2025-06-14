@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import banner1 from '../assets/banner1.webp';
-import banner2 from '../assets/banner2.webp';
-import banner3 from '../assets/banner3.webp';
+import banner1 from '../assets/images/one_five.webp';  // Update path as needed
+import banner2 from '../assets/images/one_six.webp';  // Update path as needed
+import banner1Mobile from '../assets/images/mobile_banner1.webp';  // Add mobile images
+import banner2Mobile from '../assets/images/mobile_banner2.webp';  // Add mobile images
 import card1 from '../assets/card1.webp';
 import card2 from '../assets/card2.webp';
 import card3 from '../assets/card3.webp';
@@ -24,6 +25,7 @@ import pr4 from '../assets/pr/card4.webp';
 import pr5 from '../assets/pr/card5.webp';
 import pr6 from '../assets/pr/card6.webp';
 import pr7 from '../assets/pr/card7.webp';
+import one_two from '../assets/images/one_two.webp';  // Update path as needed
 
 // YouTube related imports - add these images after taking screenshots
 import youtubeThumb from '../assets/youtube_thumbnail.webp';
@@ -34,21 +36,43 @@ import TestimonialSection from '../components/TestimonialSection';
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const timerRef = useRef(null);
 
-    const images = [
+    const desktopImages = [
         { url: banner1, alt: "Dr. Joints Pain Relief oil." },
-        { url: banner2, alt: "Dr. Joints Muscles Pain Relief oils." },
-        { url: banner3, alt: "Dr. Joints Body pain relief oil." }
-    ];    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % images.length);
-        }, 3000);
-        return () => clearInterval(timer);
-    }, [images.length]);
+        { url: banner2, alt: "Dr. Joints Muscles Pain Relief oils." }
+    ];
+    
+    const mobileImages = [
+        { url: banner1Mobile, alt: "Dr. Joints Pain Relief oil - mobile view." },
+        { url: banner2Mobile, alt: "Dr. Joints Muscles Pain Relief oils - mobile view." }
+    ];
+    
+    const images = isMobile ? mobileImages : desktopImages;
+    
+    useEffect(() => {
+        // Auto slide functionality
+        timerRef.current = setInterval(() => {
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
+        }, 5000);
+        
+        // Handle screen resize
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        
+        window.addEventListener('resize', handleResize);
+        
+        return () => {
+            clearInterval(timerRef.current);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [images.length, isMobile]);
 
     return (
         <div className="relative">
-            <div className="relative h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden">
+            <div className="relative h-[100vh] sm:h-[100vh] md:h-[30rem] overflow-hidden">
                 {images.map((image, index) => (
                     <div
                         key={index}
@@ -58,7 +82,7 @@ const Hero = () => {
                         <img
                             src={image.url}
                             alt={image.alt}
-                            className="w-full h-full"
+                            className="w-full h-full object-contain md:object-cover"
                         />
                     </div>
                 ))}
@@ -286,33 +310,6 @@ const VideoTrustSection = ({ currentLang, translations }) => {
                             </div>
                         </div>
 
-                        {/* Social Proof Grid */}
-                        {/* <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
-                                <div className="text-4xl mb-3">👥</div>
-                                <div className="text-2xl font-bold text-white">50K+</div>
-                                <div className="text-gray-300 text-sm">Subscribers</div>
-                            </div>
-                            
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
-                                <div className="text-4xl mb-3">👍</div>
-                                <div className="text-2xl font-bold text-white">89K</div>
-                                <div className="text-gray-300 text-sm">Likes</div>
-                            </div>
-                            
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
-                                <div className="text-4xl mb-3">💬</div>
-                                <div className="text-2xl font-bold text-white">12K</div>
-                                <div className="text-gray-300 text-sm">Comments</div>
-                            </div>
-                            
-                            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 transform hover:scale-105 transition-all duration-300 text-center">
-                                <div className="text-4xl mb-3">🔄</div>
-                                <div className="text-2xl font-bold text-white">5K</div>
-                                <div className="text-gray-300 text-sm">Shares</div>
-                            </div>
-                        </div> */}
-
                         {/* Testimonial Highlight */}
                         <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm rounded-xl p-6 border border-blue-400/30">
                             <div className="flex items-start space-x-4">
@@ -355,20 +352,6 @@ const VideoTrustSection = ({ currentLang, translations }) => {
                         </div>
                     </div>
                 </div>
-
-                {/* Bottom Trust Banner */}
-                {/* <div className="mt-16 text-center">
-                    <div className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 py-4 px-8 rounded-full shadow-xl">
-                        <div className="flex items-center space-x-3 text-lg font-bold">
-                            <span>🏆</span>
-                            <span>Most Watched Pain Relief Video in India</span>
-                            <span>🔥</span>
-                        </div>
-                    </div>
-                    <p className="text-gray-300 mt-4 text-sm">
-                        Join millions who discovered the power of Ayurvedic pain relief
-                    </p>
-                </div> */}
             </div>
         </div>
     );
@@ -611,6 +594,9 @@ const Product = ({ currentLang, translations }) => {
                         />
                     </div>
                 </div>
+            </div>
+            <div>
+                <img src={one_two} alt="One" className="w-full mt-10 h-auto object-cover" />
             </div>
         </div>
     );

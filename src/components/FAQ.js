@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ten from '../assets/images/ten.webp';
 
 const FAQItem = ({ question, answer }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +38,7 @@ const FAQ = ({ translations }) => {
                     ))}
                 </div>
             </div>
+            <img src={ten} alt="FAQ Background" className="w-full h-auto mt-8" />
         </div>
     );
 };

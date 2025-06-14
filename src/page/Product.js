@@ -21,6 +21,11 @@ import ten from '../assets/ing/1.webp';
 import eleven from '../assets/ing/2.webp';
 import twelve from '../assets/ing/9.webp';
 
+import product3 from '../assets/images/eight.webp';
+import product4 from '../assets/images/six.webp';
+import product5 from '../assets/images/nine.webp';
+
+
 
 const Product = ({ translations, currentLang }) => {
     const navigate = useNavigate();
@@ -49,7 +54,7 @@ const Product = ({ translations, currentLang }) => {
         });
     };
 
-    const productImages = [product1, product2];
+    const productImages = [product1, product2, product3, product4, product5];
 
     return (
         <div className="w-full">
@@ -417,59 +422,7 @@ const Product = ({ translations, currentLang }) => {
                 </div>
             </div>
 
-            {/* How to Use Section */}
-            <div className="py-16">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-gray-800 mb-4">How to Use</h2>
-                        <p className="text-xl text-gray-600">Simple steps for maximum effectiveness</p>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        { [
-                            {
-                                step: "2",
-                                title: "Apply Oil",
-                                description: "Take 3-4 drops and apply to the painful area",
-                                image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
-                            },
-                            {
-                                step: "3",
-                                title: "Massage Gently",
-                                description: "Massage in circular motions for 5-10 minutes",
-                                image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
-                            },
-                            {
-                                step: "4",
-                                title: "Repeat Daily",
-                                description: "Use 2-3 times daily for best results",
-                                image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
-                            }
-                        ].map((step, index) => (
-                            <div key={index} className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                                {/* Step Image */}
-                                <div className="w-full h-48 mb-6 rounded-lg overflow-hidden bg-gray-100">
-                                    <img 
-                                        src={step.image} 
-                                        alt={step.title}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                        style={{ width: '500px', height: '500px', objectFit: 'cover' }}
-                                        onError={(e) => {
-                                            e.target.src = 'https://via.placeholder.com/500x500/3b82f6/ffffff?text=Step+' + step.step;
-                                        }}
-                                    />
-                                </div>
-                                
-                                <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                                    {step.step}
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-800 mb-2">{step.title}</h3>
-                                <p className="text-gray-600">{step.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+
 
             {/* Call to Action Section */}
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 py-16">
@@ -511,3 +464,56 @@ const Product = ({ translations, currentLang }) => {
 export default Product;
 
 
+            // {/* How to Use Section */}
+            // <div className="py-16">
+            //     <div className="container mx-auto px-4">
+            //         <div className="text-center mb-12">
+            //             <h2 className="text-4xl font-bold text-gray-800 mb-4">How to Use</h2>
+            //             <p className="text-xl text-gray-600">Simple steps for maximum effectiveness</p>
+            //         </div>
+                    
+            //         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            //             { [
+            //                 {
+            //                     step: "2",
+            //                     title: "Apply Oil",
+            //                     description: "Take 3-4 drops and apply to the painful area",
+            //                     image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
+            //                 },
+            //                 {
+            //                     step: "3",
+            //                     title: "Massage Gently",
+            //                     description: "Massage in circular motions for 5-10 minutes",
+            //                     image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
+            //                 },
+            //                 {
+            //                     step: "4",
+            //                     title: "Repeat Daily",
+            //                     description: "Use 2-3 times daily for best results",
+            //                     image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
+            //                 }
+            //             ].map((step, index) => (
+            //                 <div key={index} className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+            //                     {/* Step Image */}
+            //                     <div className="w-full h-48 mb-6 rounded-lg overflow-hidden bg-gray-100">
+            //                         <img 
+            //                             src={step.image} 
+            //                             alt={step.title}
+            //                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            //                             style={{ width: '500px', height: '500px', objectFit: 'cover' }}
+            //                             onError={(e) => {
+            //                                 e.target.src = 'https://via.placeholder.com/500x500/3b82f6/ffffff?text=Step+' + step.step;
+            //                             }}
+            //                         />
+            //                     </div>
+                                
+            //                     <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            //                         {step.step}
+            //                     </div>
+            //                     <h3 className="text-xl font-bold text-gray-800 mb-2">{step.title}</h3>
+            //                     <p className="text-gray-600">{step.description}</p>
+            //                 </div>
+            //             ))}
+            //         </div>
+            //     </div>
+            // </div>

@@ -4,6 +4,7 @@ import { ShieldCheck, Users, Heart, Award, Check, ArrowRight, Star, Activity, Le
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Helmet } from 'react-helmet'; // You may need to install this package
+import about from '../assets/about2.webp'; // Adjust the path as necessary
 
 const About = ({ currentLang, translations }) => {
     useEffect(() => {
@@ -153,10 +154,10 @@ const About = ({ currentLang, translations }) => {
                             alt="Our mission"
                             className="relative rounded-2xl shadow-2xl"
                         />
-                        <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl">
+                        {/* <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl">
                             <p className="text-3xl font-bold text-blue-900">15+ Years</p>
                             <p className="text-gray-600">of Excellence</p>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="space-y-8" data-aos="fade-left">
@@ -277,14 +278,14 @@ const About = ({ currentLang, translations }) => {
                         <div className="absolute -top-4 -right-4 w-72 h-72 bg-green-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
                         <div className="absolute -bottom-8 -left-4 w-72 h-72 bg-blue-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
                         <img
-                            src="https://source.unsplash.com/random/800x600/?ayurveda,herbs,medicine"
+                            src={about}
                             alt="Natural ingredients for joint health"
                             className="relative rounded-2xl shadow-2xl w-full"
                         />
-                        <div className="absolute -top-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
+                        {/* <div className="absolute -top-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
                             <p className="text-3xl font-bold text-green-600">100%</p>
                             <p className="text-gray-600">Natural Formula</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

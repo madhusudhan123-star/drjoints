@@ -29,7 +29,6 @@ const Blog = lazy(() => import(/* webpackChunkName: "blog" */ './page/Blog'));
 const BlogDetail = lazy(() => import(/* webpackChunkName: "blog" */ './page/BlogDetail'));
 const Landing = lazy(() => import(/* webpackChunkName: "landing" */ './page/Landing'));
 const ThankYou = lazy(() => import(/* webpackChunkName: "misc" */ './page/ThankYou'));
-const Agent = lazy(() => import(/* webpackChunkName: "misc" */ './page/Agent'));
 const Landing_two = lazy(() => import(/* webpackChunkName: "landing" */ './page/Landing_two'));
 const Landing_three = lazy(() => import(/* webpackChunkName: "landing" */ './page/Landing_three'));
 
@@ -127,7 +126,6 @@ const App = () => {
             <Route path='/Drjoints2' element={<Landing_two currentLang={currentLang} translations={translations || {}} />} />
             <Route path='/Drjoints3' element={<Landing_three currentLang={currentLang} translations={translations || {}} />} />
             <Route path='/thank-you' element={<ThankYou />} />
-            <Route path='/agent' element={<Agent />} />
             <Route path='*' element={<Navigate to="/" />} />
           </Routes>
         </Suspense>

@@ -3,6 +3,8 @@ import one from '../assets/images/one.webp'
 import two from '../assets/images/two.webp'  
 import three from '../assets/images/three.webp'
 import four from '../assets/images/four.webp'
+import one1 from '../assets/images/one_one.webp'
+
 
 const Secondsection = () => {
   return (
@@ -89,6 +91,7 @@ const Secondsection = () => {
           </div>
         </div>
       </div>
+      <img src={one1} alt="One" className="w-full mt-10 h-auto object-cover" />
     </div>
   )
 }
