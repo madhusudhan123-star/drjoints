@@ -32,8 +32,33 @@ const Product = ({ translations, currentLang }) => {
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedOffer, setSelectedOffer] = useState(0);
-    const productPrice = 3990; // Discounted price per unit
-    const originalPrice = 6990; // Original price per unit
+    const [currency, setCurrency] = useState('INR'); // Default to INR
+    const productPrice = 3990; // Discounted price per unit in INR
+    const originalPrice = 6990; // Original price per unit in INR
+    const exchangeRate = 0.012; // Approximate conversion rate: 1 INR = 0.012 USD
+
+    // Format price based on detected currency
+    const formatPrice = (priceInINR) => {
+        if (currency === 'USD') {
+            const priceInUSD = priceInINR * exchangeRate;
+            return `$${priceInUSD.toFixed(2)}`;
+        }
+        return `₹${priceInINR}`;
+    };
+
+    // Detect user's country and set currency
+    useEffect(() => {
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.country !== 'IN') {
+                    setCurrency('USD');
+                }
+            })
+            .catch(error => {
+                console.error('Error detecting location:', error);
+            });
+    }, []);
 
     // Auto-slide offers every 2 seconds
     useEffect(() => {
@@ -49,7 +74,8 @@ const Product = ({ translations, currentLang }) => {
                 quantity,
                 totalAmount: quantity * productPrice,
                 productName: 'Pain Relief Oil For Muscles',
-                unitPrice: productPrice
+                unitPrice: productPrice,
+                currency: currency
             }
         });
     };
@@ -149,8 +175,8 @@ const Product = ({ translations, currentLang }) => {
                         </div>
                         <div className=' flex items-start gap-5 flex-col'>
                             <div className='flex items-center gap-2'>
-                                <p className='line-through text-gray-400 text-3xl'>₹ {originalPrice}</p>
-                                <p className='text-xl font-bold text-red-600'>₹ {productPrice}</p>
+                                <p className='line-through text-gray-400 text-3xl'>{formatPrice(originalPrice)}</p>
+                                <p className='text-xl font-bold text-red-600'>{formatPrice(productPrice)}</p>
                                 <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Lowest price</span>
                             </div>
                             <p className='text-gray-500'>Incl. of all taxes</p>
@@ -168,8 +194,8 @@ const Product = ({ translations, currentLang }) => {
                                         </div>
                                         <div>
                                             <div className='flex items-center gap-2 p-2'>
-                                                    <p className='line-through text-gray-400 text-xl'>₹ {originalPrice}</p>
-                                                    <p className='text-lg text-black'>₹ {productPrice}</p>
+                                                <p className='line-through text-gray-400 text-xl'>{formatPrice(originalPrice)}</p>
+                                                <p className='text-lg text-black'>{formatPrice(productPrice)}</p>
                                             </div>
                                             <p className='text-2xl text-green-500'> 3 Bottles</p>
                                         </div>
@@ -197,7 +223,7 @@ const Product = ({ translations, currentLang }) => {
                                     onClick={handleCheckout}
                                     className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
                                 >
-                                    Buy Now - ₹ {productPrice * quantity}
+                                    Buy Now - {formatPrice(productPrice * quantity)}
                                 </button>
                             </div>
                         </div>
@@ -245,8 +271,8 @@ const Product = ({ translations, currentLang }) => {
                 <div className="md:hidden w-full">
                     <div className=' flex items-start gap-5 flex-col'>
                         <div className='flex items-center gap-2'>
-                            <p className='line-through text-gray-400 text-3xl'>₹ {originalPrice}</p>
-                            <p className='text-xl font-bold text-red-600'>₹ {productPrice}</p>
+                            <p className='line-through text-gray-400 text-3xl'>{formatPrice(originalPrice)}</p>
+                            <p className='text-xl font-bold text-red-600'>{formatPrice(productPrice)}</p>
                             <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Lowest price</span>
                         </div>
                         <p className='text-gray-500'>Incl. of all taxes</p>
@@ -262,8 +288,8 @@ const Product = ({ translations, currentLang }) => {
                                     </div>
                                     <div>
                                         <div className='flex items-center gap-2 p-2'>
-                                                <p className='line-through text-gray-400 text-xl'>₹ {originalPrice}</p>
-                                                <p className='text-lg text-black'>₹ {productPrice}</p>
+                                            <p className='line-through text-gray-400 text-xl'>{formatPrice(originalPrice)}</p>
+                                            <p className='text-lg text-black'>{formatPrice(productPrice)}</p>
                                         </div>
                                         <p className='text-2xl text-green-500'> 3 Bottles</p>
                                     </div>
@@ -289,7 +315,7 @@ const Product = ({ translations, currentLang }) => {
                                 onClick={handleCheckout}
                                 className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
                             >
-                                Buy Now - ₹ {productPrice * quantity}
+                                Buy Now - {formatPrice(productPrice * quantity)}
                             </button>
                         </div>
                     </div>
@@ -433,7 +459,7 @@ const Product = ({ translations, currentLang }) => {
                         onClick={handleCheckout}
                         className="bg-white text-blue-600 px-12 py-4 rounded-full text-xl font-bold hover:bg-gray-100 transition-colors shadow-xl"
                     >
-                        Order Now - ₹ {productPrice}
+                        Order Now - {formatPrice(productPrice)}
                     </button>
                     <div className="flex items-center justify-center mt-6 gap-8 text-blue-100">
                         <div className="flex items-center gap-2">

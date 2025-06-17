@@ -38,11 +38,11 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
     return (
         <nav className="bg-white shadow-lg relative">
             {/* Rotating Text Banner */}
-            <div className="bg-orange-500 text-white text-center py-2">
+            {/* <div className="bg-orange-500 text-white text-center py-2">
                 <marquee behavior="scroll" direction="left">
                     Make your payment online and save 10% instantly on your purchase! It’s fast, secure, and convenient. Take advantage of this limited-time offer and enjoy extra savings today. Don't miss out—start saving now! 🎉✨
                 </marquee>
-            </div>
+            </div> */}
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16 sm:h-20">

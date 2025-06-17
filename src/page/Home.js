@@ -72,7 +72,7 @@ const Hero = () => {
 
     return (
         <div className="relative">
-            <div className="relative h-[100vh] sm:h-[100vh] md:h-[30rem] overflow-hidden">
+            <div className="relative h-[100vh] sm:h-[100vh] md:h-[33rem] overflow-hidden">
                 {images.map((image, index) => (
                     <div
                         key={index}
@@ -139,12 +139,12 @@ const ProductSection = () => {
     ];
 
     return (
-        <div className="w-full py-16 bg-gradient-to-b from-white to-gray-50">
+        <div className="w-full bg-gradient-to-b mt-3 from-white to-gray-50">
             <h2 className="text-4xl font-bold text-center text-blue-900 mb-4">Dr. Joints Pain Relief Oil</h2>
             <p className="text-center text-gray-600 mb-12">One Solution for All Your Pain Relief Needs</p>
 
             {/* trusted icons */}
-            <div className="w-full px-4 sm:px-8 py-8 md:py-12 mt-16">
+            <div className="w-full px-4 sm:px-8 ">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center items-center mx-auto">
                     <div>
                         <img src={one} alt="Trusted Brand 1" className="max-w-full h-auto" />
@@ -577,6 +577,14 @@ const Product = ({ currentLang, translations }) => {
                 </div>
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div className="relative">
+                        <img
+                            src={product}
+                            alt="Dr. Joints Pain Relief Oil Product"
+                            className="w-full h-auto"
+                        />
+                    </div>
+
                     <div className="space-y-6 pr-4">
                         <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content1}</p>
                         <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content2}</p>
@@ -586,13 +594,7 @@ const Product = ({ currentLang, translations }) => {
                         </button>
                     </div>
 
-                    <div className="relative">
-                        <img
-                            src={product}
-                            alt="Dr. Joints Pain Relief Oil Product"
-                            className="w-full h-auto"
-                        />
-                    </div>
+
                 </div>
             </div>
             <div>

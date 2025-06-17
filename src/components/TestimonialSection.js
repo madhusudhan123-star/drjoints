@@ -24,7 +24,7 @@ const TestimonialSection = ({ testimonials }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
       {testimonials && testimonials.map((testimonial, index) => (
-        <div key={index} className="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-transform duration-300 hover:shadow-xl hover:scale-105">
+        <div key={index} className="relative group overflow-hidden rounded-xl shadow-lg h-[30rem] transition-transform duration-300 hover:shadow-xl hover:scale-105">
           {/* Testimonial Image */}
           <div className="absolute inset-0 w-full h-full">
             {testimonial.image ? (
