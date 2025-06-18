@@ -19,7 +19,7 @@ export const translations = {
       homelink: '/',
       aboutUs: 'About Us',
       aboutUslink: '/about',
-      product: 'Product',
+      product: 'Shop Dr. Joints',
       productlink: '/product',
       returnPolicy: 'Return Policy',
       returnPolicylink: '/return',

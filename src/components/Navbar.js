@@ -67,14 +67,6 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                             className="text-gray-700 hover:text-blue-600 px-3 py-2">
                             {nav.product}
                         </a>
-                        <a href={nav.returnPolicylink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.returnPolicy}
-                        </a>
-                        <a href={nav.Checkoutlink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.Checkout}
-                        </a>
                         <a href={nav.contactUslink || "#"}
                             className="text-gray-700 hover:text-blue-600 px-3 py-2">
                             {nav.contactUs}
@@ -112,14 +104,6 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                         <a href={nav.productlink || "#"}
                             className="block text-gray-700 hover:text-blue-600 px-3 py-2">
                             {nav.product}
-                        </a>
-                        <a href={nav.returnPolicylink || "#"}
-                            className="block text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.returnPolicy}
-                        </a>
-                        <a href={nav.Checkoutlink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.Checkout}
                         </a>
                         <a href={nav.contactUslink || "#"}
                             className="block text-gray-700 hover:text-blue-600 px-3 py-2">
