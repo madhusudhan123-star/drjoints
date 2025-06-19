@@ -115,7 +115,7 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                         </a>
 
                         {/* Mobile Language Selector */}
-                        <div className="px-3 py-2">
+                        {/* <div className="px-3 py-2">
                             <button
                                 className="flex items-center space-x-2 text-gray-700 hover:text-blue-600"
                                 onClick={toggleLangMenu}
@@ -136,7 +136,7 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                                     ))}
                                 </div>
                             )}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             )}

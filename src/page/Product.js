@@ -21,7 +21,7 @@ import eleven from '../assets/ing/2.webp';
 import twelve from '../assets/ing/9.webp';
 
 import product3 from '../assets/images/eight.webp';
-import product4 from '../assets/images/six.webp';
+// import product4 from '../assets/images/six.webp';
 import product5 from '../assets/images/nine.webp';
 
 
@@ -79,12 +79,12 @@ const Product = ({ translations, currentLang }) => {
         });
     };
 
-    const productImages = [product1, product2, product3, product4, product5];
+    const productImages = [product1, product2, product3, product5];
 
     return (
         <div className="w-full">
             {/* Trust Indicators Banner */}
-            <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-lg p-6 mb-8">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-lg p-6 mb-8 md:block hidden ">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                     <div className="flex items-center justify-center space-x-2">
                         <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
