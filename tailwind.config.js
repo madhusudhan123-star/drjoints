@@ -19,11 +19,21 @@ module.exports = {
         'fade-in': {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(calc(-100% / 2))' },
         }
       },
       animation: {
         'bounce-slow': 'bounce 3s infinite',
         'fade-in': 'fade-in 0.2s ease-in-out',
+        marquee: 'marquee 25s linear infinite',
+        'scroll': 'scroll 20s linear infinite',
       }
     },
   },

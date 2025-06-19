@@ -6,7 +6,6 @@ import product2 from '../assets/product2.webp';
 import amazon from '../assets/icons/amazon.webp';
 import flipkart from '../assets/icons/flipkart.webp';
 import stamps from '../assets/icons/stamps.webp';
-import pain from '../assets/icons/pain.webp';
 
 import one from '../assets/ing/8.webp';
 import two from '../assets/ing/4.webp';
@@ -223,7 +222,7 @@ const Product = ({ translations, currentLang }) => {
                                     onClick={handleCheckout}
                                     className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
                                 >
-                                    Buy Now - {formatPrice(productPrice * quantity)}
+                                    Buy Now 
                                 </button>
                             </div>
                         </div>
@@ -361,12 +360,7 @@ const Product = ({ translations, currentLang }) => {
             </div>
 
             {/* Product Benefits Section */}
-            <div className="container mx-auto px-4 py-12">
-                <div className="text-center mb-12">
-                    <h2 className="text-6xl font-bold text-blue-800 mb-4">SYMPTOMS</h2>
-                </div>
-                <img src={pain} alt="Pain Relief" className="w-full h-auto" />
-            </div>
+          
 
             {/* Key Ingredients Section */}
             <div className="bg-gray-50 py-16">
@@ -459,7 +453,7 @@ const Product = ({ translations, currentLang }) => {
                         onClick={handleCheckout}
                         className="bg-white text-blue-600 px-12 py-4 rounded-full text-xl font-bold hover:bg-gray-100 transition-colors shadow-xl"
                     >
-                        Order Now - {formatPrice(productPrice)}
+                        Order Now
                     </button>
                     <div className="flex items-center justify-center mt-6 gap-8 text-blue-100">
                         <div className="flex items-center gap-2">

@@ -61,7 +61,7 @@ export const translations = {
       answer3: ` Whether you're an athlete recovering from a strenuous workout or someone dealing with age-related muscle pain, our oil is the perfect solution for people of all ages.`,
     },
     product: {
-      title: 'Our Product',
+      title: 'Product',
       subtitle: 'Best Pain Relief Oil For Muscles',
       content1: `Joint pain can be your worst nightmare or an joint pain relief ayurvedic oil unwanted guest during chilly
           winters, cold monsoons or old age.Joints – the connecting tissues between our bones – are an
@@ -96,18 +96,6 @@ export const translations = {
         {
           question: "Can the oil be used for joint pain as well?",
           answer: "Yes, our pain relief oil is versatile and can be used for both muscle and joint pain. It is effective in reducing inflammation and discomfort in areas such as knees, shoulders, elbows, and other joints."
-        },
-        {
-          question: "Is it safe to use daily?",
-          answer: "Absolutely! The oil is made from safe, natural ingredients and is suitable for daily use. Regular application can help maintain muscle and joint flexibility, reduce stiffness, and prevent pain."
-        },
-        {
-          question: "Who can use this oil?",
-          answer: "Our pain relief oil is suitable for all age groups. Whether you are an athlete, an individual recovering from muscle strain, or someone experiencing age-related muscle and joint pain, the oil can help relieve discomfort effectively."
-        },
-        {
-          question: "How long will it take to feel relief?",
-          answer: "Many users feel relief shortly after application, as the oil is quickly absorbed into the skin. However, the duration may vary depending on the severity of the pain. For chronic pain, regular use over time will yield the best results."
         }
       ]
     },

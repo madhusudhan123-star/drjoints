@@ -3,7 +3,7 @@ import one from '../assets/images/one.webp'
 import two from '../assets/images/two.webp'  
 import three from '../assets/images/three.webp'
 import four from '../assets/images/four.webp'
-import one1 from '../assets/images/one_one.webp'
+import pain from '../assets/icons/pain.webp'
 
 
 const Secondsection = () => {
@@ -26,7 +26,7 @@ const Secondsection = () => {
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div className="text-white text-center p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <h3 className="text-2xl font-bold mb-2">Neck Pain</h3>
-                  <p className="text-lg">Instant relief for neck strain</p>
+                  <p className="text-lg">Stiff neck, cervical pain, or tension headaches? Our products help ease muscle tightness and improve flexibility.</p>
                 </div>
               </div>
             </div>
@@ -35,63 +35,76 @@ const Secondsection = () => {
           {/* Small Images Grid */}
           <div className="md:w-1/2">
             <div className="grid grid-cols-2 gap-6">
-              {/* Muscle Pain */}
-              <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group">
-                <img 
-                  src={two} 
-                  alt="Muscle Pain Relief" 
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="text-white text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-xl font-bold mb-1">Wrist Pain</h3>
-                    <p className="text-sm">Quick relief for Wrist joint</p>
-                  </div>
-                </div>
-              </div>
-
               {/* Back Pain */}
               <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group">
                 <img 
-                  src={three} 
+                  src={two} 
                   alt="Back Pain Relief" 
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="text-white text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-xl font-bold mb-1">Knee Pain</h3>
-                    <p className="text-sm">Natural relief for chronic knee pain</p>
+                    <h3 className="text-xl font-bold mb-1">Back Pain</h3>
+                    <p className="text-sm">Lower back pain and spinal stiffness relief with natural solutions</p>
                   </div>
                 </div>
               </div>
 
-              {/* Neck Pain */}
+              {/* Body Pains */}
               <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group">
                 <img 
-                  src={four} 
-                  alt="Neck Pain Relief" 
+                  src={three} 
+                  alt="Body Pain Relief" 
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="text-white text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-xl font-bold mb-1">Knee Pain</h3>
-                    <p className="text-sm">Instant relief for Knee strain</p>
+                    <h3 className="text-xl font-bold mb-1">Body Pains</h3>
+                    <p className="text-sm">Natural relief for fatigue and body aches</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Muscle & Joint Pain */}
+              <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group">
+                <img 
+                  src={four} 
+                  alt="Muscle Joint Pain Relief" 
+                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="text-white text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-xl font-bold mb-1">Muscle & Joint Pain</h3>
+                    <p className="text-sm">Targeted solutions for inflammation and joint health</p>
                   </div>
                 </div>
               </div>
 
               {/* Info Box */}
-              <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-blue-600 flex items-center justify-center text-white p-6">
-                <div className="text-center">
-                  <p className="font-bold text-xl mb-2">And Many More</p>
-                  <p className="text-sm opacity-90">Discover natural relief for various types of body pain</p>
-                </div>
+              <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+                <a href="/product">
+                  <div className="text-center">
+                    <button className="bg-white text-blue-600 font-semibold py-3 px-6 rounded-full 
+                    hover:bg-blue-50 transform hover:scale-105 transition-all duration-300 
+                    shadow-md hover:shadow-lg active:scale-95">
+                      Order Now
+                    </button>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <img src={one1} alt="One" className="w-full mt-10 h-auto object-cover" />
+
+            <div className="container mx-auto px-4 py-12">
+                <div className="text-center mb-12">
+                    <h2 className="text-6xl font-bold text-blue-800 mb-4">SYMPTOMS</h2>
+                </div>
+                <img src={pain} alt="Pain Relief" className="w-full h-auto" />
+            </div>
+
+      
     </div>
   )
 }

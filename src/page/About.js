@@ -446,9 +446,9 @@ const About = ({ currentLang, translations }) => {
             </div>
 
             {/* FAQ Section */}
-            <div className="bg-gray-50 py-24">
+            {/* <div className="bg-gray-50 py-24">
                 <FAQ currentLang={currentLang} translations={translations} />
-            </div>
+            </div> */}
 
             {/* Call to Action */}
             <div className="bg-white py-16">
