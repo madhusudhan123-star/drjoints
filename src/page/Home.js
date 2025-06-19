@@ -124,7 +124,7 @@ const Hero = () => {
                 ))}
             </div>
 
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {images.map((_, index) => (
                     <button
                         key={index}
@@ -133,7 +133,7 @@ const Hero = () => {
                         onClick={() => setCurrentSlide(index)}
                     />
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 };
@@ -249,10 +249,11 @@ const VideoTrustSection = ({ currentLang, translations }) => {
                 <img src={one1} alt="Ayurvedic Solutions" className="w-full md:w-1/2 h-auto object-contain" />
                 <div className='w-full md:w-1/2'>
                     <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-6">
-                        Natural Ayurvedic Solutions
+                    Why Choose Dr.Joints ?
                     </h2>
-                    <p className="text-lg text-gray-700 text-center max-w-2xl mx-auto mb-8">
-                    At Dr Joints, we help you get natural relief from common pains like neck pain, body aches, muscle and joint pain, and back pain. Our Ayurvedic solutions work to ease stiffness, reduce swelling, and improve movement without side effects. Whether you have a sore neck from poor posture, tired muscles from daily work, or lower back pain from sitting too long, Dr Joints supports faster recovery and lasting comfort. Choose safe, herbal care and stay active every day.
+                    <p className="text-lg text-gray-700 text-left max-w-2xl mx-auto mb-8 pl-4">
+                        If you're looking for a joint supplement that goes beyond temporary relief, Dr. Joints deliver real, noticeable results — safely and naturally.
+                        In a world where modern medicine often leans heavily on synthetic solutions and quick fixes, more people are turning back to nature for holistic healing. Among the most trusted natural remedies (external link- https://www.naturalremedy.com/ ) is Ayurveda, an ancient Indian system of medicine that emphasizes balance, wellness, and natural treatments. One standout in Ayurvedic healing is the use of pain relief oils—a therapeutic option that combines ancient wisdom with natural ingredients to provide powerful, lasting relief from discomfort.
                     </p>
                     <a href='/product'>
                         <button className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-full 
@@ -480,6 +481,7 @@ const Product = ({ currentLang, translations }) => {
                         </div>
 
                         <div className="space-y-6 pr-4">
+                            <h1 className="text-gray-800 font-bold text-2xl">{translations[currentLang].product.title}</h1>
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content1}</p>
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content2}</p>
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content3}</p>
@@ -720,13 +722,13 @@ const Testimonials = ({ currentLang, translations }) => {
                             href="/product"
                             className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
                         >
-                            🛒 Order Now - ₹3,990
+                            Order Now
                         </a>
                         <a 
                             href="tel:+919908030111"
                             className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
                         >
-                            📞 Call for Free Consultation
+                            Call for Free Consultation
                         </a>
                     </div>
                 </div>

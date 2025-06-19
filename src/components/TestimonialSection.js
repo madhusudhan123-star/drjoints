@@ -31,7 +31,7 @@ const TestimonialSection = ({ testimonials }) => {
               <img
                 src={testimonial.image}
                 alt={`${testimonial.name}'s testimonial`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
