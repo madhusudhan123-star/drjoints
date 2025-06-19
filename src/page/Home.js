@@ -108,7 +108,7 @@ const Hero = () => {
 
     return (
         <div className="relative">
-            <div className="relative h-[80vh] sm:h-[100vh] md:h-[33rem] overflow-hidden">
+            <div className="relative h-[75vh] sm:h-[100vh] md:h-[33rem] overflow-hidden">
                 {images.map((image, index) => (
                     <div
                         key={index}
