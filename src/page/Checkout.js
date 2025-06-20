@@ -5,10 +5,11 @@ import { useForm } from '@formspree/react';
 // API base URL that works in both development and production environments
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
     ? 'https://razorpaybackend-wgbh.onrender.com' // Use your actual production backend URL https://razorpaybackend-wgbh.onrender.com
-    : 'http://localhost:5000';
+    : 'https://razorpaybackend-wgbh.onrender.com';
 
 const COUNTRY_CURRENCY_MAP = {
-    'India': { currency: 'INR', symbol: '₹', rate: 1 }
+    'India': { currency: 'INR', symbol: '₹', rate: 1, basePrice: 3990 }, // ₹3990 per product
+    'United States': { currency: 'USD', symbol: '$', rate: 1, basePrice: 120 } // $120 per product
 };
 
 const DEFAULT_COUNTRY = 'India';
@@ -27,10 +28,40 @@ const Checkout = ({ translations, currentLang }) => {
     const [promoCode, setPromoCode] = useState("");
     const [isPromoApplied, setIsPromoApplied] = useState(false);
     const [state, handleFormspreeSubmit] = useForm("mvgobdev");
-    const [orderNumber, setOrderNumber] = useState(1); // Initial order number
+    const [orderNumber, setOrderNumber] = useState(1);
+    const [userCountry, setUserCountry] = useState(DEFAULT_COUNTRY);
+    const [isLoadingLocation, setIsLoadingLocation] = useState(true);
+
+    // Detect user's location and set appropriate currency
+    useEffect(() => {
+        const detectUserLocation = async () => {
+            try {
+                // Try to get user's location via IP
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                if (data.country_name === 'India') {
+                    setUserCountry('India');
+                    setFormData(prev => ({ ...prev, country: 'India' }));
+                } else {
+                    // For all non-India locations, default to USD
+                    setUserCountry('United States');
+                    setFormData(prev => ({ ...prev, country: 'United States' }));
+                }
+            } catch (error) {
+                console.error('Failed to detect location:', error);
+                // Default to India if location detection fails
+                setUserCountry('India');
+                setFormData(prev => ({ ...prev, country: 'India' }));
+            } finally {
+                setIsLoadingLocation(false);
+            }
+        };
+
+        detectUserLocation();
+    }, []);
 
     useEffect(() => {
-        // Simulate fetching the latest order number from the backend
         const latestOrderNumber = localStorage.getItem("orderNumber") || 1;
         setOrderNumber(parseInt(latestOrderNumber, 10));
     }, []);
@@ -38,7 +69,7 @@ const Checkout = ({ translations, currentLang }) => {
     const incrementOrderNumber = () => {
         const nextOrderNumber = orderNumber + 1;
         setOrderNumber(nextOrderNumber);
-        localStorage.setItem("orderNumber", nextOrderNumber); // Persist order number locally
+        localStorage.setItem("orderNumber", nextOrderNumber);
     };
 
     const [formData, setFormData] = useState({
@@ -54,18 +85,16 @@ const Checkout = ({ translations, currentLang }) => {
         paymentMode: ''
     });
 
-    // Update currency and convert amount when country changes
     useEffect(() => {
         if (orderDetails) {
             const foundCurrency = COUNTRY_CURRENCY_MAP[formData.country] || DEFAULT_CURRENCY;
             setCurrentCurrency(foundCurrency);
 
-            // Convert amount from INR to selected currency
-            const baseAmount = orderDetails.totalAmount; // Total amount in INR
-            const convertedValue = (baseAmount * foundCurrency.rate).toFixed(2);
-            setConvertedAmount(convertedValue);
+            // Use direct base price for each currency without any discounts
+            const baseAmount = foundCurrency.basePrice * orderDetails.quantity;
+            setConvertedAmount(baseAmount.toFixed(2));
         }
-    }, [formData.country, orderDetails]);
+    }, [formData.country, orderDetails, formData.paymentMode]);
 
     // Original useEffects for initialization and script loading...
     useEffect(() => {
@@ -115,16 +144,9 @@ const Checkout = ({ translations, currentLang }) => {
             const foundCurrency = COUNTRY_CURRENCY_MAP[formData.country] || DEFAULT_CURRENCY;
             setCurrentCurrency(foundCurrency);
 
-            let baseAmount = orderDetails.totalAmount; // Total amount in INR
-            let discountPercentage = 10;
-
-            // Apply 10% discount for online payment
-            if (formData.paymentMode === 'online') {
-                baseAmount *= (1 - discountPercentage / 100);
-            }
-
-            const convertedValue = (baseAmount * foundCurrency.rate).toFixed(2);
-            setConvertedAmount(convertedValue);
+            // Use direct base price for each currency without any discounts
+            const baseAmount = foundCurrency.basePrice * orderDetails.quantity;
+            setConvertedAmount(baseAmount.toFixed(2));
         }
     }, [formData.country, orderDetails, formData.paymentMode]);
 
@@ -465,19 +487,19 @@ const Checkout = ({ translations, currentLang }) => {
                     <span className="font-semibold text-green-800">Secure Checkout</span>
                 </div>
                 <div className="grid grid-cols-1 gap-2 text-sm text-gray-700">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-3">
                         <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span>SSL Encrypted</span>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-3">
                         <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         <span>Also available on Amazon</span>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 mb-3">
                         <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
@@ -522,7 +544,7 @@ const Checkout = ({ translations, currentLang }) => {
                                 </div>
                                 <span className="text-sm text-gray-700">Amazon Prime eligible</span>
                             </div>
-                            <a href="#" className="text-xs text-orange-600 underline">View on Amazon</a>
+                            <a href={userCountry === 'USD' ? "https://www.amazon.com/" : "https://www.amazon.in/"} className="text-xs text-orange-600 underline">View on Amazon</a>
                         </div>
                         <p className="text-xs text-gray-600">Same product, multiple trusted platforms</p>
                     </div>
@@ -547,7 +569,7 @@ const Checkout = ({ translations, currentLang }) => {
                 <div className="flex justify-between py-2">
                     <span className="text-gray-700">{orderDetails?.productName} x {orderDetails?.quantity}</span>
                     <span className="text-gray-700">
-                        <span className="line-through">{currentCurrency.symbol} {(6990 * orderDetails.quantity * currentCurrency.rate).toFixed(2)}</span> {currentCurrency.symbol} {convertedAmount}
+                        <span className="line-through">{currentCurrency.symbol} {(currentCurrency.basePrice * 1.75 * orderDetails.quantity).toFixed(2)}</span> {currentCurrency.symbol} {convertedAmount}
                     </span>
                 </div>
 
@@ -582,7 +604,7 @@ const Checkout = ({ translations, currentLang }) => {
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         <option value="">Select Payment Method</option>
-                        <option value="cod">Cash on Delivery (COD)</option>
+                        {userCountry === 'India' && <option value="cod">Cash on Delivery (COD)</option>}
                         <option value="online">Online Payment</option>
                     </select>
                     {formErrors.paymentMode && (
@@ -651,6 +673,16 @@ const Checkout = ({ translations, currentLang }) => {
         }
     };
 
+    // Get available countries based on user's detected location
+    const getAvailableCountries = () => {
+        if (userCountry === 'India') {
+            return Object.keys(COUNTRY_CURRENCY_MAP);
+        } else {
+            // For non-India users, only show USD option
+            return ['United States'];
+        }
+    };
+
     if (!orderDetails) {
         return (
             <div className="flex items-center justify-center min-h-screen">
@@ -683,11 +715,7 @@ const Checkout = ({ translations, currentLang }) => {
         );
     }
     return (
-        <div className="max-w-7xl mx-auto px-4 py-12">
-            <h1 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                {translations[currentLang].checkout.title}
-            </h1>
-
+        <div className="max-w-7xl mx-auto px-4">
             {formErrors.submit && (
                 <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg mb-8">
                     {formErrors.submit}
@@ -715,13 +743,17 @@ const Checkout = ({ translations, currentLang }) => {
                                     value={formData.country}
                                     onChange={handleInputChange}
                                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    disabled={isLoadingLocation}
                                 >
-                                    {Object.keys(COUNTRY_CURRENCY_MAP).map(country => (
+                                    {getAvailableCountries().map(country => (
                                         <option key={country} value={country}>
                                             {country} ({COUNTRY_CURRENCY_MAP[country].currency})
                                         </option>
                                     ))}
                                 </select>
+                                {isLoadingLocation && (
+                                    <p className="text-sm text-gray-500">Detecting your location...</p>
+                                )}
                             </div>
 
                             {renderFormField("streetAddress", translations[currentLang].checkout.address)}

@@ -25,45 +25,38 @@ import pr4 from '../assets/pr/card4.webp';
 import pr5 from '../assets/pr/card5.webp';
 import pr6 from '../assets/pr/card6.webp';
 import pr7 from '../assets/pr/card7.webp';
-import one_two from '../assets/images/one_two.webp';  // Update path as needed
 import one1 from '../assets/images/one_one.webp'
-
-// YouTube related imports - add these images after taking screenshots
 import youtubeThumb from '../assets/youtube_thumbnail.webp';
-// import youtubeStats from '../assets/youtube_stats.webp';
-// import youtubeSocialProof from '../assets/youtube_social_proof.webp';
-import TestimonialSection from '../components/TestimonialSection';
+import { translations } from '../data/translations';
 
-// Add custom styles for the logo carousel
 const logoCarouselStyles = `
-@keyframes scrollx {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-100% / 4)); /* Adjust based on number of logos */
-  }
-}
+    @keyframes scrollx {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% / 4)); /* Adjust based on number of logos */
+    }
+    }
 
-.logo-carousel {
-  width: 100%;
-  overflow: hidden;
-  padding: 20px 0;
-  background: linear-gradient(90deg, white 0%, rgba(255,255,255,0) 5%, rgba(255,255,255,0) 95%, white 100%);
-}
+    .logo-carousel {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    background: linear-gradient(90deg, white 0%, rgba(255,255,255,0) 5%, rgba(255,255,255,0) 95%, white 100%);
+    }
 
-.animate-scrollx {
-  animation: scrollx 20s linear infinite;
-  width: fit-content;
-}
+    .animate-scrollx {
+    animation: scrollx 20s linear infinite;
+    width: fit-content;
+    }
 
-/* Make sure there's enough content for seamless looping */
-.animate-scrollx:hover {
-  animation-play-state: paused;
-}
+    /* Make sure there's enough content for seamless looping */
+    .animate-scrollx:hover {
+    animation-play-state: paused;
+    }
 `;
 
-// Insert the styles into the document
 if (typeof document !== 'undefined') {
   const styleElement = document.createElement('style');
   styleElement.textContent = logoCarouselStyles;
@@ -139,47 +132,59 @@ const Hero = () => {
 };
 
 const ProductSection = () => {
-
-    // Brand logos array
-    const brandLogos = [
-        { src: one, alt: "Trusted Brand 1" },
-        { src: two, alt: "Trusted Brand 2" },
-        { src: three, alt: "Trusted Brand 3", className: "w-[5rem] h-auto" },
-        { src: four, alt: "Trusted Brand 4" }
+    const cards = [
+        {
+            id: 1,
+            image: card1,
+            title: "Pain Relief Oil",
+            benefit: "Fast Acting Formula",
+            description: "Instant relief for muscle & joint pain",
+            alt: "Dr. Joints Pain Relief oil front view"
+        },
+        {
+            id: 2,
+            image: card2,
+            title: "Pain Relief Oil",
+            benefit: "Deep Penetration",
+            description: "Reaches deep muscle tissues",
+            alt: "Dr. Joints Pain Relief oil ingredients view"
+        },
+        {
+            id: 3,
+            image: card3,
+            title: "Pain Relief Oil",
+            benefit: "Natural Ingredients",
+            description: "100% Ayurvedic formulation",
+            alt: "Dr. Joints Pain Relief oil benefits view"
+        },
+        {
+            id: 4,
+            image: card4,
+            title: "Pain Relief Oil",
+            benefit: "Long Lasting Relief",
+            description: "Sustained pain relief action",
+            alt: "Dr. Joints Pain Relief oil usage view"
+        }
     ];
 
     return (
-        <div className="w-full mt-3">
+        <div className="w-full bg-gradient-to-b from-white to-gray-50">
             <h2 className="text-4xl font-bold text-center text-blue-900 mb-4">Dr. Joints Pain Relief Oil</h2>
             <p className="text-center text-gray-600 mb-12">One Solution for All Your Pain Relief Needs</p>
 
-            {/* Improved infinite scrolling logos */}
-            <div className="w-full overflow-hidden mb-12">
-                <div className="logo-carousel">
-                    <div className="flex items-center space-x-8 animate-scrollx">
-                        {/* First set of logos */}
-                        {brandLogos.map((logo, index) => (
-                            <div key={`logo-1-${index}`} className="flex-shrink-0">
-                                <img 
-                                    src={logo.src} 
-                                    alt={logo.alt} 
-                                    className={logo.className || "w-20 h-20 object-contain"} 
-                                />
-                            </div>
-                        ))}
-                        
-                        {/* Duplicated sets for seamless loop - multiple copies ensure smooth transition */}
-                        {[...Array(3)].map((_, setIndex) => (
-                            brandLogos.map((logo, index) => (
-                                <div key={`logo-${setIndex+2}-${index}`} className="flex-shrink-0">
-                                    <img 
-                                        src={logo.src} 
-                                        alt={logo.alt} 
-                                        className={logo.className || "w-20 h-20 object-contain"} 
-                                    />
-                                </div>
-                            ))
-                        ))}
+            <div className="w-full">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-items-center items-center mx-auto">
+                    <div>
+                        <img src={one} alt="Trusted Brand 1" className="max-w-full h-auto" />
+                    </div>
+                    <div>
+                        <img src={two} alt="Trusted Brand 2" className="max-w-full h-auto" />
+                    </div>
+                    <div>
+                        <img src={three} alt="Trusted Brand 3" className="max-w-full h-auto" />
+                    </div>
+                    <div>
+                        <img src={four} alt="Trusted Brand 4" className="w-[8.5rem] h-auto" />
                     </div>
                 </div>
             </div>
@@ -246,7 +251,6 @@ const VideoTrustSection = ({ currentLang, translations }) => {
         <div>
             {/* Additional Content */}
             <div className="flex mt-10 flex-col md:flex-row py-5 bg-white">
-                <img src={one1} alt="Ayurvedic Solutions" className="w-full md:w-1/2 h-auto object-contain" />
                 <div className='w-full md:w-1/2'>
                     <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-6">
                     Why Choose Dr.Joints ?
@@ -262,6 +266,7 @@ const VideoTrustSection = ({ currentLang, translations }) => {
                         </button>
                     </a>
                 </div>
+                <img src={one1} alt="Ayurvedic Solutions" className="w-full md:w-1/2 h-auto object-contain" />
             </div>
 
         <div ref={sectionRef} className='bg-gradient-to-br from-gray-900 via-red-900 to-black py-16 relative overflow-hidden'>
@@ -481,7 +486,7 @@ const Product = ({ currentLang, translations }) => {
                         </div>
 
                         <div className="space-y-6 pr-4">
-                            <h1 className="text-gray-800 font-bold text-2xl">{translations[currentLang].product.title}</h1>
+                            <h1 className="text-gray-800 font-bold text-2xl">{translations[currentLang].product.title2}</h1>
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content1}</p>
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content2}</p>
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content3}</p>
@@ -650,6 +655,69 @@ const About = ({ currentLang, translations }) => {
 };
 
 const Testimonials = ({ currentLang, translations }) => {
+    const testimonials = translations[currentLang]?.testimonials?.testimonial || [];
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+    
+    // Duplicate testimonials for infinite scroll effect
+    const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+    
+    // Auto-slide functionality
+    useEffect(() => {
+        if (!isHovered && testimonials.length > 0) {
+            const interval = setInterval(() => {
+                setCurrentSlide((prevSlide) => {
+                    const nextSlide = prevSlide + 1;
+                    // Reset to beginning when we reach the end of first set
+                    if (nextSlide >= testimonials.length) {
+                        return 0;
+                    }
+                    return nextSlide;
+                });
+            }, 3000); // Change slide every 3 seconds
+            
+            return () => clearInterval(interval);
+        }
+    }, [testimonials.length, isHovered]);
+
+    // Helper function to render star ratings
+    const renderStars = (rating) => {
+        const stars = [];
+        for (let i = 0; i < 5; i++) {
+            stars.push(
+                <svg 
+                    key={i} 
+                    className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                    fill="currentColor" 
+                    viewBox="0 0 20 20"
+                >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+            );
+        }
+        return stars;
+    };
+
+    const goToSlide = (index) => {
+        setCurrentSlide(index);
+    };
+
+    const goToPrevSlide = () => {
+        setCurrentSlide((prevSlide) => 
+            prevSlide === 0 ? testimonials.length - 1 : prevSlide - 1
+        );
+    };
+
+    const goToNextSlide = () => {
+        setCurrentSlide((prevSlide) => 
+            prevSlide === testimonials.length - 1 ? 0 : prevSlide + 1
+        );
+    };
+
+    if (!testimonials || testimonials.length === 0) {
+        return null;
+    }
+
     return (
         <div className="bg-gradient-to-b from-orange-50 via-yellow-50 to-green-50 py-20 relative overflow-hidden">
             {/* Decorative Background Elements */}
@@ -688,48 +756,100 @@ const Testimonials = ({ currentLang, translations }) => {
                         <br />
                         <span className="text-orange-600 font-semibold">Join the movement towards pain-free living</span>
                     </p>
-                    
-                    {/* Statistics */}
-                    <div className="flex justify-center space-x-8 mt-8">
-                        <div className="text-center">
-                            <div className="text-3xl font-bold text-orange-600">50,000+</div>
-                            <div className="text-gray-600">Happy Customers</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-3xl font-bold text-green-600">95%</div>
-                            <div className="text-gray-600">Success Rate</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-3xl font-bold text-yellow-600">4.9★</div>
-                            <div className="text-gray-600">Average Rating</div>
-                        </div>
-                    </div>
                 </div>
 
-                {/* Testimonials Grid - Using our new component */}
-                <TestimonialSection testimonials={translations[currentLang].testimonials.testimonial} />
+                {/* Auto-sliding Testimonial Section */}
+                <div 
+                    className="relative"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
+                    {/* Slider Container */}
+                    <div className="overflow-hidden rounded-xl">
+                        <div 
+                            className="flex transition-transform duration-500 ease-in-out"
+                            style={{ 
+                                transform: `translateX(-${currentSlide * (100 / 3)}%)`,
+                                width: `${(testimonials.length * 100) / 3}%`
+                            }}
+                        >
+                            {duplicatedTestimonials.map((testimonial, index) => (
+                                <div 
+                                    key={`${index}-${testimonial.name}`}
+                                    className="w-1/3 px-4 flex-shrink-0"
+                                >
+                                    <div className="relative group overflow-hidden rounded-xl shadow-lg h-[30rem] transition-transform duration-300 hover:shadow-xl hover:scale-105">
+                                        {/* Testimonial Image */}
+                                        <div className="absolute inset-0 w-full h-full">
+                                            {testimonial.image ? (
+                                                <img
+                                                    src={testimonial.image}
+                                                    alt={`${testimonial.name}'s testimonial`}
+                                                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                                    <span className="text-6xl text-white font-bold opacity-30">
+                                                        {testimonial.name ? testimonial.name.charAt(0) : "T"}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+                                        
+                                        {/* Overlay with Text */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex flex-col justify-end p-6 text-white">
+                                            {/* Star Rating */}
+                                            <div className="flex items-center mb-2">
+                                                {renderStars(testimonial.rating || 5)}
+                                            </div>
+                                            
+                                            {/* Review Text - Limited to 2 lines */}
+                                            <p className="line-clamp-2 text-sm mb-3 text-white/90">
+                                                {testimonial.text}
+                                            </p>
+                                            
+                                            {/* Name and Location */}
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <h4 className="font-semibold">{testimonial.name}</h4>
+                                                    <p className="text-xs text-white/80">{testimonial.location}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-                {/* Call to Action */}
-                <div className="text-center bg-white rounded-2xl shadow-xl p-8 border border-orange-200">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                        Ready to Start Your Healing Journey?
-                    </h3>
-                    <p className="text-gray-600 mb-6">
-                        Join thousands who have discovered the power of Ayurvedic pain relief
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a 
-                            href="/product"
-                            className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-                        >
-                            Order Now
-                        </a>
-                        <a 
-                            href="tel:+919908030111"
-                            className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-                        >
-                            Call for Free Consultation
-                        </a>
+                    {/* Navigation Arrows */}
+                    <button 
+                        onClick={goToPrevSlide}
+                        className="absolute top-1/2 left-4 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+                    >
+                        <ChevronLeft className="w-6 h-6 text-gray-700" />
+                    </button>
+                    
+                    <button 
+                        onClick={goToNextSlide}
+                        className="absolute top-1/2 right-4 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+                    >
+                        <ChevronRight className="w-6 h-6 text-gray-700" />
+                    </button>
+
+                    {/* Slide Indicators */}
+                    <div className="flex justify-center mt-8 space-x-2">
+                        {testimonials.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => goToSlide(index)}
+                                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                    index === currentSlide 
+                                        ? 'bg-orange-500 scale-125' 
+                                        : 'bg-gray-300 hover:bg-gray-400'
+                                }`}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
@@ -845,6 +965,43 @@ const PR = () => {
                     </button>
                     
                     <button 
+                                        href={item.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block p-6 hover:bg-gray-50 transition-colors"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center space-x-4">
+                                                <div className="w-12 h-12 flex-shrink-0">
+                                                    <img 
+                                                        src={item.icon} 
+                                                        alt={item.source}
+                                                        className="w-full h-full object-contain"
+                                                    />
+                                                </div>
+                                                <div className="font-medium text-gray-800">
+                                                    {item.source}
+                                                </div>
+                                            </div>
+                                            <div className="text-blue-600">
+                                                Read Article →
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    {/* Navigation arrows */}
+                    {/* <button 
+                        onClick={goToPrevSlide}
+                        className="absolute top-1/2 left-2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-md z-10 transition-all hover:scale-110"
+                    >
+                        <ChevronLeft className="w-5 h-5 text-gray-700" />
+                    </button>
+                    
+                    <button 
                         onClick={goToNextSlide}
                         className="absolute top-1/2 right-2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-md z-10 transition-all hover:scale-110"
                     >
@@ -858,9 +1015,9 @@ const PR = () => {
                         <button
                             key={index}
                             className={`w-2 h-2 rounded-full transition-all ${
-                                index === currentSlide ? 'bg-blue-600 w-4' : 'bg-gray-300'
+                                index === currentMediaSlide ? 'bg-blue-600 w-4' : 'bg-gray-300'
                             }`}
-                            onClick={() => setCurrentSlide(index)}
+                            onClick={() => setCurrentMediaSlide(index)}
                         />
                     ))}
                 </div> */}
@@ -879,8 +1036,8 @@ const Home = ({ currentLang, translations }) => {
                 </a>
                 <Hero currentLang={currentLang} />
                 <ProductSection currentLang={currentLang} />
-                <Product currentLang={currentLang} translations={translations} />
                 <Secondsection />
+                <Product currentLang={currentLang} translations={translations} />
                 <VideoTrustSection currentLang={currentLang} translations={translations} />
                 {/* <About currentLang={currentLang} translations={translations} /> */}
                 <PR />

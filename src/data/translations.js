@@ -63,10 +63,10 @@ export const translations = {
     product: {
       title: 'Product',
       subtitle: 'Best Pain Relief Oil For Muscles',
-      title: `Experience Natural Relief: Benefits of Dr.Joints Pain Relief Oils`,
+      title2: `Experience Natural Relief: Benefits of Dr.Joints Pain Relief Oils`,
       content1: ` Joint pain can turn daily routines into major challenges, especially during cold weather or as we age. Our joints are essential for movement, and keeping them healthy is key to maintaining an active lifestyle.`,
       content2: `While prevention through exercise and diet is important, when pain strikes, you need a remedy that's safe, effective, and natural. DR. Joints Pain Relief Oil offers a trusted Ayurvedic solution.`,
-      content3: ` Pain relief oils (Internal Link -  same blog page Pain relief oils )are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals.Try them for a natural and soothing way to feel better.`
+      content3: ` Pain relief oils are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals.Try them for a natural and soothing way to feel better.`
     },
     faq: {
       title: "FAQ's",

@@ -30,19 +30,16 @@ const Product = ({ translations, currentLang }) => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
-    const [selectedOffer, setSelectedOffer] = useState(0);
-    const [currency, setCurrency] = useState('INR'); // Default to INR
-    const productPrice = 3990; // Discounted price per unit in INR
-    const originalPrice = 6990; // Original price per unit in INR
-    const exchangeRate = 0.012; // Approximate conversion rate: 1 INR = 0.012 USD
+    const [selectedOffer, setSelectedOffer] = useState(0);    const [currency, setCurrency] = useState('INR'); // Default to INR
+    const productPrice = currency === 'USD' ? 120 : 3990; // $120 for USD, ₹3990 for INR
+    const originalPrice = currency === 'USD' ? 180 : 6990; // $180 for USD, ₹6990 for INR
 
     // Format price based on detected currency
-    const formatPrice = (priceInINR) => {
+    const formatPrice = (price) => {
         if (currency === 'USD') {
-            const priceInUSD = priceInINR * exchangeRate;
-            return `$${priceInUSD.toFixed(2)}`;
+            return `$${price}`;
         }
-        return `₹${priceInINR}`;
+        return `₹${price}`;
     };
 
     // Detect user's country and set currency
@@ -65,15 +62,14 @@ const Product = ({ translations, currentLang }) => {
             setSelectedOffer((prev) => (prev + 1) % 3);
         }, 2000);
         return () => clearInterval(interval);
-    }, []);
-
-    const handleCheckout = () => {
+    }, []);    const handleCheckout = () => {
+        const currentProductPrice = currency === 'USD' ? 120 : 3990;
         navigate('/checkout', {
             state: {
                 quantity,
-                totalAmount: quantity * productPrice,
+                totalAmount: quantity * currentProductPrice,
                 productName: 'Pain Relief Oil For Muscles',
-                unitPrice: productPrice,
+                unitPrice: currentProductPrice,
                 currency: currency
             }
         });
@@ -121,11 +117,12 @@ const Product = ({ translations, currentLang }) => {
                             </span>
                             ))}
                         </div>
-                    </div>
-                    <div className='flex items-center gap-4'>
-                        <img src={amazon} alt="Amazon Logo" className="h-20" />
-                        <img src={flipkart} alt="Flipkart Logo" className="h-20" />
-                    </div>
+                    </div>                    <a href={currency === 'USD' ? "https://www.amazon.com/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" className='flex items-center gap-4 mb-6'>
+                        <div className='flex items-center gap-4'>
+                            <img src={amazon} alt="Amazon Logo" className="h-20" />
+                            <img src={flipkart} alt="Flipkart Logo" className="h-20" />
+                        </div>
+                    </a>
                 </div>
 
                 {/* Product Images Section */}
@@ -161,7 +158,7 @@ const Product = ({ translations, currentLang }) => {
                 <div className="hidden md:block md:w-1/2 w-full md:order-2">
                     <div>
                         <h1 className="text-3xl font-bold montserrat text-gray-800 mb-2">Pain Relief Oil For Muscles</h1>
-                        <p className='text-blue-600 scada-regular text-sm'>Helps Relieve All Types of Joint & Nerve Pain | With Castor Oil, Gaultheria Oil, Eucalyptus Oil, Arnica Oil & Myrrh Oil | 100% Natural</p>
+                        <p className='text-blue-600 scada-regular text-sm'>Pain relief oils are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals.Try them for a natural and soothing way to feel better.</p>
                         <div className='flex items-center gap-2 my-4 scada-regular'>
                             <span className="text-lg font-medium text-gray-600">4.5/5</span>
                             <div className="flex">
@@ -177,14 +174,14 @@ const Product = ({ translations, currentLang }) => {
                                 <p className='line-through text-gray-400 text-3xl'>{formatPrice(originalPrice)}</p>
                                 <p className='text-xl font-bold text-red-600'>{formatPrice(productPrice)}</p>
                                 <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Lowest price</span>
-                            </div>
-                            <p className='text-gray-500'>Incl. of all taxes</p>
-                            <div className='flex items-center gap-4'>
-                                <img src={amazon} alt="Amazon Logo" className="h-20" />
-                                <img src={flipkart} alt="Flipkart Logo" className="h-20" />
+                            </div>                            <div className='flex items-center gap-4'>
+                                <a href={currency === 'USD' ? "https://www.amazon.com/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer">
+                                    <img src={amazon} alt="Amazon Logo" className="h-20" />
+                                </a>
+                                {/* <img src={flipkart} alt="Flipkart Logo" className="h-20" /> */}
                             </div>
                             <div className='w-full h-[1px] bg-black'></div>
-                            <div className='w-1/2'>
+                            {/* <div className='w-1/2'>
                                 <p className='text-lg text-gray-500'>Select Variant</p>
                                 <div className='flex items-center gap-2'>
                                     <div className='border border-green-600 rounded-lg border-2 w-full cursor-pointer'>
@@ -200,7 +197,7 @@ const Product = ({ translations, currentLang }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div>
                                 <img src={stamps} alt="Stamps" className="" />
                             </div>
@@ -278,23 +275,6 @@ const Product = ({ translations, currentLang }) => {
                         <div>
                             <img src={stamps} alt="Stamps" className="" />
                         </div>
-                        <div className='w-full'>
-                            <p className='text-lg text-gray-500'>Select Variant</p>
-                            <div className='flex items-center gap-2'>
-                                <div className='border border-green-600 rounded-lg border-2 w-full cursor-pointer'>
-                                    <div className='bg-green-500 text-white p-2 rounded-t-lg'>
-                                        100 ml
-                                    </div>
-                                    <div>
-                                        <div className='flex items-center gap-2 p-2'>
-                                            <p className='line-through text-gray-400 text-xl'>{formatPrice(originalPrice)}</p>
-                                            <p className='text-lg text-black'>{formatPrice(productPrice)}</p>
-                                        </div>
-                                        <p className='text-2xl text-green-500'> 3 Bottles</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         
                         {/* Mobile Buy Button */}
                         <div className="w-full space-y-4">
@@ -314,7 +294,7 @@ const Product = ({ translations, currentLang }) => {
                                 onClick={handleCheckout}
                                 className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
                             >
-                                Buy Now - {formatPrice(productPrice * quantity)}
+                                Buy Now
                             </button>
                         </div>
                     </div>

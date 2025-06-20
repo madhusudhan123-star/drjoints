@@ -3,11 +3,15 @@ import { Globe } from 'lucide-react';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.webp';
 
-
-
 const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    // Set isLoaded to true after component mounts to trigger animations
+    useEffect(() => {
+        setIsLoaded(true);
+    }, []);
 
     console.log('Current Language:', currentLang);
     console.log('Translations:', translations);
@@ -36,52 +40,140 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
     };
 
     return (
-        <nav className="bg-white shadow-lg relative">
-            {/* Rotating Text Banner */}
-            {/* <div className="bg-orange-500 text-white text-center py-2">
-                <marquee behavior="scroll" direction="left">
-                    Make your payment online and save 10% instantly on your purchase! It’s fast, secure, and convenient. Take advantage of this limited-time offer and enjoy extra savings today. Don't miss out—start saving now! 🎉✨
-                </marquee>
-            </div> */}
+        <nav className="bg-white relative overflow-hidden">
+            {/* Animation Keyframes */}
+            <style jsx>{`
+                @keyframes popIn {
+                    0% { transform: scale(0.8); opacity: 0; }
+                    70% { transform: scale(1.1); }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+                .pop-in {
+                    animation: popIn 0.5s ease forwards;
+                }
+                
+                /* Continuous animations */
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+                .pulse {
+                    animation: pulse 2s ease-in-out infinite;
+                }
+                
+                @keyframes float {
+                    0% { transform: translateY(0px); }
+                    50% { transform: translateY(-4px); }
+                    100% { transform: translateY(0px); }
+                }
+                .float {
+                    animation: float 3s ease-in-out infinite;
+                }
+                
+                @keyframes shimmer {
+                    0% { background-position: -100% 0; }
+                    100% { background-position: 200% 0; }
+                }
+                .shimmer-bg {
+                    background: linear-gradient(
+                        90deg,
+                        rgba(255,255,255,0) 0%,
+                        rgba(255,255,255,0.8) 50%,
+                        rgba(255,255,255,0) 100%
+                    );
+                    background-size: 200% 100%;
+                    animation: shimmer 8s infinite linear;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                    pointer-events: none;
+                }
+                
+                @keyframes borderGlow {
+                    0% { box-shadow: 0 0 5px rgba(66, 153, 225, 0.1); }
+                    50% { box-shadow: 0 0 15px rgba(66, 153, 225, 0.3); }
+                    100% { box-shadow: 0 0 5px rgba(66, 153, 225, 0.1); }
+                }
+                .border-glow {
+                    animation: borderGlow 3s infinite;
+                }
+                
+                @keyframes colorCycle {
+                    0% { color: #2b6cb0; }
+                    25% { color: #4299e1; }
+                    50% { color: #3182ce; }
+                    75% { color: #2c5282; }
+                    100% { color: #2b6cb0; }
+                }
+                .color-cycle {
+                    animation: colorCycle 8s infinite;
+                }
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                /* Staggered animations */
+                .staggered-item:nth-child(1) { animation-delay: 0.1s; }
+                .staggered-item:nth-child(2) { animation-delay: 0.2s; }
+                .staggered-item:nth-child(3) { animation-delay: 0.3s; }
+                .staggered-item:nth-child(4) { animation-delay: 0.4s; }
+                .staggered-item:nth-child(5) { animation-delay: 0.5s; }
+
+                @keyframes slideDown {
+                    0% { opacity: 0; transform: translateY(-10px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+                .slide-down {
+                    animation: slideDown 0.3s ease forwards;
+                }
+            `}</style>
+
+            {/* Shimmer background effect */}
+            <div className="shimmer-bg"></div>
+            
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex justify-between items-center h-16 sm:h-20">
-                    {/* Logo */}
-                    <div className="flex-shrink-0">
+                    {/* Logo with pulse animation */}
+                    <div className={`flex-shrink-0 ${isLoaded ? 'pop-in pulse' : 'opacity-0'}`}>
                         <a href={nav.homelink || "#"}>
                             <img src={logo} alt="Dr. Joints Logo" className="h-8 sm:h-12 md:h-16" />
                         </a>
                     </div>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-4">
+                    {/* Desktop Navigation with float animations */}
+                    <div className="hidden md:flex items-center px-2">
                         <a href={nav.homelink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.home}
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}>
+                            <span className="color-cycle">{nav.home}</span>
                         </a>
                         <a href={nav.aboutUslink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            style={{animationDelay: '0.5s'}}>
                             {nav.aboutUs}
                         </a>
                         <a href={nav.productlink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            style={{animationDelay: '1s'}}>
                             {nav.product}
                         </a>
                         <a href={nav.contactUslink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            style={{animationDelay: '1.5s'}}>
                             {nav.contactUs}
                         </a>
                         <a href={nav.bloglink || "#"}
-                            className="text-gray-700 hover:text-blue-600 px-3 py-2">
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            style={{animationDelay: '2s'}}>
                             {nav.blog}
                         </a>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden flex items-center">
+                    {/* Mobile Menu Button with pulse animation */}
+                    <div className={`md:hidden flex items-center ${isLoaded ? 'pop-in pulse' : 'opacity-0'}`}>
                         <button
                             onClick={toggleMenu}
-                            className="text-gray-700 hover:text-blue-600 p-2"
+                            className="text-gray-700 hover:text-blue-600 p-2 transition-transform active:scale-90 hover:scale-110 color-cycle"
                         >
                             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -91,54 +183,37 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
 
             {/* Mobile Navigation Menu */}
             {isMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50">
-                    <div className="px-4 pt-2 pb-4 space-y-2">
-                        <a href={nav.homelink || "#"}
-                            className="block text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.home}
-                        </a>
-                        <a href={nav.aboutUslink || "#"}
-                            className="block text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.aboutUs}
-                        </a>
-                        <a href={nav.productlink || "#"}
-                            className="block text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.product}
-                        </a>
-                        <a href={nav.contactUslink || "#"}
-                            className="block text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.contactUs}
-                        </a>
-                        <a href={nav.bloglink || "#"}
-                            className="block text-gray-700 hover:text-blue-600 px-3 py-2">
-                            {nav.blog}
-                        </a>
-
-                        {/* Mobile Language Selector */}
-                        {/* <div className="px-3 py-2">
-                            <button
-                                className="flex items-center space-x-2 text-gray-700 hover:text-blue-600"
-                                onClick={toggleLangMenu}
-                            >
-                                <Globe size={20} />
-                                <span>Select Language</span>
-                            </button>
-                            {isLangMenuOpen && (
-                                <div className="mt-2 py-2 space-y-1">
-                                    {languages.map((lang) => (
-                                        <button
-                                            key={lang.code}
-                                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                            onClick={() => handleLangSelect(lang.code)}
-                                        >
-                                            {lang.name}
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
-                        </div> */}
+                <>
+                    <div className="md:hidden fixed inset-0 bg-black bg-opacity-20 z-40" onClick={toggleMenu}></div>
+                    <div className="md:hidden fixed top-0 left-0 right-0 bg-white z-50 pop-in slide-down border-glow">
+                        <div className="px-4 pt-2 pb-4 space-y-2">
+                            <a href={nav.homelink || "#"}
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-3 hover:scale-105 transition-transform pop-in staggered-item float">
+                                {nav.home}
+                            </a>
+                            <a href={nav.aboutUslink || "#"}
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                style={{animationDelay: '0.3s'}}>
+                                {nav.aboutUs}
+                            </a>
+                            <a href={nav.productlink || "#"}
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                style={{animationDelay: '0.6s'}}>
+                                {nav.product}
+                            </a>
+                            <a href={nav.contactUslink || "#"}
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                style={{animationDelay: '0.9s'}}>
+                                {nav.contactUs}
+                            </a>
+                            <a href={nav.bloglink || "#"}
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                style={{animationDelay: '1.2s'}}>
+                                {nav.blog}
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </>
             )}
         </nav>
     );
