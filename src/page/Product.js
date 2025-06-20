@@ -117,12 +117,13 @@ const Product = ({ translations, currentLang }) => {
                             </span>
                             ))}
                         </div>
-                    </div>                    <a href={currency === 'USD' ? "https://www.amazon.in/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" className='flex items-center gap-4 mb-6'>
+                    </div>                    
+                    {/* <a href={currency === 'USD' ? "https://www.amazon.in/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" className='flex items-center gap-4 mb-6'> */}
                         <div className='flex items-center gap-4'>
-                            <img src={amazon} alt="Amazon Logo" className="h-20" />
-                            <img src={flipkart} alt="Flipkart Logo" className="h-20" />
+                            {/* <img src={amazon} alt="Amazon Logo" className="h-20" /> */}
+                            {/* <img src={flipkart} alt="Flipkart Logo" className="h-20" /> */}
                         </div>
-                    </a>
+                    {/* </a> */}
                 </div>
 
                 {/* Product Images Section */}
@@ -173,31 +174,14 @@ const Product = ({ translations, currentLang }) => {
                             <div className='flex items-center gap-2'>
                                 <p className='line-through text-gray-400 text-3xl'>{formatPrice(originalPrice)}</p>
                                 <p className='text-xl font-bold text-red-600'>{formatPrice(productPrice)}</p>
-                                <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Lowest price</span>
+                                <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Discounted Price</span>
                             </div>                            <div className='flex items-center gap-4'>
-                                <a href={currency === 'USD' ? "https://www.amazon.com/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer">
-                                    <img src={amazon} alt="Amazon Logo" className="h-20" />
+                                {/* href={currency === 'USD' ? "#" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" */}
+                                <a>
+                                    {/* <img src={amazon} alt="Amazon Logo" className="h-20" /> */}
                                 </a>
-                                {/* <img src={flipkart} alt="Flipkart Logo" className="h-20" /> */}
                             </div>
                             <div className='w-full h-[1px] bg-black'></div>
-                            {/* <div className='w-1/2'>
-                                <p className='text-lg text-gray-500'>Select Variant</p>
-                                <div className='flex items-center gap-2'>
-                                    <div className='border border-green-600 rounded-lg border-2 w-full cursor-pointer'>
-                                        <div className='bg-green-500 text-white p-2 rounded-t-lg'>
-                                            100 ml
-                                        </div>
-                                        <div>
-                                            <div className='flex items-center gap-2 p-2'>
-                                                <p className='line-through text-gray-400 text-xl'>{formatPrice(originalPrice)}</p>
-                                                <p className='text-lg text-black'>{formatPrice(productPrice)}</p>
-                                            </div>
-                                            <p className='text-2xl text-green-500'> 3 Bottles</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
                             <div>
                                 <img src={stamps} alt="Stamps" className="" />
                             </div>
@@ -233,11 +217,11 @@ const Product = ({ translations, currentLang }) => {
                             }}>
                             { [
                                 {
-                                    title: "Available offer",
-                                    subtitle: "10% Off on Online Payment",
-                                    description: "Extra discount on prepaid orders",
+                                    title: "Available Offer",
+                                    subtitle: "45 Days Course",
+                                    description: "Complete course designed for 45 days of use",
                                     color: "bg-white"
-                                },
+                                },                                  
                                 {
                                     title: "Available offer",
                                     subtitle: "15 Days Return Policy",
@@ -245,11 +229,11 @@ const Product = ({ translations, currentLang }) => {
                                     color: "bg-white"
                                 },
                                 {
-                                    title: "Available offer",
-                                    subtitle: "Buy 3 Bottles Pack",
-                                    description: "Best value for money deal",
+                                    title: "Available Offer",
+                                    subtitle: "Buy 3 Cans Pack (11 fl oz each)",
+                                    description: "Best value for money deal — enjoy three convenient 11 fl oz cans.",
                                     color: "bg-white"
-                                }
+                                }                                  
                             ].map((offer, index) => (
                                 <div key={index} className={`w-full flex-shrink-0 ${offer.color} p-4 rounded-lg border border-gray-200`}>
                                     <div className="pdp-coupon">

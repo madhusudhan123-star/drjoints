@@ -50,22 +50,6 @@ const Blog = ({ currentLang, translations, blogPosts }) => {
                         <BlogPost key={post.id} post={post} />
                     ))}
                 </div>
-
-                {/* Newsletter Section with translations */}
-                {/* <div className="mt-16 bg-blue-600 rounded-xl p-8 text-center">
-                    <h2 className="text-2xl font-bold text-white mb-4">{blogText.newsletter.title}</h2>
-                    <p className="text-blue-100 mb-6">{blogText.newsletter.description}</p>
-                    <div className="max-w-md mx-auto flex gap-4">
-                        <input
-                            type="email"
-                            placeholder={blogText.newsletter.placeholder}
-                            className="flex-1 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                            {blogText.newsletter.button}
-                        </button>
-                    </div>
-                </div> */}
             </div>
         </div>
     );

@@ -32,6 +32,7 @@ const ThankYou = lazy(() => import(/* webpackChunkName: "misc" */ './page/ThankY
 const Landing_two = lazy(() => import(/* webpackChunkName: "landing" */ './page/Landing_two'));
 const Landing_three = lazy(() => import(/* webpackChunkName: "landing" */ './page/Landing_three'));
 
+
 // Optimized loading component
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen">
@@ -90,7 +91,7 @@ const App = () => {
   return (
     <div>
       {/* Mobile call button - only load on mobile */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 
+      {/* <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50 
                         flex justify-around items-center py-3 px-4 space-x-4">
         <button
           onClick={handleCall}
@@ -101,7 +102,7 @@ const App = () => {
           <FaPhoneAlt className="text-lg" />
           <span className="text-sm font-medium">Call Now</span>
         </button>
-      </div>
+      </div> */}
 
       <BrowserRouter>
         <ConditionalNavbar />

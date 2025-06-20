@@ -21,6 +21,8 @@ export const translations = {
       aboutUslink: '/about',
       product: 'Shop Dr. Joints',
       productlink: '/product',
+      privacyPolicy: 'Privacy Policy',
+      privacyPolicylink: '/privacy',
       returnPolicy: 'Return Policy',
       returnPolicylink: '/return',
       Checkout: 'Checkout',
@@ -231,7 +233,59 @@ export const translations = {
       }
     ],
     privacy: {
-      title: "Privacy Policy"
+      title: "Privacy Policy",
+      lastUpdated: "Last Updated: July 2025",
+      sections: [
+        {
+          title: "Information We Collect",
+          content: [
+            {
+              text: "This Privacy Policy describes how Sampoorna Arogya collects, uses, and discloses your information when you use our website."
+            },
+            {
+              subtitle: "Personal Information:",
+              text: "This includes information that can be used to identify you, such as your name, billing address, shipping address, email address, and phone number. You only provide this information when you contact us through a form on the Site."
+            },
+            {
+              subtitle: "Non-Personal Information:",
+              text: "This includes information that cannot be used to identify you, such as your browser type, operating system, IP address, browsing activity on the Site, and demographic information (e.g., age, gender). This information is collected automatically when you visit the Site."
+            }
+          ]
+        },
+        {
+          title: "How We Use Your Information",
+          content: [
+            {
+              subtitle: "Personal Information:",
+              text: "We will only use your personal information to respond to inquiries and requests. We will not share your personal information with any third parties without your consent, except as required by law."
+            },
+            {
+              subtitle: "Non-Personal Information:",
+              text: "We use non-personal information to improve the Site and understand how users interact. We may also use non-personal information for internal marketing and promotional purposes."
+            }
+          ]
+        },
+        {
+          title: "Cookies and Tracking Technologies",
+          content: `We may use cookies and other tracking technologies to collect non-personal information about your use of the Site. Cookies are small data files that are stored on your device when you visit a website. They allow the website to remember your actions and preferences over time. If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser. When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select "Remember Me", your login will persist for two weeks. If you log out of your account, the login cookies will be removed. If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.`
+        },
+        {
+          title: "Third-Party Service Providers",
+          content: "We may use third-party service providers to help us operate the Site and deliver our services. These service providers may have access to your non-personal information. We will not share your personal information with any third-party service providers for their marketing purposes without your consent."
+        },
+        {
+          title: "Security",
+          content: "We take reasonable steps to protect your information from unauthorized access, disclosure, alteration, or destruction. However, no website or internet transmission is completely secure."
+        },
+        {
+          title: "Children's Privacy",
+          content: "The Site is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and you believe that your child has provided us with personal information, please contact us. We will take steps to remove the information from our records."
+        },
+        {
+          title: "Changes to this Privacy Policy",
+          content: "We may update this Privacy Policy from time to time. We will post any changes on the Site. We encourage you to review this Privacy Policy periodically for the latest information on our privacy practices."
+        }
+      ]
     },
     checkout: {
       title: "Checkout",
@@ -329,19 +383,53 @@ export const translations = {
     blogPosts: [
       {
           id: 1,
-          title: "Natural Remedies for Chronic Joint Pain",
+          title: "The Best Ayurvedic Joint pain & Muscle pain Oil | Dr.Joints",
+          slug: "Joint-Pain-Ayurvedic-oil",
           date: "March 15, 2024",
-          excerpt: "Discover effective natural remedies and lifestyle changes that can help manage chronic joint pain without relying solely on medication.",
-          content: `Joint pain affects millions of people worldwide, impacting daily activities and quality of life. While conventional treatments are available, many people are turning to natural remedies for relief. This article explores various natural approaches to managing joint pain, including:
+          excerpt: "Dr.Joints - Ayurvedic Joint pain oil with a blend of natural ingredients, relieves muscle and joint pain by reducing inflammation, restoring comfort for better movement.",
+          content: `Ayurvedic Joint pain oil can be a major obstacle in everyday life, making simple tasks like walking, sitting, or bending difficult. While regular exercise and a balanced diet can help, sometimes pain is inevitable due to weather changes or aging.
 
-          1. Anti-inflammatory foods
-          2. Gentle exercise routines
-          3. Herbal supplements
-          4. Ayurvedic treatments
-          
-          Our comprehensive guide will help you understand how these natural remedies work and how to incorporate them into your daily routine.`,
+          At times like these, turning to natural remedies can make all the difference. DR. Joints is an Ayurvedic Joint pain oil - solution designed to relieve joint and muscle pain safely and effectively.
+
+          Ayurvedic Joint Pain Oil is made up of natural resources that helps to relieve muscle and joint pains. This ayurvedic oil does not create any side effects on the human body. This oil has anti-inflammatory properties that help to prevent discomfort and promote healing.
+
+          How does Ayurvedic Joint pain & Muscle Oil work?
+
+          The oil penetrates deep into the tissues, reducing inflammation, improving blood circulation, and soothing muscle tension. Its powerful herbal formula not only relieves pain quickly but also strengthens muscles and joints over time.
+
+          Made from 100% natural ingredients, this oil harnesses the anti-inflammatory and muscle-nourishing properties of Ayurvedic herbs. It's safe for daily use and suitable for all age groups, from athletes to seniors.
+
+          It helps rebuild and maintain joint flexibility and ease discomforts that come with age, weight, accident, or sports-related stress.
+
+          Who uses this pain relief oil:
+          - People with joint pain, arthritis, or frozen shoulder
+          - Those suffering from backaches or muscular cramps
+          - Athletes and individuals with active lifestyles
+
+          How to use Dr joints pain relief oil?
+
+          These ayurvedic pain oil provides instant relief after massage. While oral medications are common treatments, pain relief oils provide a natural alternative or complementary therapy for managing pain.
+
+          Simply apply a small amount of Dr joints pain oil to the affected area and massage gently in circular motions until fully absorbed. For best results, use 2-3 times a day consistently.
+
+          Why to choose DR. Joint Pain Relief Oil?
+
+          - Fast relief from muscle and joint pain
+          - Reduces stiffness and improves flexibility
+          - Safe for daily use
+          - Suitable for all ages
+
+          Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, DR. Joints ayurvedic Relief Oil is your natural companion for lasting relief.
+
+          Conclusion
+
+          Dr.Joint Ayurvedic Oil offers a natural and effective solution for managing joint pain, stiffness, and inflammation. Its special combination of herbal ingredients works in concert to support better mobility and long-lasting relief without the negative side effects of chemical-based substitutes. Dr.Joint Ayurvedic Oil is a safe, extensive method of reestablishing joint health and improving general well-being, regardless of whether you are experiencing muscle aches, back pain, or arthritis.
+
+          Experience relief from body aches, muscle pains, and joint pains with our natural Ayurvedic solution.`,
           readTime: "5 min read",
-          image: blog1
+          image: blog1,
+          focusKeyword: "Ayurvedic Joint pain oil",
+          metaDescription: "Dr.Joints - Ayurvedic Joint pain oil with a blend of natural ingredients, relieves muscle and joint pain by reducing inflammation, restoring comfort for better movement."
         },
       {
           id: 2,
@@ -350,23 +438,23 @@ export const translations = {
           excerpt: "Learn how Ayurvedic solutions like DR. Joints Pain Relief Oil can help you naturally combat joint and muscle pain, especially during colder seasons or aging.",
           content: `Joint pain can be a major obstacle in everyday life, making simple tasks like walking, sitting, or bending difficult. While regular exercise and a balanced diet can help, sometimes pain is inevitable due to weather changes or aging.
 
-            At times like these, turning to natural remedies can make all the difference. DR. Joints Pain Relief Oil is an Ayurvedic solution designed to relieve joint and muscle pain safely and effectively.
+              At times like these, turning to natural remedies can make all the difference. DR. Joints Pain Relief Oil is an Ayurvedic solution designed to relieve joint and muscle pain safely and effectively.
 
-            How does it work?
-            The oil penetrates deep into the tissues, reducing inflammation, improving blood circulation, and soothing muscle tension. Its powerful herbal formula not only relieves pain quickly but also strengthens muscles and joints over time.
+              How does it work?
+              The oil penetrates deep into the tissues, reducing inflammation, improving blood circulation, and soothing muscle tension. Its powerful herbal formula not only relieves pain quickly but also strengthens muscles and joints over time.
 
-            Made from 100% natural ingredients, this oil harnesses the anti-inflammatory and muscle-nourishing properties of Ayurvedic herbs. It's safe for daily use and suitable for all age groups, from athletes to seniors.
+              Made from 100% natural ingredients, this oil harnesses the anti-inflammatory and muscle-nourishing properties of Ayurvedic herbs. It's safe for daily use and suitable for all age groups, from athletes to seniors.
 
-            How to use it?
-            Simply apply a small amount of oil to the affected area and massage gently in circular motions until fully absorbed. For best results, use 2-3 times a day consistently.
+              How to use it?
+              Simply apply a small amount of oil to the affected area and massage gently in circular motions until fully absorbed. For best results, use 2-3 times a day consistently.
 
-            Why choose DR. Joints Pain Relief Oil?
-            - Fast relief from muscle and joint pain
-            - Reduces stiffness and improves flexibility
-            - Safe for daily use
-            - Suitable for all ages
+              Why choose DR. Joints Pain Relief Oil?
+              - Fast relief from muscle and joint pain
+              - Reduces stiffness and improves flexibility
+              - Safe for daily use
+              - Suitable for all ages
 
-            Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, DR. Joints Pain Relief Oil is your natural companion for lasting relief.`,
+              Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, DR. Joints Pain Relief Oil is your natural companion for lasting relief.`,
           readTime: "4 min read",
           image: blog2
       },
@@ -377,24 +465,24 @@ export const translations = {
         excerpt: "Explore how Ayurvedic oils like DR. Joints Pain Relief Oil can naturally ease joint and muscle pain, strengthen your body, and improve flexibility.",
         content: `Joint pain can turn daily routines into major challenges, especially during cold weather or as we age. Our joints are essential for movement, and keeping them healthy is key to maintaining an active lifestyle.
 
-          While prevention through exercise and diet is important, when pain strikes, you need a remedy that's safe, effective, and natural. DR. Joints Pain Relief Oil offers a trusted Ayurvedic solution.
+            While prevention through exercise and diet is important, when pain strikes, you need a remedy that's safe, effective, and natural. DR. Joints Pain Relief Oil offers a trusted Ayurvedic solution.
 
-          What makes it special?
-          Formulated with 100% natural herbs, the oil targets the root cause of pain by penetrating deep into the muscle tissues. It helps reduce inflammation, improves blood circulation, and eases muscle stiffness, providing quick and lasting relief.
+            What makes it special?
+            Formulated with 100% natural herbs, the oil targets the root cause of pain by penetrating deep into the muscle tissues. It helps reduce inflammation, improves blood circulation, and eases muscle stiffness, providing quick and lasting relief.
 
-          How to use:
-          Massage a small amount of oil onto the painful area in gentle, circular motions until absorbed. Apply 2-3 times daily for best results.
+            How to use:
+            Massage a small amount of oil onto the painful area in gentle, circular motions until absorbed. Apply 2-3 times daily for best results.
 
-          Key Benefits:
-          - Quick pain relief
-          - Strengthens joints, muscles, and bones
-          - Enhances flexibility
-          - Reduces stiffness
-          - Safe for everyday use
+            Key Benefits:
+            - Quick pain relief
+            - Strengthens joints, muscles, and bones
+            - Enhances flexibility
+            - Reduces stiffness
+            - Safe for everyday use
 
-          Suitable for athletes, elders, and anyone experiencing muscle or joint discomfort, DR. Joints Pain Relief Oil is your natural ally for a pain-free, active life.
+            Suitable for athletes, elders, and anyone experiencing muscle or joint discomfort, DR. Joints Pain Relief Oil is your natural ally for a pain-free, active life.
 
-          Start your journey towards better joint health today with the power of Ayurveda.`,
+            Start your journey towards better joint health today with the power of Ayurveda.`,
         readTime: "4 min read",
         image: blog3
       },
@@ -405,20 +493,54 @@ export const translations = {
 export const blogPosts = [
       {
           id: 1,
-          title: "Natural Remedies for Chronic Joint Pain",
+          title: "The Best Ayurvedic Joint pain & Muscle pain Oil | Dr.Joints",
+          slug: "Joint-Pain-Ayurvedic-oil",
           date: "March 15, 2024",
-          excerpt: "Discover effective natural remedies and lifestyle changes that can help manage chronic joint pain without relying solely on medication.",
-          content: `Joint pain affects millions of people worldwide, impacting daily activities and quality of life. While conventional treatments are available, many people are turning to natural remedies for relief. This article explores various natural approaches to managing joint pain, including:
+          excerpt: "Dr.Joints - Ayurvedic Joint pain oil with a blend of natural ingredients, relieves muscle and joint pain by reducing inflammation, restoring comfort for better movement.",
+          content: `Ayurvedic Joint pain oil can be a major obstacle in everyday life, making simple tasks like walking, sitting, or bending difficult. While regular exercise and a balanced diet can help, sometimes pain is inevitable due to weather changes or aging.
 
-          1. Anti-inflammatory foods
-          2. Gentle exercise routines
-          3. Herbal supplements
-          4. Ayurvedic treatments
-          
-          Our comprehensive guide will help you understand how these natural remedies work and how to incorporate them into your daily routine.`,
+          At times like these, turning to natural remedies can make all the difference. DR. Joints is an Ayurvedic Joint pain oil - solution designed to relieve joint and muscle pain safely and effectively.
+
+          Ayurvedic Joint Pain Oil is made up of natural resources that helps to relieve muscle and joint pains. This ayurvedic oil does not create any side effects on the human body. This oil has anti-inflammatory properties that help to prevent discomfort and promote healing.
+
+          How does Ayurvedic Joint pain & Muscle Oil work?
+
+          The oil penetrates deep into the tissues, reducing inflammation, improving blood circulation, and soothing muscle tension. Its powerful herbal formula not only relieves pain quickly but also strengthens muscles and joints over time.
+
+          Made from 100% natural ingredients, this oil harnesses the anti-inflammatory and muscle-nourishing properties of Ayurvedic herbs. It's safe for daily use and suitable for all age groups, from athletes to seniors.
+
+          It helps rebuild and maintain joint flexibility and ease discomforts that come with age, weight, accident, or sports-related stress.
+
+          Who uses this pain relief oil:
+          - People with joint pain, arthritis, or frozen shoulder
+          - Those suffering from backaches or muscular cramps
+          - Athletes and individuals with active lifestyles
+
+          How to use Dr joints pain relief oil?
+
+          These ayurvedic pain oil provides instant relief after massage. While oral medications are common treatments, pain relief oils provide a natural alternative or complementary therapy for managing pain.
+
+          Simply apply a small amount of Dr joints pain oil to the affected area and massage gently in circular motions until fully absorbed. For best results, use 2-3 times a day consistently.
+
+          Why to choose DR. Joint Pain Relief Oil?
+
+          - Fast relief from muscle and joint pain
+          - Reduces stiffness and improves flexibility
+          - Safe for daily use
+          - Suitable for all ages
+
+          Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, DR. Joints ayurvedic Relief Oil is your natural companion for lasting relief.
+
+          Conclusion
+
+          Dr.Joint Ayurvedic Oil offers a natural and effective solution for managing joint pain, stiffness, and inflammation. Its special combination of herbal ingredients works in concert to support better mobility and long-lasting relief without the negative side effects of chemical-based substitutes. Dr.Joint Ayurvedic Oil is a safe, extensive method of reestablishing joint health and improving general well-being, regardless of whether you are experiencing muscle aches, back pain, or arthritis.
+
+          Experience relief from body aches, muscle pains, and joint pains with our natural Ayurvedic solution.`,
           readTime: "5 min read",
-          image: blog1
-      },
+          image: blog1,
+          focusKeyword: "Ayurvedic Joint pain oil",
+          metaDescription: "Dr.Joints - Ayurvedic Joint pain oil with a blend of natural ingredients, relieves muscle and joint pain by reducing inflammation, restoring comfort for better movement."
+        },
       {
           id: 2,
           title: "Say Goodbye to Joint Pain with Ayurvedic Oil",
