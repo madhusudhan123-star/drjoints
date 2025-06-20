@@ -117,7 +117,7 @@ const Product = ({ translations, currentLang }) => {
                             </span>
                             ))}
                         </div>
-                    </div>                    <a href={currency === 'USD' ? "https://www.amazon.com/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" className='flex items-center gap-4 mb-6'>
+                    </div>                    <a href={currency === 'USD' ? "https://www.amazon.in/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" className='flex items-center gap-4 mb-6'>
                         <div className='flex items-center gap-4'>
                             <img src={amazon} alt="Amazon Logo" className="h-20" />
                             <img src={flipkart} alt="Flipkart Logo" className="h-20" />

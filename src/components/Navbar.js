@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Globe } from 'lucide-react';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.webp';
+import icons_one from '../assets/images/icons_one.webp';
+import icons_two from '../assets/images/icons_two.webp';
+import icons_three from '../assets/images/icons_three.webp';
+import icons_four from '../assets/images/icons_four.webp';
 
 const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,13 +66,13 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                     animation: pulse 2s ease-in-out infinite;
                 }
                 
-                @keyframes float {
-                    0% { transform: translateY(0px); }
-                    50% { transform: translateY(-4px); }
-                    100% { transform: translateY(0px); }
+                @keyframes bounce {
+                    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                    40% { transform: translateY(-10px); }
+                    60% { transform: translateY(-5px); }
                 }
-                .float {
-                    animation: float 3s ease-in-out infinite;
+                .bounce {
+                    animation: bounce 2s ease-in-out infinite;
                 }
                 
                 @keyframes shimmer {
@@ -141,30 +145,35 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                         </a>
                     </div>
 
-                    {/* Desktop Navigation with float animations */}
+                    {/* Desktop Navigation with bounce animations */}
                     <div className="hidden md:flex items-center px-2">
                         <a href={nav.homelink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}>
+                            className={`text-gray-700 hover:text-blue-600 flex justify-center px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}>
+                            <img src={icons_one} alt="Home Icon" className="inline-block h-6 w-6 mr-1" />
                             <span className="color-cycle">{nav.home}</span>
                         </a>
                         <a href={nav.aboutUslink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            className={`text-gray-700 hover:text-blue-600 flex justify-center px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
                             style={{animationDelay: '0.5s'}}>
+                            <img src={icons_two} alt="About Us Icon" className="inline-block h-6 w-6 mr-1" />
                             {nav.aboutUs}
                         </a>
                         <a href={nav.productlink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
                             style={{animationDelay: '1s'}}>
+                            <img src={icons_three} alt="Product Icon" className="inline-block h-6 w-6 mr-1" />
                             {nav.product}
                         </a>
                         <a href={nav.contactUslink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
                             style={{animationDelay: '1.5s'}}>
+                            <img src={icons_four} alt="Contact Us Icon" className="inline-block h-6 w-6 mr-1" />
                             {nav.contactUs}
                         </a>
                         <a href={nav.bloglink || "#"}
-                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform float ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
+                            className={`text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-110 transition-transform bounce ${isLoaded ? 'pop-in staggered-item' : 'opacity-0'}`}
                             style={{animationDelay: '2s'}}>
+                            <Globe className="inline-block h-6 w-6 mr-1" />
                             {nav.blog}
                         </a>
                     </div>
@@ -188,26 +197,26 @@ const Navbar = ({ currentLang, setCurrentLang, translations, languages }) => {
                     <div className="md:hidden fixed top-0 left-0 right-0 bg-white z-50 pop-in slide-down border-glow">
                         <div className="px-4 pt-2 pb-4 space-y-2">
                             <a href={nav.homelink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-3 hover:scale-105 transition-transform pop-in staggered-item float">
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-3 hover:scale-105 transition-transform pop-in staggered-item bounce">
                                 {nav.home}
                             </a>
                             <a href={nav.aboutUslink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
                                 style={{animationDelay: '0.3s'}}>
                                 {nav.aboutUs}
                             </a>
                             <a href={nav.productlink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
                                 style={{animationDelay: '0.6s'}}>
                                 {nav.product}
                             </a>
                             <a href={nav.contactUslink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
                                 style={{animationDelay: '0.9s'}}>
                                 {nav.contactUs}
                             </a>
                             <a href={nav.bloglink || "#"}
-                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item float"
+                                className="block text-gray-700 hover:text-blue-600 px-3 py-2 hover:scale-105 transition-transform pop-in staggered-item bounce"
                                 style={{animationDelay: '1.2s'}}>
                                 {nav.blog}
                             </a>

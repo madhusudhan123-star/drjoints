@@ -170,7 +170,7 @@ export const translations = {
     },
     contact: {
       title: 'Contact Us',
-      address: 'Begumpet, Hyderabad, Telangana 500016',
+      address: 'Hyderabad, Telangana 500016',
       phone: '+91 9908 016 333',
       email: 'israelitesshopping171@gmail.com',
       info: "information",
@@ -284,6 +284,35 @@ export const translations = {
         {
           title: "Welcome to Dr.Joints!",
           content: "These terms and conditions outline the rules and regulations for the use of Dr.Joints Website, located at https://drjoints.in, A product of Pain Relief Oil. By accessing this website we assume you accept these terms and conditions. Do not continue to use Dr.Joints if you do not agree to take all of the terms and conditions stated on this page."
+        },
+        {
+          title: "Definitions",
+          content: "The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice, and all Agreements: \"Client\", \"You\" and \"Your\" refers to you, the person who logs on to this website and is compliant with the Company's terms and conditions. \"The Company\", \"Ourselves\", \"We\", \"Our\" and \"Us\", refers to our Company. \"Party\", \"Parties\", or \"Us\", refers to both the Client and ourselves. All terms refer to the offer, acceptance, and consideration of payment necessary to undertake the process of our assistance to the Client most appropriately for the express purpose of meeting the Client's needs in respect of the provision of the Company's stated services, by and subject to, prevailing law of in. Any use of the above terminology or other words in the singular, plural, capitalization, and/or he/she or they, are taken as interchangeable and therefore as referring to the same."
+        },
+        {
+          title: "Cookies",
+          content: "We employ the use of cookies. By accessing Dr.Joints, you agree to use cookies in agreement with Dr.Joints's Privacy Policy. Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies."
+        },
+        {
+          title: "License",
+          content: "Unless otherwise stated, Dr.Joints and/or its licensors own the intellectual property rights for all material on Dr.Joints. All intellectual property rights are reserved. You may access this from Dr.Joints for your personal use subject to restrictions set in these terms and conditions."
+        },
+        {
+          title: "You must not:",
+          content: [
+            "Republish material from Dr.Joints",
+            "Sell, rent, or sub-license material from Dr.Joints",
+            "Reproduce, duplicate, or copy material from Dr.Joints",
+            "Redistribute content from Dr.Joints"
+          ]
+        },
+        {
+          title: "User Comments",
+          content: "Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Dr.Joints does not filter, edit, publish, or review Comments before their presence on the website. Comments do not reflect the views and opinions of Dr.Joints, its agents, and/or affiliates. Comments reflect the views and opinions of the person who posts their views and opinions. To the extent permitted by applicable laws, Dr.Joints shall not be liable for the Comments or any liability, damages, or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website."
+        },
+        {
+          title: "Content Liability",
+          content: "We shall not be held responsible for any content that appears on your Website. You agree to protect and defend us against all claims that are arising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third-party rights."
         }
       ]
     },

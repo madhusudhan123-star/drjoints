@@ -100,33 +100,22 @@ const Hero = () => {
     }, [images.length, isMobile]);
 
     return (
-        <div className="relative">
-            <div className="relative h-[75vh] sm:h-[100vh] md:h-[33rem] overflow-hidden">
+        <div className="w-full">
+            <div className="relative w-full h-auto overflow-hidden">
                 {images.map((image, index) => (
                     <div
                         key={index}
-                        className={`absolute w-full h-full transition-opacity duration-1000 ease-in-out
-              ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                        className={`w-full transition-opacity duration-1000 ease-in-out
+                        ${index === currentSlide ? 'opacity-100' : 'opacity-0 absolute inset-0'}`}
                     >
                         <img
                             src={image.url}
                             alt={image.alt}
-                            className="w-full h-full object-contain md:object-cover"
+                            className="w-full h-auto object-cover"
                         />
                     </div>
                 ))}
             </div>
-
-            {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {images.map((_, index) => (
-                    <button
-                        key={index}
-                        className={`w-2 h-2 rounded-full transition-colors duration-300
-              ${index === currentSlide ? 'bg-blue-600' : 'bg-gray-300'}`}
-                        onClick={() => setCurrentSlide(index)}
-                    />
-                ))}
-            </div> */}
         </div>
     );
 };
@@ -857,97 +846,194 @@ const Testimonials = ({ currentLang, translations }) => {
     );
 };
 
-const PR = () => {
-    const mediaLinks = [
-        { 
-            title: 'Daily Hunt',
-            link: 'http://m.dailyhunt.in/news/india/english/republic+news+india-epaper-dhfacc36dfce9c4bb68db0e89d033c921b/dr+joints+pain+relief+oil+expanding+indian+ayurveda+to+uae-newsid-dhfacc36dfce9c4bb68db0e89d033c921b_0195d5c0cd9611efbfff30234ee32bf7?sm=Y',
-            icon: pr1,
-            source: 'Daily Hunt'
-        },
-        { 
-            title: 'Republic News India',
-            link: 'https://republicnewsindia.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: pr2,
-            source: 'Republic News'
-        },
-        { 
-            title: 'Flipboard',
-            link: 'https://flipboard.com/@republicnewsind/-dr-joints-pain-relief-oil-expanding-ind/a-V8D2Oej2QgGHtagao7JlCQ%3Aa%3A3544623556-7947af09c2%2Frepublicnewsindia.com',
-            icon: pr3,
-            source: 'Flipboard'
-        },
-        { 
-            title: 'The Indian Bulletin',
-            link: 'https://theindianbulletin.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: pr4,
-            source: 'Indian Bulletin'
-        },
-        { 
-            title: 'RD Times',
-            link: 'https://rdtimes.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: pr5,
-            source: 'RD Times'
-        },
-        { 
-            title: 'Abhyuday Times',
-            link: 'https://abhyudaytimes.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: pr6,
-            source: 'Abhyuday Times'
-        },
-        { 
-            title: 'Indian Sentinel',
-            link: 'https://indiansentinel.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
-            icon: pr7,
-            source: 'Indian Sentinel'
-        }
-    ];
+const PR = ({ currentLang, translations }) => {
+        const [currentMediaSlide, setCurrentMediaSlide] = useState(0);
+        const productRef = useRef(null);
     
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const totalSlides = mediaLinks.length;
+        const mediaLinks = [
+            { 
+                title: 'Daily Hunt',
+                link: 'http://m.dailyhunt.in/news/india/english/republic+news+india-epaper-dhfacc36dfce9c4bb68db0e89d033c921b/dr+joints+pain+relief+oil+expanding+indian+ayurveda+to+uae-newsid-dhfacc36dfce9c4bb68db0e89d033c921b_0195d5c0cd9611efbfff30234ee32bf7?sm=Y',
+                icon: pr1,
+                source: 'Daily Hunt'
+            },
+            { 
+                title: 'Republic News India',
+                link: 'https://republicnewsindia.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+                icon: pr2,
+                source: 'Republic News'
+            },
+            { 
+                title: 'Flipboard',
+                link: 'https://flipboard.com/@republicnewsind/-dr-joints-pain-relief-oil-expanding-ind/a-V8D2Oej2QgGHtagao7JlCQ%3Aa%3A3544623556-7947af09c2%2Frepublicnewsindia.com',
+                icon: pr3,
+                source: 'Flipboard'
+            },
+            { 
+                title: 'The Indian Bulletin',
+                link: 'https://theindianbulletin.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+                icon: pr4,
+                source: 'Indian Bulletin'
+            },
+            { 
+                title: 'RD Times',
+                link: 'https://rdtimes.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+                icon: pr5,
+                source: 'RD Times'
+            },
+            { 
+                title: 'Abhyuday Times',
+                link: 'https://abhyudaytimes.com/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+                icon: pr6,
+                source: 'Abhyuday Times'
+            },
+            { 
+                title: 'Indian Sentinel',
+                link: 'https://indiansentinel.in/dr-joints-pain-relief-oil-expanding-indian-ayurveda-to-uae/',
+                icon: pr7,
+                source: 'Indian Sentinel'
+            }
+        ];
     
-    // Auto-slide functionality
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % totalSlides);
-        }, 4000);
-        
-        return () => clearInterval(interval);
-    }, [totalSlides]);
+        // Auto-slide functionality
+        useEffect(() => {
+            const slideTimer = setInterval(() => {
+                setCurrentMediaSlide((prev) => (prev + 1) % mediaLinks.length);
+            }, 3000); // Change slide every 3 seconds
     
-    return (
-        <div className=" mt-10">
-            <div className="">
-                <div className="relative">
-                    {/* Slider container */}
-                    <div className="overflow-hidden rounded-lg shadow-md bg-white">
+            return () => clearInterval(slideTimer);
+        }, [mediaLinks.length]);
+    
+        return (
+            <div ref={productRef} className=" bg-[#F0E7E5] relative">
+                {/* Featured Media Coverage Slider */}
+                <div className="w-full bg-gradient-to-r from-blue-600 to-purple-600">
+                    <div className="text-center">
+                        {/* Media Logos Row */}
+                        <div className="flex justify-center items-center space-x-4 mb-4 overflow-hidden">
+                            <div className="flex space-x-6 animate-pulse">
+                                {[pr1, pr2, pr3, pr4, pr5].map((logo, index) => (
+                                    <div key={index} className=" flex items-center justify-center">
+                                        <img 
+                                            src={logo} 
+                                            alt={`Media ${index + 1}`}
+                                            className="w-6 h-6 md:w-24 md:h-24 object-contain"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        {/* Trendy Title */}
+                        <div className="relative">
+                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 relative">
+                                <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                                    🔥 TRENDING NOW 
+                                </span>
+                                <span className="block text-2xl md:text-3xl mt-2">
+                                    Media Spotlight
+                                </span>
+                            </h3>
+                            
+                            {/* Animated underline */}
+                            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full animate-pulse"></div>
+                        </div>
+                        
+                        <p className="text-blue-100 mt-4 text-lg">
+                            🌟 Dr. Joints making headlines across India's top news platforms
+                        </p>
+                        
+                        {/* Live indicator */}
+                        <div className="flex justify-center items-center mt-3">
+                            <div className="flex items-center space-x-2 bg-red-500 text-white px-3 py-1 rounded-full text-sm animate-bounce">
+                                <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
+                                <span className="font-medium">LIVE COVERAGE</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div className="relative w-full overflow-hidden">
                         <div 
-                            className="flex transition-transform duration-500 ease-in-out"
-                            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                            className="flex transition-transform duration-1000 ease-in-out"
+                            style={{ transform: `translateX(-${currentMediaSlide * 100}%)` }}
                         >
                             {mediaLinks.map((item, index) => (
-                                <div key={index} className="w-full flex-shrink-0">
+                                <div key={index} className="w-full flex-shrink-0 px-4">
                                     <a 
                                         href={item.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="block p-6 hover:bg-gray-50 transition-colors"
+                                        className="group block"
                                     >
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center space-x-4">
-                                                <div className="w-12 h-12 flex-shrink-0">
-                                                    <img 
-                                                        src={item.icon} 
-                                                        alt={item.source}
-                                                        className="w-full h-full object-contain"
-                                                    />
-                                                </div>
-                                                <div className="font-medium text-gray-800">
-                                                    {item.source}
-                                                </div>
+                                        <div className="max-w-4xl mx-auto bg-white rounded-xl p-8 border border-gray-100 
+                                                      transform hover:scale-105 transition-all duration-300 
+                                                      hover:shadow-2xl shadow-xl relative overflow-hidden">
+                                            
+                                            {/* Trending badge */}
+                                            <div className="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-pink-500 
+                                                          text-white px-3 py-1 rounded-full text-xs font-bold 
+                                                          animate-pulse shadow-lg">
+                                                🔥 TRENDING
                                             </div>
-                                            <div className="text-blue-600">
-                                                Read Article →
+                                            
+                                            <div className="text-center">
+                                                {/* Icon Image */}
+                                                <div className="flex justify-center mb-6">
+                                                    <div className="w-32 h-32 md:w-40 md:h-40 rounded-full 
+                                                                  bg-gradient-to-br from-blue-50 to-purple-50 
+                                                                  flex items-center justify-center shadow-lg
+                                                                  group-hover:shadow-xl transition-all duration-300
+                                                                  border-4 border-white">
+                                                        <img 
+                                                            src={item.icon} 
+                                                            alt={item.source}
+                                                            className="w-24 h-24 md:w-32 md:h-32 object-contain
+                                                                     group-hover:scale-110 transition-transform duration-300"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                
+                                                {/* Enhanced Title */}
+                                                {/* <h4 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 
+                                                             group-hover:text-blue-600 transition-colors">
+                                                    {item.title}
+                                                </h4> */}
+                                                
+                                                {/* Subtitle with highlights */}
+                                                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                                                    <span className="font-semibold text-blue-600">Dr. Joints Pain Relief Oil</span> 
+                                                    <br />
+                                                    {/* <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent font-medium">
+                                                        Expanding Indian Ayurveda to UAE
+                                                    </span> */}
+                                                </p>
+                                                
+                                                {/* Source and CTA */}
+                                                <div className="flex items-center justify-center space-x-4">
+                                                    {/* <span className="bg-gradient-to-r from-blue-500 to-purple-500 
+                                                                   text-white text-sm py-2 px-4 rounded-full font-medium
+                                                                   shadow-lg transform group-hover:scale-105 transition-all">
+                                                        📰 {item.source}
+                                                    </span> */}
+                                                    <span className="text-blue-600 font-medium flex items-center
+                                                                   group-hover:text-blue-800 transition-colors
+                                                                   bg-blue-50 px-4 py-2 rounded-full">
+                                                        Read Full Story
+                                                        <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" 
+                                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
+                                                                  d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                
+                                                {/* Breaking news effect */}
+                                                <div className="mt-4 flex justify-center">
+                                                    <div className="flex items-center space-x-2 text-red-600 text-sm font-medium">
+                                                        <div className="w-2 h-2 bg-red-600 rounded-full animate-ping"></div>
+                                                        <span>Breaking: National Coverage</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </a>
@@ -955,79 +1041,32 @@ const PR = () => {
                             ))}
                         </div>
                     </div>
-                    
-                    {/* Navigation arrows */}
-                    {/* <button 
-                        onClick={goToPrevSlide}
-                        className="absolute top-1/2 left-2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-md z-10 transition-all hover:scale-110"
-                    >
-                        <ChevronLeft className="w-5 h-5 text-gray-700" />
-                    </button>
-                    
-                    <button 
-                                        href={item.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="block p-6 hover:bg-gray-50 transition-colors"
-                                    >
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center space-x-4">
-                                                <div className="w-12 h-12 flex-shrink-0">
-                                                    <img 
-                                                        src={item.icon} 
-                                                        alt={item.source}
-                                                        className="w-full h-full object-contain"
-                                                    />
-                                                </div>
-                                                <div className="font-medium text-gray-800">
-                                                    {item.source}
-                                                </div>
-                                            </div>
-                                            <div className="text-blue-600">
-                                                Read Article →
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            ))}
-                        </div>
+    
+                    {/* Enhanced Slider Indicators */}
+                    <div className="flex justify-center mt-6 space-x-3">
+                        {mediaLinks.map((_, index) => (
+                            <button
+                                key={index}
+                                className={`w-3 h-3 rounded-full transition-all duration-300 transform ${
+                                    index === currentMediaSlide 
+                                        ? 'bg-yellow-300 scale-125 shadow-lg' 
+                                        : 'bg-white/50 hover:bg-white/75 hover:scale-110'
+                                }`}
+                                onClick={() => setCurrentMediaSlide(index)}
+                            />
+                        ))}
                     </div>
-                    
-                    {/* Navigation arrows */}
-                    {/* <button 
-                        onClick={goToPrevSlide}
-                        className="absolute top-1/2 left-2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-md z-10 transition-all hover:scale-110"
-                    >
-                        <ChevronLeft className="w-5 h-5 text-gray-700" />
-                    </button>
-                    
-                    <button 
-                        onClick={goToNextSlide}
-                        className="absolute top-1/2 right-2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-md z-10 transition-all hover:scale-110"
-                    >
-                        <ChevronRight className="w-5 h-5 text-gray-700" />
-                    </button> */}
                 </div>
-                
-                {/* Indicator dots */}
-                {/* <div className="flex justify-center mt-4 space-x-2">
-                    {mediaLinks.map((_, index) => (
-                        <button
-                            key={index}
-                            className={`w-2 h-2 rounded-full transition-all ${
-                                index === currentMediaSlide ? 'bg-blue-600 w-4' : 'bg-gray-300'
-                            }`}
-                            onClick={() => setCurrentMediaSlide(index)}
-                        />
-                    ))}
-                </div> */}
             </div>
-        </div>
-    );
-}
+        );
+};
+
+
+
+
 
 const Home = ({ currentLang, translations }) => {
-    return (
+return (
         <div className={currentLang === 'ar' ? 'rtl' : 'ltr'
         }>
             <div className='overflow-x-hidden'>
@@ -1056,3 +1095,9 @@ const Home = ({ currentLang, translations }) => {
 };
 
 export default Home;
+
+
+
+
+
+//
