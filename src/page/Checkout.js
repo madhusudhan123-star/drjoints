@@ -4,8 +4,8 @@ import { useForm } from '@formspree/react';
 
 // API base URL that works in both development and production environments
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://razorpaybackend-wgbh.onrender.com' // Use your actual production backend URL https://razorpaybackend-wgbh.onrender.com
-    : 'https://razorpaybackend-wgbh.onrender.com';
+    ? 'https://drjoints-api.onrender.com' // Use `your actual production backend URL https://drjoints-api.onrender.com`
+    : 'https://drjoints-api.onrender.com';
 
 const COUNTRY_CURRENCY_MAP = {
     'India': { currency: 'INR', symbol: '₹', rate: 1, basePrice: 3990 }, // ₹3990 per product

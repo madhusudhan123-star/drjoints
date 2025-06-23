@@ -40,6 +40,21 @@ const LoadingSpinner = () => (
   </div>
 );
 
+// Scroll to top component
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+};
+
 // Simplified language options
 const languages = [{ code: 'en', name: 'English' }];
 
@@ -105,6 +120,7 @@ const App = () => {
       </div> */}
 
       <BrowserRouter>
+        <ScrollToTop />
         <ConditionalNavbar />
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>

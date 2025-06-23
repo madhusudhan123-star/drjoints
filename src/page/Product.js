@@ -30,9 +30,11 @@ const Product = ({ translations, currentLang }) => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(0);
-    const [selectedOffer, setSelectedOffer] = useState(0);    const [currency, setCurrency] = useState('INR'); // Default to INR
-    const productPrice = currency === 'USD' ? 120 : 3990; // $120 for USD, ₹3990 for INR
-    const originalPrice = currency === 'USD' ? 180 : 6990; // $180 for USD, ₹6990 for INR
+    const [selectedOffer, setSelectedOffer] = useState(0);
+    const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 45, seconds: 30 });
+    const [currency, setCurrency] = useState('INR');
+    const productPrice = currency === 'USD' ? 120 : 3990;
+    const originalPrice = currency === 'USD' ? 180 : 6990;
 
     // Format price based on detected currency
     const formatPrice = (price) => {
@@ -62,7 +64,28 @@ const Product = ({ translations, currentLang }) => {
             setSelectedOffer((prev) => (prev + 1) % 3);
         }, 2000);
         return () => clearInterval(interval);
-    }, []);    const handleCheckout = () => {
+    }, []);
+
+    // Countdown timer effect
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft(prev => {
+                if (prev.seconds > 0) {
+                    return { ...prev, seconds: prev.seconds - 1 };
+                } else if (prev.minutes > 0) {
+                    return { hours: prev.hours, minutes: prev.minutes - 1, seconds: 59 };
+                } else if (prev.hours > 0) {
+                    return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
+                } else {
+                    return { hours: 23, minutes: 59, seconds: 59 }; // Reset
+                }
+            });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    const handleCheckout = () => {
         const currentProductPrice = currency === 'USD' ? 120 : 3990;
         navigate('/checkout', {
             state: {
@@ -159,8 +182,9 @@ const Product = ({ translations, currentLang }) => {
                 <div className="hidden md:block md:w-1/2 w-full md:order-2">
                     <div>
                         <h1 className="text-3xl font-bold montserrat text-gray-800 mb-2">Pain Relief Oil For Muscles</h1>
-                        <p className='text-blue-600 scada-regular text-sm'>Pain relief oils are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals.Try them for a natural and soothing way to feel better.</p>
-                        <div className='flex items-center gap-2 my-4 scada-regular'>
+                        <p className='text-black text-sm'>Pain relief oils are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals.Try them for a natural and soothing way to feel better.</p>
+                        
+                        {/* <div className='flex items-center gap-2 my-4 scada-regular'>
                             <span className="text-lg font-medium text-gray-600">4.5/5</span>
                             <div className="flex">
                                 {[...Array(5)].map((_, index) => (
@@ -169,42 +193,158 @@ const Product = ({ translations, currentLang }) => {
                                 </span>
                                 ))}
                             </div>
-                        </div>
-                        <div className=' flex items-start gap-5 flex-col'>
-                            <div className='flex items-center gap-2'>
+                        </div> */}
+
+                        <div className='flex items-start gap-5 flex-col'>
+                            {/* <div className='flex items-center gap-2'>
                                 <p className='line-through text-gray-400 text-3xl'>{formatPrice(originalPrice)}</p>
                                 <p className='text-xl font-bold text-red-600'>{formatPrice(productPrice)}</p>
                                 <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Discounted Price</span>
-                            </div>                            <div className='flex items-center gap-4'>
-                                {/* href={currency === 'USD' ? "#" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" */}
-                                <a>
-                                    {/* <img src={amazon} alt="Amazon Logo" className="h-20" /> */}
-                                </a>
-                            </div>
-                            <div className='w-full h-[1px] bg-black'></div>
+                            </div> */}
+                            
+                            <div className='w-full h-[1px] bg-gray-300'></div>
                             <div>
                                 <img src={stamps} alt="Stamps" className="" />
                             </div>
-                            {/* Desktop Quantity and Buy Button */}
-                            <div className="w-full space-y-4">
-                                <div className="flex items-center gap-4">
-                                    <label htmlFor="quantity" className="text-lg text-gray-700">Quantity:</label>
-                                    <input
-                                        type="number"
-                                        id="quantity"
-                                        min="1"
-                                        value={quantity}
-                                        onChange={(e) => setQuantity(parseInt(e.target.value))}
-                                        className="w-20 px-3 py-2 border border-gray-300 rounded-md"
-                                    />
+
+                            {/* Enhanced Desktop Buy Section with Urgency */}
+                            <div className="w-full mt-6">
+                                {/* Urgency Banner */}
+                                <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-lg mb-4 animate-pulse">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center space-x-2">
+                                            <svg className="w-5 h-5 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                            <span className="font-bold text-sm">LIMITED TIME OFFER!</span>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="text-xs opacity-90">Ends in:</div>
+                                            <div className="flex space-x-1 text-sm font-mono">
+                                                <span className="bg-white bg-opacity-20 px-1 rounded">{String(timeLeft.hours).padStart(2, '0')}</span>
+                                                <span>:</span>
+                                                <span className="bg-white bg-opacity-20 px-1 rounded">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                                                <span>:</span>
+                                                <span className="bg-white bg-opacity-20 px-1 rounded">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <button
-                                    onClick={handleCheckout}
-                                    className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
-                                >
-                                    Buy Now 
-                                </button>
+
+                                {/* Stock Alert */}
+                                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                                    <div className="flex items-center space-x-2">
+                                        <div className="w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
+                                        <span className="text-yellow-800 font-medium text-sm">⚡ Only 7 bottles left in stock!</span>
+                                    </div>
+                                    <div className="mt-2">
+                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                            <div className="bg-red-500 h-2 rounded-full animate-pulse" style={{ width: '15%' }}></div>
+                                        </div>
+                                        <p className="text-xs text-gray-600 mt-1">85% sold out today</p>
+                                    </div>
+                                </div>
+
+                                {/* Enhanced Buy Now Section */}
+                                <div className="bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 rounded-xl p-6 text-white shadow-2xl border-4 border-green-300 relative overflow-hidden">
+                                    {/* Animated Background Effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-pulse"></div>
+                                    
+                                        {/* Main CTA Button */}
+                                        <button onClick={handleCheckout} className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
+                                            <span className="relative z-10 flex items-center justify-center space-x-2">
+                                                <span>BUY NOW - GET INSTANT RELIEF!</span>
+                                            </span>
+                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                                        </button>
+
+                                    <div className="relative z-10">
+                                        {/* Special Offer Badge */}
+                                        <div className="absolute -top-3 -right-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold transform rotate-12 animate-bounce">
+                                            SAVE 43%
+                                        </div>
+
+                                        <div className="text-center mb-4">
+                                            <h3 className="text-2xl font-bold mb-2">🔥 FLASH SALE ACTIVE 🔥</h3>
+                                            <p className="text-green-100 text-sm">Get instant relief at the lowest price ever!</p>
+                                        </div>
+
+                                        {/* Price Display */}
+                                        <div className="text-center mb-6">
+                                            <div className="flex items-center justify-center space-x-3 mb-2">
+                                                <span className="text-3xl font-bold line-through text-red-200">{formatPrice(originalPrice)}</span>
+                                                <span className="text-4xl font-black text-yellow-300">{formatPrice(productPrice)}</span>
+                                            </div>
+                                            <div className="bg-yellow-400 text-green-800 px-4 py-1 rounded-full inline-block text-sm font-bold">
+                                                You Save {formatPrice(originalPrice - productPrice)}!
+                                            </div>
+                                        </div>
+
+                                        {/* Quantity Selector */}
+                                        <div className="flex items-center justify-center space-x-4 mb-6">
+                                            <label className="text-white font-medium">Quantity:</label>
+                                            <div className="flex items-center bg-white rounded-lg">
+                                                <button 
+                                                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                                    className="text-green-600 px-3 py-2 font-bold hover:bg-gray-100 rounded-l-lg"
+                                                >
+                                                    -
+                                                </button>
+                                                <input
+                                                    type="number"
+                                                    min="1"
+                                                    value={quantity}
+                                                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                                                    className="w-16 text-center py-2 text-green-800 font-bold border-0 focus:outline-none"
+                                                />
+                                                <button 
+                                                    onClick={() => setQuantity(quantity + 1)}
+                                                    className="text-green-600 px-3 py-2 font-bold hover:bg-gray-100 rounded-r-lg"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                       
+
+                                        {/* Trust Badges */}
+                                        <div className="grid grid-cols-3 gap-2 mt-4 text-xs">
+                                            <div className="text-center">
+                                                <div className="text-green-200">🚚</div>
+                                                <div>FREE Shipping</div>
+                                            </div>
+                                            <div className="text-center">
+                                                <div className="text-green-200">💰</div>
+                                                <div>COD Available</div>
+                                            </div>
+                                            <div className="text-center">
+                                                <div className="text-green-200">🔄</div>
+                                                <div>15-Day Return</div>
+                                            </div>
+                                        </div>
+
+                                        {/* Social Proof */}
+                                        <div className="mt-4 text-center">
+                                            <div className="flex items-center justify-center space-x-1 mb-2">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <span key={i} className="text-yellow-300 text-lg">⭐</span>
+                                                ))}
+                                            </div>
+                                            <p className="text-green-100 text-sm">🔥 2,847 customers bought this today!</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Bonus Offers */}
+                                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                    <h4 className="font-bold text-blue-800 mb-2">🎁 EXCLUSIVE BONUSES:</h4>
+                                    <ul className="text-sm text-blue-700 space-y-1">
+                                        <li>✅ FREE Pain Relief Guide (₹299 value)</li>
+                                        <li>✅ FREE Consultation Call (₹500 value)</li>
+                                        <li>✅ Priority Customer Support</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -247,7 +387,7 @@ const Product = ({ translations, currentLang }) => {
                     </div>
                 </div>
 
-                {/* Mobile: Price and Variant Selection - Shows after images on mobile */}
+                {/* Mobile: Enhanced Buy Section */}
                 <div className="md:hidden w-full">
                     <div className=' flex items-start gap-5 flex-col'>
                         <div className='flex items-center gap-2'>
@@ -260,26 +400,82 @@ const Product = ({ translations, currentLang }) => {
                             <img src={stamps} alt="Stamps" className="" />
                         </div>
                         
-                        {/* Mobile Buy Button */}
-                        <div className="w-full space-y-4">
-                            <div className="flex items-center gap-4">
-                                <label htmlFor="quantity-mobile" className="text-lg text-gray-700">Quantity:</label>
-                                <input
-                                    type="number"
-                                    id="quantity-mobile"
-                                    min="1"
-                                    value={quantity}
-                                    onChange={(e) => setQuantity(parseInt(e.target.value))}
-                                    className="w-20 px-3 py-2 border border-gray-300 rounded-md"
-                                />
+                        {/* Mobile Urgency Section */}
+                        <div className="w-full">
+                            {/* Mobile Urgency Banner */}
+                            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-3 rounded-lg mb-4 animate-pulse">
+                                <div className="text-center">
+                                    <div className="flex items-center justify-center space-x-2 mb-1">
+                                        <svg className="w-4 h-4 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        </svg>
+                                        <span className="font-bold text-sm">FLASH SALE!</span>
+                                    </div>
+                                    <div className="flex justify-center space-x-1 text-sm font-mono">
+                                        <span className="bg-white bg-opacity-20 px-1 rounded">{String(timeLeft.hours).padStart(2, '0')}</span>
+                                        <span>:</span>
+                                        <span className="bg-white bg-opacity-20 px-1 rounded">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                                        <span>:</span>
+                                        <span className="bg-white bg-opacity-20 px-1 rounded">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <button
-                                onClick={handleCheckout}
-                                className="w-full bg-green-500 text-white py-4 rounded-lg text-xl font-bold hover:bg-green-600 transition-colors"
-                            >
-                                Buy Now
-                            </button>
+
+                            {/* Mobile Stock Alert */}
+                            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                                <div className="flex items-center space-x-2">
+                                    <div className="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
+                                    <span className="text-yellow-800 font-medium text-sm">Only 7 left!</span>
+                                </div>
+                            </div>
+
+                            {/* Mobile Enhanced Buy Button */}
+                            <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white shadow-xl relative overflow-hidden">
+                                <div className="text-center mb-4">
+                                    <h3 className="text-lg font-bold mb-1">🔥 GET INSTANT RELIEF! 🔥</h3>
+                                    <div className="bg-yellow-400 text-green-800 px-3 py-1 rounded-full inline-block text-xs font-bold">
+                                        SAVE {formatPrice(originalPrice - productPrice)}
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-center space-x-3 mb-4">
+                                    <label className="text-white font-medium text-sm">Qty:</label>
+                                    <div className="flex items-center bg-white rounded-lg">
+                                        <button 
+                                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                            className="text-green-600 px-2 py-1 font-bold"
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            value={quantity}
+                                            onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                                            className="w-12 text-center py-1 text-green-800 font-bold border-0 focus:outline-none"
+                                        />
+                                        <button 
+                                            onClick={() => setQuantity(quantity + 1)}
+                                            className="text-green-600 px-2 py-1 font-bold"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button
+                                    onClick={handleCheckout}
+                                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg"
+                                >
+                                    🛒 BUY NOW - INSTANT RELIEF!
+                                </button>
+
+                                <div className="grid grid-cols-3 gap-2 mt-3 text-xs text-center">
+                                    <div>🚚 FREE Ship</div>
+                                    <div>💰 COD</div>
+                                    <div>🔄 15-Day Return</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
