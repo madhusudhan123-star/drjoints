@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import product from '../assets/product.webp';
 import product1 from '../assets/product1.webp';
 import product2 from '../assets/product2.webp';
-import amazon from '../assets/icons/amazon.webp';
+import amazon from '../assets/images/amazon.webp';
 import flipkart from '../assets/icons/flipkart.webp';
 import stamps from '../assets/icons/stamps.webp';
 
@@ -21,7 +20,6 @@ import eleven from '../assets/ing/2.webp';
 import twelve from '../assets/ing/9.webp';
 
 import product3 from '../assets/images/eight.webp';
-// import product4 from '../assets/images/six.webp';
 import product5 from '../assets/images/nine.webp';
 
 
@@ -97,6 +95,9 @@ const Product = ({ translations, currentLang }) => {
             }
         });
     };
+    const handleCheckout2 = () => {
+        navigate('https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB')
+    }
 
     const productImages = [product1, product2, product3, product5];
 
@@ -208,7 +209,7 @@ const Product = ({ translations, currentLang }) => {
                             </div>
 
                             {/* Enhanced Desktop Buy Section with Urgency */}
-                            <div className="w-full mt-6">
+                            <div className="w-full mt-6 overflow-x-hidden">
                                 {/* Urgency Banner */}
                                 <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-lg mb-4 animate-pulse">
                                     <div className="flex items-center justify-between">
@@ -251,12 +252,23 @@ const Product = ({ translations, currentLang }) => {
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-pulse"></div>
                                     
                                         {/* Main CTA Button */}
-                                        <button onClick={handleCheckout} className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
-                                            <span className="relative z-10 flex items-center justify-center space-x-2">
-                                                <span>BUY NOW - GET INSTANT RELIEF!</span>
-                                            </span>
-                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                                        </button>
+                                        <div className='flex gap-5'>
+                                            <button onClick={handleCheckout} className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
+                                                <span className="relative z-10 flex items-center justify-center space-x-2">
+                                                    <span>BUY NOW </span>
+                                                </span>
+                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                                            </button>
+                                            <button id="amazon" onClick={handleCheckout2} className="w-full flex items-center justify-center bg-white hover:bg-white text-black py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
+                                                <a href="https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB" target="_blank" rel="noopener noreferrer">
+                                                    <img src={amazon} alt="Amazon Logo" className="w-20" />
+                                                    <span className="relative z-10 flex items-center justify-center space-x-2">
+                                                        <span>Amazon</span>
+                                                    </span>
+                                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                                                </a>
+                                            </button>
+                                        </div>
 
                                     <div className="relative z-10">
                                         {/* Special Offer Badge */}
@@ -462,13 +474,24 @@ const Product = ({ translations, currentLang }) => {
                                         </button>
                                     </div>
                                 </div>
-
-                                <button
-                                    onClick={handleCheckout}
-                                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg"
-                                >
-                                    🛒 BUY NOW - INSTANT RELIEF!
-                                </button>
+                                <div className="flex flex-col gap-2">
+                                    <button
+                                        onClick={handleCheckout}
+                                        className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg"
+                                    >
+                                        BUY NOW - INSTANT RELIEF!
+                                    </button>
+                                    <button
+                                        id="amazon"
+                                        className="w-full bg-white hover:bg-white text-black py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg">
+                                        <a href="https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB" target="_blank" rel="noopener noreferrer">
+                                            <img src={amazon} alt="Amazon Logo" className="w-20 mx-auto mb-2" />
+                                            <span className="relative z-10 flex items-center justify-center space-x-2">
+                                                <span>Buy on Amazon</span>
+                                            </span>
+                                        </a>
+                                    </button>
+                                </div>
 
                                 <div className="grid grid-cols-3 gap-2 mt-3 text-xs text-center">
                                     <div>🚚 FREE Ship</div>

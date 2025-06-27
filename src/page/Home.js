@@ -758,8 +758,8 @@ const Testimonials = ({ currentLang, translations }) => {
                         <div 
                             className="flex transition-transform duration-500 ease-in-out"
                             style={{ 
-                                transform: `translateX(-${currentSlide * (100 / 3)}%)`,
-                                width: `${(testimonials.length * 100) / 3}%`
+                                transform: `translateX(-${currentSlide * (100 / 10)}%)`,
+                                width: `${(testimonials.length * 100) / 10}%`
                             }}
                         >
                             {duplicatedTestimonials.map((testimonial, index) => (
