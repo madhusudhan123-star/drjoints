@@ -465,7 +465,7 @@ const About = ({ currentLang, translations }) => {
                                 Join thousands of satisfied customers who've discovered effective, natural joint pain relief
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <a href="/product">
+                                <a href="/product/dr-joints-pain-relief-oil">
                                     <button className="px-8 py-3 bg-white text-blue-900 rounded-full font-semibold hover:bg-blue-50 transition-all">
                                         Explore Products
                                     </button>

@@ -248,7 +248,7 @@ const VideoTrustSection = ({ currentLang, translations }) => {
                         If you're looking for a joint supplement that goes beyond temporary relief, Dr. Joints deliver real, noticeable results — safely and naturally.
                         In a world where modern medicine often leans heavily on synthetic solutions and quick fixes, more people are turning back to nature for holistic healing. Among the most trusted natural remedies (external link- https://www.naturalremedy.com/ ) is Ayurveda, an ancient Indian system of medicine that emphasizes balance, wellness, and natural treatments. One standout in Ayurvedic healing is the use of pain relief oils—a therapeutic option that combines ancient wisdom with natural ingredients to provide powerful, lasting relief from discomfort.
                     </p>
-                    <a href='/product'>
+                    <a href='/product/dr-joints-pain-relief-oil'>
                         <button className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-full 
                         hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 block mx-auto">
                         Order Now
@@ -368,7 +368,7 @@ const VideoTrustSection = ({ currentLang, translations }) => {
                         <div className="space-y-4">
                             <div className="flex flex-col gap-4">
                                 <a 
-                                    href="/product" 
+                                    href="/product/dr-joints-pain-relief-oil" 
                                     className="w-full px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 
                                              text-white text-lg font-bold rounded-full shadow-lg 
                                              hover:from-green-600 hover:to-green-700 transform hover:scale-105 
@@ -480,7 +480,7 @@ const Product = ({ currentLang, translations }) => {
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content2}</p>
                             <p className="text-gray-800 leading-relaxed">{translations[currentLang].product.content3}</p>
                             <button className="px-8 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
-                                <a href="/product">Buy Now</a>
+                                <a href="/product/dr-joints-pain-relief-oil">Buy Now</a>
                             </button>
                         </div>
 
@@ -1070,7 +1070,7 @@ return (
         <div className={currentLang === 'ar' ? 'rtl' : 'ltr'
         }>
             <div className='overflow-x-hidden'>
-                <a href='/product'>
+                <a href='/product/dr-joints-pain-relief-oil'>
                     <img src={producticon} className='fixed z-10 bottom-14 md:bottom-0 left-0 w-48' alt="Dr. Joints Product Icon" />
                 </a>
                 <Hero currentLang={currentLang} />

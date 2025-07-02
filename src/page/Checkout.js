@@ -99,7 +99,7 @@ const Checkout = ({ translations, currentLang }) => {
     // Original useEffects for initialization and script loading...
     useEffect(() => {
         if (!location.state) {
-            navigate('/product');
+            navigate('/product/dr-joints-pain-relief-oil');
             return;
         }
         setOrderDetails(location.state);

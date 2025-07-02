@@ -107,7 +107,7 @@ const Product = ({ translations, currentLang }) => {
                 <meta name="description" content="Experience natural pain relief with our herbal oil. Effective for joint, muscle, and nerve pain. 100% natural ingredients." />
                 <meta name="keywords" content="pain relief oil, herbal oil, joint pain, muscle pain, nerve pain, natural ingredients" />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://drjoints.in/product" />
+                <link rel="canonical" href="https://drjoints.in/product/dr-joints-pain-relief-oil" />
                 <script type="application/ld+json">
                     {`
                     {
@@ -141,7 +141,7 @@ const Product = ({ translations, currentLang }) => {
                         },
                         "offers": {
                             "@type": "Offer",
-                            "url": "https://drjoints.in/product",
+                            "url": "https://drjoints.in/product/dr-joints-pain-relief-oil",
                             "priceCurrency": "${currency}",
                             "price": "${productPrice}",
                             "priceValidUntil": "2025-12-31",
@@ -183,6 +183,60 @@ const Product = ({ translations, currentLang }) => {
                             "bestRating": "5",
                             "worstRating": "1"
                         },
+                        "keywords": [
+                            "ayurvedic joint pain oil",
+                            "natural pain relief",
+                            "muscle pain remedy",
+                            "arthritis relief oil",
+                            "herbal pain oil",
+                            "oil for knee pain",
+                            "back pain oil",
+                            "Dr. Joints oil",
+                            "Dr. Joints for joint pain",
+                            "Dr. Joints India",
+                            "Ayurvedic oil for joint pain",
+                            "Natural joint pain relief",
+                            "Herbal remedy for arthritis",
+                            "Muscle soreness relief oil",
+                            "Pain relief oil for back",
+                            "Knee pain relief oil",
+                            "Pain management oil",
+                            "Joint support oil",
+                            "Inflammation relief oil",
+                            "Best Ayurvedic oil for joint pain",
+                            "Effective muscle pain relief",
+                            "Natural arthritis pain management",
+                            "Herbal oil for stiff joints",
+                            "Quick relief for knee pain",
+                            "Deep tissue muscle pain relief",
+                            "Ayurvedic back pain treatment",
+                            "Natural joint inflammation treatment",
+                            "Soothing oil for sore muscles",
+                            "Pain relief for osteoarthritis",
+                            "Pain relief for rheumatoid arthritis",
+                            "Oil for frozen shoulder",
+                            "Pain relief for sciatica",
+                            "Joint pain relief balm",
+                            "Ayurvedic pain relief for elderly",
+                            "What is the best Ayurvedic oil for knee pain?",
+                            "How to relieve muscle pain naturally?",
+                            "Ayurvedic remedies for arthritis stiffness",
+                            "Natural oil to reduce joint swelling",
+                            "Where to buy Dr. Joints oil in India?",
+                            "Ingredients in Ayurvedic joint pain oil",
+                            "Does Dr. Joints oil work for back pain?",
+                            "Ayurvedic oil for joint pain and swelling",
+                            "How to use Dr. Joints oil for muscle ache?",
+                            "Dr. Joints reviews",
+                            "Dr. Joints testimonials",
+                            "Dr. Joints benefits",
+                            "Dr. Joints ingredients",
+                            "Buy Dr. Joints online",
+                            "Dr. Joints price",
+                            "Dr Joints"
+                        ],
+                        "gtin13": "8901234567890",
+                        "productID": "DJ-PRL-100ML",
                         "additionalProperty": [
                             {
                                 "@type": "PropertyValue",
@@ -276,15 +330,73 @@ const Product = ({ translations, currentLang }) => {
                         "isRelatedTo": [
                             {
                                 "@type": "MedicalCondition",
-                                "name": "Joint Pain"
-                            },
-                            {
-                                "@type": "MedicalCondition", 
-                                "name": "Muscle Pain"
+                                "name": "Joint Pain",
+                                "url": "https://schema.org/JointPain"
                             },
                             {
                                 "@type": "MedicalCondition",
-                                "name": "Arthritis"
+                                "name": "Muscle Pain",
+                                "url": "https://schema.org/MusclePain"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Arthritis",
+                                "url": "https://schema.org/Arthritis"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Osteoarthritis",
+                                "url": "https://schema.org/Osteoarthritis"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Rheumatoid Arthritis",
+                                "url": "https://schema.org/RheumatoidArthritis"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Back Pain",
+                                "url": "https://schema.org/BackPain"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Knee Pain",
+                                "url": "https://schema.org/KneePain"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Muscle Soreness",
+                                "url": "https://schema.org/MuscleSoreness"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Joint Stiffness",
+                                "url": "https://schema.org/JointStiffness"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Inflammation",
+                                "url": "https://schema.org/Inflammation"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Sciatica",
+                                "url": "https://schema.org/Sciatica"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Frozen Shoulder",
+                                "url": "https://schema.org/FrozenShoulder"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Sprain",
+                                "url": "https://schema.org/Sprain"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Strain",
+                                "url": "https://schema.org/Strain"
                             }
                         ]
                     }

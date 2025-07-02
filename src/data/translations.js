@@ -3,7 +3,7 @@ import about from '../assets/about.webp';
 import blog1 from '../assets/blogs/one.webp'
 import blog2 from '../assets/blogs/two.webp'
 import blog3 from '../assets/blogs/three.webp'
-import blog4 from '../assets/blogs/three.webp'
+import blog4 from '../assets/images/blog4.webp'
 import blog5 from '../assets/blogs/three.webp'
 import one from '../assets/review/1.webp';
 import two from '../assets/review/2.webp';
@@ -25,7 +25,7 @@ export const translations = {
       aboutUs: 'About Us',
       aboutUslink: '/about',
       product: 'Shop Dr. Joints',
-      productlink: '/product',
+      productlink: '/product/dr-joints-pain-relief-oil',
       privacyPolicy: 'Privacy Policy',
       privacyPolicylink: '/privacy',
       returnPolicy: 'Return Policy',
@@ -496,7 +496,7 @@ export const translations = {
         - Safe for daily use
         - Suitable for all ages
 
-        Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, [DR. Joints ayurvedic Relief Oil](/product) is your natural companion for lasting relief.
+        Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, [DR. Joints ayurvedic Relief Oil](/product/dr-joints-pain-relief-oil) is your natural companion for lasting relief.
 
         ## Conclusion
 
@@ -544,7 +544,7 @@ export const translations = {
         - Reduces stiffness
         - Safe for everyday use
 
-        Suitable for athletes, elders, and anyone experiencing muscle or joint discomfort, [DR. Joint Pain Relief Oil](/product) is your natural ally for a pain-free, active life.
+        Suitable for athletes, elders, and anyone experiencing muscle or joint discomfort, [DR. Joint Pain Relief Oil](/product/dr-joints-pain-relief-oil) is your natural ally for a pain-free, active life.
 
         ## Conclusion
 
@@ -587,7 +587,7 @@ export const translations = {
 
         ## Try Herbal Supplements
 
-        Herbal supplements have gained popularity as natural alternatives to manage [chronic joint pain](/product), thanks to their anti-inflammatory and analgesic properties. While these remedies may not replace conventional treatments, they can be a helpful addition to your pain management plan.
+        Herbal supplements have gained popularity as natural alternatives to manage [chronic joint pain](/product/dr-joints-pain-relief-oil), thanks to their anti-inflammatory and analgesic properties. While these remedies may not replace conventional treatments, they can be a helpful addition to your pain management plan.
 
         Some herbal supplements have shown promise in reducing joint pain and inflammation:
 
@@ -655,7 +655,7 @@ export const blogPosts = [
           - Safe for daily use
           - Suitable for all ages
 
-          Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, [DR. Joints ayurvedic Relief Oil](/product) is your natural companion for lasting relief.
+          Whether you're dealing with old injuries, age-related discomfort, or winter-related stiffness, [DR. Joints ayurvedic Relief Oil](/product/dr-joints-pain-relief-oil) is your natural companion for lasting relief.
 
           ## Conclusion
 
@@ -703,7 +703,7 @@ export const blogPosts = [
           - Reduces stiffness
           - Safe for everyday use
 
-          Suitable for athletes, elders, and anyone experiencing muscle or joint discomfort, [DR. Joint Pain Relief Oil](/product) is your natural ally for a pain-free, active life.
+          Suitable for athletes, elders, and anyone experiencing muscle or joint discomfort, [DR. Joint Pain Relief Oil](/product/dr-joints-pain-relief-oil) is your natural ally for a pain-free, active life.
 
           ## Conclusion
 
@@ -746,7 +746,7 @@ export const blogPosts = [
 
         ## Try Herbal Supplements
 
-        Herbal supplements have gained popularity as natural alternatives to manage [chronic joint pain](/product), thanks to their anti-inflammatory and analgesic properties. While these remedies may not replace conventional treatments, they can be a helpful addition to your pain management plan.
+        Herbal supplements have gained popularity as natural alternatives to manage [chronic joint pain](/product/dr-joints-pain-relief-oil), thanks to their anti-inflammatory and analgesic properties. While these remedies may not replace conventional treatments, they can be a helpful addition to your pain management plan.
 
         Some herbal supplements have shown promise in reducing joint pain and inflammation:
 
@@ -769,4 +769,58 @@ export const blogPosts = [
         focusKeyword: "Chronic Joint Pain",
         metaDescription: "Discover Dr. Joint's natural tips to ease chronic joint pain, reduce inflammation, and improve mobility—no medication needed. Move freely again."
       },
+      {
+        id: 4,
+        title: "Dr Joints: Top 7 Precautions for Knee & Joint Pain Relief",
+        slug: "Knee-Pain-Joint-pain",
+        date: "July 2, 2025",
+        excerpt: "Discover the top 7 precautions for knee and joint pain relief with Dr. Joints. Learn how natural tips and ayurvedic oil for muscle and joint pain can help you stay active and pain-free.",
+        content: `# Top 7 Precautions for Knee Pain and Joint Pain
+
+        [Joint and knee pain](/) are increasingly common in today's sedentary, busy lifestyle. Joint pain, whether from age, arthritis, or misuse, can significantly alter your way of living. You can, however, take certain measures to prevent discomfort and promote joint mobility.
+
+        ## Here are the top 7 knee and joint pain relief precautions that you should incorporate for long-term Pain Relief.
+
+        ### 1. Stay Healthy Weight
+
+        Extra body weight causes extra pressure on your [joints and knees](/product/dr-joints-pain-relief-oil), particularly lower limbs. Each additional pound puts additional strain on your knees, increasing the risk of joint degradation. Maintaining a healthy weight can help reduce your risk of developing joint discomfort and ease any pain you already have.
+
+        ### 2. Apply Ayurvedic Oil as a Daily Massage
+
+        Massage with ayurvedic oil daily for [joint and muscular aches](https://www.healthline.com/health/muscle-aches) facilitates blood circulation, reduces inflammation, and loosens stiff joints. This improves blood flow, eases tense joints, and lowers inflammation. This reduces inflammation, relaxes stiff joints, and increases blood flow.
+
+        This circulation alleviates tight joints, and diminishes inflammation, soothes rigid joints, and boosts blood circulation.
+
+        ### 3. Be Active, But Not Excessively
+
+        For making your muscles strong and joint stabilizers, perform low-impact exercises such as yoga, walking, or swimming regularly. Sudden and hard training or sports exercise of high-impact might make them worse. Modify the instruction according to your need and take proper precautions.
+
+        ### 4. Eat Joint-Friendly Foods
+
+        An anti-inflammatory diet rich in bone- and cartilage-friendly foods and nutrients is the solution to a healthy joint. Nuts and fatty fish are some foods that are rich in omega-3 fatty acids and which reduce inflammation levels. Whole grains, vegetables, and fruits contain antioxidants and fiber, which are generally helpful for your joints.
+
+        ### 5. Wear Correct Shoes
+
+        Wearing the right shoes is essential for your safety, comfort, and overall health. Whether you're at work, exercising, or going about daily activities, your footwear plays a crucial role in supporting your body and preventing injury.
+
+        Wearing shoes that support your legs helps to ease pressure on your knees and hips and maintain good alignment.
+
+        ### 6. Keep Proper Posture
+
+        Your joints are subjected to needless effort when you have bad posture. Maintaining good posture prevents joint disordered and maintains appropriate body weight placement whether you are lifting weights or working at a computer.
+
+        ### 7. Steer Clear of Seated Resting
+
+        Long-term immobilization can cause stiffening and muscle weakening that supports your joints, although rest is necessary for the regaining of speed. In order to maintain your joints in a lubricated condition along with flexibility, it is better to alternate between rest and leisurely exercise.
+
+        ## Conclusion
+
+        Knee and joint pain is discouraged but can be endured and even prevented with proper care. Adding natural remedies such as ayurvedic oil for joint and muscle pain, a healthy lifestyle, and remembering these simple measures have a big impact on your general joint health and joint pain relief.
+
+        From Stiff to Strong – Natural Care for Joint Pain`,
+        readTime: "6 min read",
+        image: blog4,
+        focusKeyword: "Knee and Joint Pain",
+        metaDescription: "Discover the top 7 precautions for knee and joint pain relief with Dr. Joints. Learn how natural tips and ayurvedic oil for muscle and joint pain can help you stay active and pain-free."
+      }
 ];

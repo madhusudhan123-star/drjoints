@@ -284,7 +284,7 @@ const BlogDetail = ({ translations, currentLang, blogPosts }) => {
                         <div className="mt-8 bg-gradient-to-r from-blue-50 to-green-50 p-6 rounded-xl border border-blue-100">
                             <h3 className="text-xl font-bold text-gray-900 mb-3">Ready to Experience Natural Pain Relief?</h3>
                             <p className="text-gray-700 mb-4">Try DR. Joints Ayurvedic Pain Relief Oil and discover the power of natural healing.</p>
-                            <Link to="/product" className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                            <Link to="/product/dr-joints-pain-relief-oil" className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
                                 Shop Now
                                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
