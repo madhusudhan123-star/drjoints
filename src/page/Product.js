@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import product1 from '../assets/product1.webp';
 import product2 from '../assets/product2.webp';
 import amazon from '../assets/images/amazon.webp';
-import flipkart from '../assets/icons/flipkart.webp';
 import stamps from '../assets/icons/stamps.webp';
+import cart from '../assets/images/cart.png';
 
 import one from '../assets/ing/8.webp';
-import two from '../assets/ing/4.webp';
 import three from '../assets/ing/4.webp';
 import four from '../assets/ing/3.webp';
 import five from '../assets/ing/6.webp';
@@ -21,7 +21,6 @@ import twelve from '../assets/ing/9.webp';
 
 import product3 from '../assets/images/eight.webp';
 import product5 from '../assets/images/nine.webp';
-
 
 
 const Product = ({ translations, currentLang }) => {
@@ -103,6 +102,136 @@ const Product = ({ translations, currentLang }) => {
 
     return (
         <div className="w-full">
+            <Helmet>
+                <title>Pain Relief Oil For Muscles - Dr. Joints</title>
+                <meta name="description" content="Experience natural pain relief with our herbal oil. Effective for joint, muscle, and nerve pain. 100% natural ingredients." />
+                <meta name="keywords" content="pain relief oil, herbal oil, joint pain, muscle pain, nerve pain, natural ingredients" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href="https://drjoints.in/product" />
+                <script type="application/ld+json">
+                    {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Product",
+                        "name": "Dr Joints Pain Relief Oil",
+                        "alternateName": "Pain Relief Oil For Muscles",
+                        "image": [
+                            "https://drjoints.in${product1}",
+                            "https://drjoints.in${product2}",
+                            "https://drjoints.in${product3}",
+                            "https://drjoints.in${product5}"
+                        ],
+                        "description": "Natural Ayurvedic oil for joint and muscle pain relief. Helps relieve all types of joint & nerve pain with Castor Oil, Gaultheria Oil, Eucalyptus Oil, Arnica Oil & Myrrh Oil. 100% Natural ingredients including Madar, Giloy, Ajwain, Ashwagandha, and more.",
+                        "brand": {
+                            "@type": "Brand",
+                            "name": "Dr Joints"
+                        },
+                        "manufacturer": {
+                            "@type": "Organization",
+                            "name": "Dr Joints"
+                        },
+                        "category": "Health & Personal Care > Pain Relief",
+                        "gtin": "8901234567890",
+                        "mpn": "DJ-PRL-100ML",
+                        "sku": "DJ001",
+                        "weight": {
+                            "@type": "QuantitativeValue",
+                            "value": "100",
+                            "unitCode": "MLT"
+                        },
+                        "offers": {
+                            "@type": "Offer",
+                            "url": "https://drjoints.in/product",
+                            "priceCurrency": "${currency}",
+                            "price": "${productPrice}",
+                            "priceValidUntil": "2025-12-31",
+                            "itemCondition": "https://schema.org/NewCondition",
+                            "availability": "https://schema.org/InStock",
+                            "shippingDetails": {
+                                "@type": "OfferShippingDetails",
+                                "shippingRate": {
+                                    "@type": "MonetaryAmount",
+                                    "value": "0",
+                                    "currency": "${currency}"
+                                },
+                                "deliveryTime": {
+                                    "@type": "ShippingDeliveryTime",
+                                    "handlingTime": {
+                                        "@type": "QuantitativeValue",
+                                        "minValue": "1",
+                                        "maxValue": "2",
+                                        "unitCode": "DAY"
+                                    },
+                                    "transitTime": {
+                                        "@type": "QuantitativeValue",
+                                        "minValue": "3",
+                                        "maxValue": "7",
+                                        "unitCode": "DAY"
+                                    }
+                                }
+                            },
+                            "seller": {
+                                "@type": "Organization",
+                                "name": "Dr Joints",
+                                "url": "https://drjoints.in"
+                            }
+                        },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.5",
+                            "reviewCount": "2847",
+                            "bestRating": "5",
+                            "worstRating": "1"
+                        },
+                        "hasAdditiveDetails": [
+                            {
+                                "@type": "AdditiveDetails",
+                                "additiveName": "Madar",
+                                "additiveAmount": "400mg"
+                            },
+                            {
+                                "@type": "AdditiveDetails", 
+                                "additiveName": "Giloy",
+                                "additiveAmount": "1200mg"
+                            },
+                            {
+                                "@type": "AdditiveDetails",
+                                "additiveName": "Ajwain", 
+                                "additiveAmount": "800mg"
+                            },
+                            {
+                                "@type": "AdditiveDetails",
+                                "additiveName": "Ashwagandha",
+                                "additiveAmount": "600mg"
+                            }
+                        ],
+                        "audience": {
+                            "@type": "PeopleAudience",
+                            "suggestedMinAge": "18"
+                        },
+                        "potentialAction": {
+                            "@type": "BuyAction",
+                            "target": "https://drjoints.in/checkout"
+                        },
+                        "isRelatedTo": [
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Joint Pain"
+                            },
+                            {
+                                "@type": "MedicalCondition", 
+                                "name": "Muscle Pain"
+                            },
+                            {
+                                "@type": "MedicalCondition",
+                                "name": "Arthritis"
+                            }
+                        ]
+                    }
+                    `}
+                </script>
+            </Helmet>
+
             {/* Trust Indicators Banner */}
             <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-lg p-6 mb-8 md:block hidden ">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
@@ -253,14 +382,15 @@ const Product = ({ translations, currentLang }) => {
                                     
                                         {/* Main CTA Button */}
                                         <div className='flex gap-5'>
-                                            <button onClick={handleCheckout} className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
+                                            <button onClick={handleCheckout} className="w-full flex items-center justify-center bg-yellow-400 hover:bg-yellow-500 text-[#42C056] py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
+                                                <img src={cart} alt="Buy Now" className="w-20" />
                                                 <span className="relative z-10 flex items-center justify-center space-x-2">
                                                     <span>BUY NOW </span>
                                                 </span>
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                                             </button>
                                             <button id="amazon" onClick={handleCheckout2} className="w-full flex items-center justify-center bg-white hover:bg-white text-black py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
-                                                <a href="https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB" target="_blank" rel="noopener noreferrer">
+                                                <a href={currency === 'USD' ? "https://www.amazon.com/dp/B0FD9S7FRP" : "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB"}  target="_blank" rel="noopener noreferrer">
                                                     <img src={amazon} alt="Amazon Logo" className="w-20" />
                                                     <span className="relative z-10 flex items-center justify-center space-x-2">
                                                         <span>Amazon</span>
@@ -346,16 +476,6 @@ const Product = ({ translations, currentLang }) => {
                                             <p className="text-green-100 text-sm">🔥 2,847 customers bought this today!</p>
                                         </div>
                                     </div>
-                                </div>
-
-                                {/* Bonus Offers */}
-                                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                                    <h4 className="font-bold text-blue-800 mb-2">🎁 EXCLUSIVE BONUSES:</h4>
-                                    <ul className="text-sm text-blue-700 space-y-1">
-                                        <li>✅ FREE Pain Relief Guide (₹299 value)</li>
-                                        <li>✅ FREE Consultation Call (₹500 value)</li>
-                                        <li>✅ Priority Customer Support</li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -475,16 +595,14 @@ const Product = ({ translations, currentLang }) => {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <button
-                                        onClick={handleCheckout}
-                                        className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg"
-                                    >
+                                    <button onClick={handleCheckout} className="w-full bg-yellow-400 hover:bg-yellow-500 text-[#42C056] py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg">
+                                        <img src={cart} alt="Cart Icon" className="w-20 mx-auto mb-2" />
                                         BUY NOW - INSTANT RELIEF!
                                     </button>
                                     <button
                                         id="amazon"
                                         className="w-full bg-white hover:bg-white text-black py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg">
-                                        <a href="https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB" target="_blank" rel="noopener noreferrer">
+                                        <a href={currency === 'USD' ? "https://www.amazon.com/dp/B0FD9S7FRP" : "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB"} target="_blank" rel="noopener noreferrer">
                                             <img src={amazon} alt="Amazon Logo" className="w-20 mx-auto mb-2" />
                                             <span className="relative z-10 flex items-center justify-center space-x-2">
                                                 <span>Buy on Amazon</span>
@@ -649,6 +767,12 @@ const Product = ({ translations, currentLang }) => {
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                             </svg>
+                            <span>Free Shipping</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
                             <span>15 Days Return</span>
                         </div>
                         <div className="flex items-center gap-2">
@@ -665,58 +789,3 @@ const Product = ({ translations, currentLang }) => {
 };
 
 export default Product;
-
-
-            // {/* How to Use Section */}
-            // <div className="py-16">
-            //     <div className="container mx-auto px-4">
-            //         <div className="text-center mb-12">
-            //             <h2 className="text-4xl font-bold text-gray-800 mb-4">How to Use</h2>
-            //             <p className="text-xl text-gray-600">Simple steps for maximum effectiveness</p>
-            //         </div>
-                    
-            //         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            //             { [
-            //                 {
-            //                     step: "2",
-            //                     title: "Apply Oil",
-            //                     description: "Take 3-4 drops and apply to the painful area",
-            //                     image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
-            //                 },
-            //                 {
-            //                     step: "3",
-            //                     title: "Massage Gently",
-            //                     description: "Massage in circular motions for 5-10 minutes",
-            //                     image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
-            //                 },
-            //                 {
-            //                     step: "4",
-            //                     title: "Repeat Daily",
-            //                     description: "Use 2-3 times daily for best results",
-            //                     image: "https://via.placeholder.com/500x500/10b981/ffffff?text=Repeat+Daily"
-            //                 }
-            //             ].map((step, index) => (
-            //                 <div key={index} className="text-center bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-            //                     {/* Step Image */}
-            //                     <div className="w-full h-48 mb-6 rounded-lg overflow-hidden bg-gray-100">
-            //                         <img 
-            //                             src={step.image} 
-            //                             alt={step.title}
-            //                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            //                             style={{ width: '500px', height: '500px', objectFit: 'cover' }}
-            //                             onError={(e) => {
-            //                                 e.target.src = 'https://via.placeholder.com/500x500/3b82f6/ffffff?text=Step+' + step.step;
-            //                             }}
-            //                         />
-            //                     </div>
-                                
-            //                     <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-            //                         {step.step}
-            //                     </div>
-            //                     <h3 className="text-xl font-bold text-gray-800 mb-2">{step.title}</h3>
-            //                     <p className="text-gray-600">{step.description}</p>
-            //                 </div>
-            //             ))}
-            //         </div>
-            //     </div>
-            // </div>

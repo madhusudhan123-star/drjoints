@@ -126,7 +126,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home currentLang={currentLang} translations={translations || {}} />} />
             <Route path='/about' element={<About currentLang={currentLang} translations={translations || {}} />} />
-            <Route path='/product' element={<Product currentLang={currentLang} translations={translations || {}} />} />
+            <Route path='/product/dr-joints-pain-relief-oil' element={<Product currentLang={currentLang} translations={translations || {}} />} />
             <Route path='/return' element={<Return currentLang={currentLang} translations={translations || {}} />} />
             <Route path='/privacy' element={<Privacy currentLang={currentLang} translations={translations || {}} />} />
             <Route path='/contact' element={<Contact currentLang={currentLang} translations={translations || {}} />} />

@@ -544,7 +544,7 @@ const Checkout = ({ translations, currentLang }) => {
                                 </div>
                                 <span className="text-sm text-gray-700">Amazon Prime eligible</span>
                             </div>
-                            <a href={userCountry === 'USD' ? "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB" : "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB "} className="text-xs text-orange-600 underline">View on Amazon</a>
+                            <a href={userCountry === 'USD' ? "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB" : " https://www.amazon.com/dp/B0FD9S7FRP"} className="text-xs text-orange-600 underline">View on Amazon</a>
                         </div>
                         <p className="text-xs text-gray-600">Same product, multiple trusted platforms</p>
                     </div>
