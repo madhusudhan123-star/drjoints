@@ -183,26 +183,86 @@ const Product = ({ translations, currentLang }) => {
                             "bestRating": "5",
                             "worstRating": "1"
                         },
-                        "hasAdditiveDetails": [
+                        "additionalProperty": [
                             {
-                                "@type": "AdditiveDetails",
-                                "additiveName": "Madar",
-                                "additiveAmount": "400mg"
+                                "@type": "PropertyValue",
+                                "name": "Madar",
+                                "value": "400mg"
                             },
                             {
-                                "@type": "AdditiveDetails", 
-                                "additiveName": "Giloy",
-                                "additiveAmount": "1200mg"
+                                "@type": "PropertyValue", 
+                                "name": "Giloy",
+                                "value": "1200mg"
                             },
                             {
-                                "@type": "AdditiveDetails",
-                                "additiveName": "Ajwain", 
-                                "additiveAmount": "800mg"
+                                "@type": "PropertyValue",
+                                "name": "Ajwain", 
+                                "value": "800mg"
                             },
                             {
-                                "@type": "AdditiveDetails",
-                                "additiveName": "Ashwagandha",
-                                "additiveAmount": "600mg"
+                                "@type": "PropertyValue",
+                                "name": "Ashwagandha",
+                                "value": "600mg"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Suranjan Talkh",
+                                "value": "650mg"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Narkachur",
+                                "value": "400mg"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Kalonji",
+                                "value": "1400mg"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Methi (Fenugreek)",
+                                "value": "850mg"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Til Oil (Sesame)",
+                                "value": "7.50ml"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Alsi (Flaxseed)",
+                                "value": "20ml"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Peppermint",
+                                "value": "2.5ml"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Castor Oil",
+                                "value": "Base carrier oil"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Gaultheria Oil",
+                                "value": "Natural analgesic"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Eucalyptus Oil",
+                                "value": "Cooling agent"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Arnica Oil",
+                                "value": "Anti-inflammatory"
+                            },
+                            {
+                                "@type": "PropertyValue",
+                                "name": "Myrrh Oil",
+                                "value": "Healing properties"
                             }
                         ],
                         "audience": {
