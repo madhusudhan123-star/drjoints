@@ -82,7 +82,7 @@ const Secondsection = () => {
 
               {/* Info Box */}
               <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-600 p-6">
-                <a href="/product">
+                <a href="/product/dr-joints-pain-relief-oil">
                   <div className="text-center">
                     <button className="bg-white text-blue-600 font-semibold py-3 px-6 rounded-full 
                     hover:bg-blue-50 transform hover:scale-105 transition-all duration-300 

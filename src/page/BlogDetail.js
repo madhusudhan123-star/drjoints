@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 const BlogDetail = ({ translations, currentLang, blogPosts }) => {
-    const { id } = useParams();
-    const post = blogPosts.find(post => post.id === parseInt(id));
+    const { slug } = useParams();
+    const post = blogPosts.find(post => post.slug === slug);
     const [showShareMenu, setShowShareMenu] = useState(false);
 
     const handleShare = async () => {
@@ -298,8 +298,8 @@ const BlogDetail = ({ translations, currentLang, blogPosts }) => {
                 <div className="mt-12">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h2>
                     <div className="grid md:grid-cols-2 gap-6">
-                        {blogPosts.filter(p => p.id !== post.id).slice(0, 2).map(relatedPost => (
-                            <Link key={relatedPost.id} to={`/blog/${relatedPost.id}`} className="group">
+                        {blogPosts.filter(p => p.slug !== post.slug).slice(0, 2).map(relatedPost => (
+                            <Link key={relatedPost.id} to={`/blog/${relatedPost.slug}`} className="group">
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform group-hover:scale-105">
                                     <img src={relatedPost.image} alt={relatedPost.title} className="w-full h-48 object-cover" />
                                     <div className="p-6">

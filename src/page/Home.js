@@ -17,7 +17,6 @@ import three from '../assets/t_three.webp';
 import four from '../assets/t_four.webp';
 import Secondsection from '../components/Secondsection';
 import BlogSection from '../components/BlogSection';
-import InstagramFeed from '../components/InstagramFeed';
 import pr1 from '../assets/pr/card1.webp';
 import pr2 from '../assets/pr/card2.webp';
 import pr3 from '../assets/pr/card3.webp';
@@ -27,7 +26,6 @@ import pr6 from '../assets/pr/card6.webp';
 import pr7 from '../assets/pr/card7.webp';
 import one1 from '../assets/images/one_one.webp'
 import youtubeThumb from '../assets/youtube_thumbnail.webp';
-import { translations } from '../data/translations';
 
 const logoCarouselStyles = `
     @keyframes scrollx {
@@ -729,10 +727,10 @@ const Testimonials = ({ currentLang, translations }) => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center bg-white rounded-full px-6 py-3 shadow-lg border border-orange-200 mb-6">
+                    {/* <div className="inline-flex items-center bg-white rounded-full px-6 py-3 shadow-lg border border-orange-200 mb-6">
                         <span className="text-2xl mr-3">🌿</span>
                         <span className="text-orange-600 font-semibold">Real Stories, Real Relief</span>
-                    </div>
+                    </div> */}
                     
                     <h2 className="text-5xl font-bold mb-6">
                         <span className="bg-gradient-to-r from-orange-600 via-yellow-600 to-green-600 bg-clip-text text-transparent">
@@ -758,14 +756,15 @@ const Testimonials = ({ currentLang, translations }) => {
                         <div 
                             className="flex transition-transform duration-500 ease-in-out"
                             style={{ 
-                                transform: `translateX(-${currentSlide * (100 / 10)}%)`,
+                                transform: `translateX(-${currentSlide * (400 / 10)}%)`,
                                 width: `${(testimonials.length * 100) / 10}%`
                             }}
                         >
                             {duplicatedTestimonials.map((testimonial, index) => (
                                 <div 
                                     key={`${index}-${testimonial.name}`}
-                                    className="w-1/3 px-4 flex-shrink-0"
+                                    // className="w-full md:w-1/3 px-4 flex-shrink-0"
+                                    className="w-full md:w-1/3 px-4 flex-shrink-0"
                                 >
                                     <div className="relative group overflow-hidden rounded-xl shadow-lg h-[30rem] transition-transform duration-300 hover:shadow-xl hover:scale-105">
                                         {/* Testimonial Image */}
@@ -786,7 +785,7 @@ const Testimonials = ({ currentLang, translations }) => {
                                         </div>
                                         
                                         {/* Overlay with Text */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex flex-col justify-end p-6 text-white">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
                                             {/* Star Rating */}
                                             <div className="flex items-center mb-2">
                                                 {renderStars(testimonial.rating || 5)}
@@ -1061,37 +1060,31 @@ const PR = ({ currentLang, translations }) => {
         );
 };
 
-
-
-
-
 const Home = ({ currentLang, translations }) => {
-return (
-        <div className={currentLang === 'ar' ? 'rtl' : 'ltr'
-        }>
-            <div className='overflow-x-hidden'>
-                <a href='/product/dr-joints-pain-relief-oil'>
-                    <img src={producticon} className='fixed z-10 bottom-14 md:bottom-0 left-0 w-48' alt="Dr. Joints Product Icon" />
-                </a>
-                <Hero currentLang={currentLang} />
-                <ProductSection currentLang={currentLang} />
-                <Secondsection />
-                <Product currentLang={currentLang} translations={translations} />
-                <VideoTrustSection currentLang={currentLang} translations={translations} />
-                {/* <About currentLang={currentLang} translations={translations} /> */}
-                <PR />
-                <FAQ currentLang={currentLang} translations={translations} />
-                
-                <InstagramFeed />
-                <Testimonials currentLang={currentLang} translations={translations} />
-                <BlogSection 
-                    translations={translations}
-                    currentLang={currentLang}
-                    blogPosts={translations.en.blogPosts}
-                />
-            </div>
-        </div >
-    );
+    return (
+            <div className={currentLang === 'ar' ? 'rtl' : 'ltr'
+            }>
+                <div className='overflow-x-hidden'>
+                    <a href='/product/dr-joints-pain-relief-oil'>
+                        <img src={producticon} className='fixed z-10 bottom-14 md:bottom-0 left-0 w-48' alt="Dr. Joints Product Icon" />
+                    </a>
+                    <Hero currentLang={currentLang} />
+                    <ProductSection currentLang={currentLang} />
+                    <Secondsection />
+                    <Product currentLang={currentLang} translations={translations} />
+                    <VideoTrustSection currentLang={currentLang} translations={translations} />
+                    {/* <About currentLang={currentLang} translations={translations} /> */}
+                    <PR />
+                    <FAQ currentLang={currentLang} translations={translations} />
+                    <Testimonials currentLang={currentLang} translations={translations} />
+                    <BlogSection 
+                        translations={translations}
+                        currentLang={currentLang}
+                        blogPosts={translations.en.blogPosts}
+                    />
+                </div>
+            </div >
+        );
 };
 
 export default Home;

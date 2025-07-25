@@ -22,7 +22,7 @@ const BlogPost = ({ post, featured = false }) => (
             </div>
             
             <h2 className={`font-bold text-gray-800 mb-4 leading-tight hover:text-blue-600 transition-colors ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
-                <Link to={`/blog/${post.id}`}>{post.title}</Link>
+                <Link to={`/blog/${post.slug}`}>{post.title}</Link>
             </h2>
             
             <p className={`text-gray-600 mb-6 leading-relaxed ${featured ? 'text-lg' : ''}`}>
@@ -40,7 +40,7 @@ const BlogPost = ({ post, featured = false }) => (
                 </div>
                 
                 <Link 
-                    to={`/blog/${post.id}`}
+                    to={`/blog/${post.slug}`}
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors group"
                 >
                     Read More

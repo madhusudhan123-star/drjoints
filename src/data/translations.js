@@ -464,7 +464,7 @@ export const translations = {
           excerpt: "Dr.Joints - Ayurvedic Joint pain oil with a blend of natural ingredients, relieves muscle and joint pain by reducing inflammation, restoring comfort for better movement.",
           content: `# Say Goodbye to Joint Pain with Ayurvedic Oil
 
-        [Ayurvedic Joint pain oil](/blog/1) can be a major obstacle in everyday life, making simple tasks like walking, sitting, or bending difficult. While regular exercise and a balanced diet can help, sometimes pain is inevitable due to weather changes or aging.
+        [Ayurvedic Joint pain oil](/blog/Joint-Pain-Ayurvedic-oil) can be a major obstacle in everyday life, making simple tasks like walking, sitting, or bending difficult. While regular exercise and a balanced diet can help, sometimes pain is inevitable due to weather changes or aging.
 
         At times like these, turning to natural remedies can make all the difference. DR. Joints is an Ayurvedic Joint pain oil - solution designed to relieve joint and muscle pain safely and effectively.
 
@@ -520,7 +520,7 @@ export const translations = {
 
         While prevention through exercise and diet is important, when pain strikes, you need a remedy that's safe, effective, and natural. DR. Joints Pain Relief Oil offers a trusted Ayurvedic solution.
 
-        [Pain relief oils](/blog/2) are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals. Try them for a natural and soothing way to feel better.
+        [Pain relief oils](/blog/Pain-Relief-Oils) are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals. Try them for a natural and soothing way to feel better.
 
         ## What makes it special?
 
@@ -623,7 +623,7 @@ export const blogPosts = [
           excerpt: "Dr.Joints - Ayurvedic Joint pain oil with a blend of natural ingredients, relieves muscle and joint pain by reducing inflammation, restoring comfort for better movement.",
           content: `# Say Goodbye to Joint Pain with Ayurvedic Oil
 
-          [Ayurvedic Joint pain oil](/blog/1) can be a major obstacle in everyday life, making simple tasks like walking, sitting, or bending difficult. While regular exercise and a balanced diet can help, sometimes pain is inevitable due to weather changes or aging.
+          [Ayurvedic Joint pain oil](/blog/Joint-Pain-Ayurvedic-oil) can be a major obstacle in everyday life, making simple tasks like walking, sitting, or bending difficult. While regular exercise and a balanced diet can help, sometimes pain is inevitable due to weather changes or aging.
 
           At times like these, turning to natural remedies can make all the difference. DR. Joints is an Ayurvedic Joint pain oil - solution designed to relieve joint and muscle pain safely and effectively.
 
@@ -679,7 +679,7 @@ export const blogPosts = [
 
           While prevention through exercise and diet is important, when pain strikes, you need a remedy that's safe, effective, and natural. DR. Joints Pain Relief Oil offers a trusted Ayurvedic solution.
 
-          [Pain relief oils](/blog/2) are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals. Try them for a natural and soothing way to feel better.
+          [Pain relief oils](/blog/Pain-Relief-Oils) are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals. Try them for a natural and soothing way to feel better.
 
           ## What makes it special?
 

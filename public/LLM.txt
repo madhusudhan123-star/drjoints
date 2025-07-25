@@ -1,0 +1,158 @@
+# Dr. Joints - Ayurvedic Pain Relief Oil E-commerce Platform
+
+## Project Overview
+Dr. Joints is a modern React-based e-commerce website dedicated to selling premium Ayurvedic pain relief oils. The platform focuses on natural, herbal solutions for muscle and joint pain relief, targeting customers seeking holistic wellness alternatives.
+
+## Product Description
+- **Main Product**: Dr. Joints Pain Relief Oil for Muscles
+- **Category**: Ayurvedic/Natural health products
+- **Target Audience**: Athletes, elderly, people with muscle/joint pain
+- **Key Benefits**: Natural ingredients, quick absorption, suitable for all ages
+- **USP**: 100% natural Ayurvedic formulation with traditional herbs
+
+## Technical Stack
+- **Frontend**: React 18.3.1
+- **Routing**: React Router DOM 7.0.1
+- **Styling**: Tailwind CSS, Custom CSS
+- **Icons**: Lucide React, React Icons
+- **Forms**: Formspree React for contact forms
+- **Animation**: AOS (Animate On Scroll)
+- **Carousel**: Swiper.js
+- **SEO**: React Helmet
+- **Build Tool**: Create React App with React Scripts 5.0.1
+
+## Key Features
+1. **Multi-page Website Structure**
+   - Home page with hero section and product showcase
+   - About Us page with company mission and values
+   - Product page with detailed information and EMI options
+   - Blog section for content marketing
+   - Contact page with form integration
+   - Multiple checkout variants for A/B testing
+
+2. **E-commerce Functionality**
+   - Product display and information
+   - Multiple checkout flows (Checkout, Checkout_two, Checkout_test1, Checkout_test2)
+   - Razorpay payment integration with EMI support
+   - EMI options (3, 6, 9, 12 months) with different interest rates
+   - Order processing capabilities
+   - Thank you page for order confirmation
+
+3. **Payment Options**
+   - Cash on Delivery (COD) for Indian customers
+   - Online payment via Razorpay
+   - EMI (Easy Monthly Installments) with multiple tenure options:
+     - 3 months: No Cost EMI
+     - 6 months: Low Interest EMI (13% p.a.)
+     - 9 months: Flexible EMI (15% p.a.)
+     - 12 months: Easy Monthly EMI (18% p.a.)
+   - International payment support with USD currency
+
+3. **Content Management**
+   - Multi-language support structure (translations.js)
+   - Blog system with detailed posts
+   - FAQ section for customer support
+   - Review and testimonial sections
+
+4. **User Experience**
+   - Responsive design for mobile and desktop
+   - Lazy loading for performance optimization
+   - Smooth scrolling animations
+   - Instagram feed integration
+   - YouTube video integration
+   - EMI calculator and options display
+   - Interactive EMI selection interface
+
+5. **Legal & Policy Pages**
+   - Privacy Policy
+   - Terms & Conditions
+   - Return Policy
+   - Shipping Policy
+   - Cancellation Policy
+
+## Website Structure
+```
+/                    - Home page
+/about              - About Us
+/product/dr-joints-pain-relief-oil - Product page
+/contact            - Contact page
+/blog               - Blog listing
+/blog/:slug         - Individual blog posts
+/checkouts          - Main checkout page
+/checkout-two       - Alternative checkout
+/checkout-test1     - Test checkout variant 1
+/checkout-test2     - Test checkout variant 2
+/privacy            - Privacy Policy
+/terms              - Terms & Conditions
+/return             - Return Policy
+/shipping           - Shipping Policy
+/cancel             - Cancellation Policy
+/thankyou           - Order confirmation
+```
+
+## Key Components
+- **Navbar**: Main navigation with responsive design
+- **MinimalNavbar**: Simplified navigation for specific pages
+- **Footer**: Site-wide footer with links and information
+- **FAQ**: Frequently asked questions component
+- **Secondsection**: Secondary content section
+- **BlogSection**: Blog listing and display
+- **InstagramFeed**: Social media integration
+
+## Business Features
+1. **Natural Health Focus**: Emphasis on Ayurvedic and natural ingredients
+2. **Educational Content**: Blog posts about pain relief and wellness
+3. **Customer Trust Building**: Reviews, testimonials, and detailed FAQs
+4. **Mobile-First Design**: Optimized for mobile commerce
+5. **SEO Optimization**: Structured for search engine visibility
+
+## Performance Optimizations
+- Code splitting with lazy loading
+- Webpack chunk optimization
+- Image optimization with WebP format
+- Minimal bundle size strategies
+- Mobile-responsive images
+
+## Marketing Features
+- Instagram feed integration
+- Blog content marketing
+- Customer review showcase
+- YouTube video integration
+- Social proof elements
+
+## Development Environment
+- Node.js based development
+- Hot reloading for development
+- Production build optimization
+- Testing framework integration
+- ESLint configuration
+
+## Target Keywords
+- Pain relief oil
+- Muscle pain relief
+- Joint pain relief
+- Ayurvedic oil
+- Natural pain relief
+- Herbal pain relief
+- Dr. Joints
+
+## Customer Journey
+1. Land on homepage with product showcase
+2. Learn about benefits on product page
+3. Choose payment option (one-time payment or EMI)
+4. If EMI selected, choose from 4 different tenure options
+5. Complete purchase through optimized checkout with selected payment method
+6. Receive confirmation and follow-up
+
+## EMI Integration Features
+- **Product Page EMI Display**: Toggle-able EMI options section showing all available plans
+- **EMI Calculator**: Real-time calculation of monthly installments based on product price
+- **Razorpay EMI Integration**: Seamless EMI payment processing through Razorpay gateway
+- **Mobile-Responsive EMI UI**: Optimized EMI selection interface for mobile devices
+- **EMI State Management**: Proper navigation from product page to checkout with EMI pre-selection
+- **EMI Card Interface**: Interactive EMI cards instead of dropdown for better user experience
+- **EMI Validation**: Form validation to ensure EMI option is selected when EMI payment mode is chosen
+- **EMI Order Processing**: Complete order management for EMI transactions with detailed tracking
+- **Visual EMI Selection**: Color-coded EMI cards with selection indicators and hover effects
+
+This platform serves as a comprehensive digital presence for Dr. Joints, combining e-commerce functionality with educational content to build trust and drive conversions in the natural health products market.

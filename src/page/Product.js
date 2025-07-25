@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import product1 from '../assets/product1.webp';
 import product2 from '../assets/product2.webp';
-import amazon from '../assets/images/amazon.webp';
+import amazon from '../assets/images/amazon1.webp';
 import stamps from '../assets/icons/stamps.webp';
 import cart from '../assets/images/cart.png';
-
 import one from '../assets/ing/8.webp';
 import three from '../assets/ing/4.webp';
 import four from '../assets/ing/3.webp';
@@ -18,7 +17,6 @@ import nine from '../assets/ing/7.webp';
 import ten from '../assets/ing/1.webp';
 import eleven from '../assets/ing/2.webp';
 import twelve from '../assets/ing/9.webp';
-
 import product3 from '../assets/images/eight.webp';
 import product5 from '../assets/images/nine.webp';
 
@@ -30,6 +28,8 @@ const Product = ({ translations, currentLang }) => {
     const [selectedOffer, setSelectedOffer] = useState(0);
     const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 45, seconds: 30 });
     const [currency, setCurrency] = useState('INR');
+    const [showEmiOptions, setShowEmiOptions] = useState(false);
+    const [selectedEmiOption, setSelectedEmiOption] = useState(null);
     const productPrice = currency === 'USD' ? 120 : 3990;
     const originalPrice = currency === 'USD' ? 180 : 6990;
 
@@ -39,6 +39,50 @@ const Product = ({ translations, currentLang }) => {
             return `$${price}`;
         }
         return `₹${price}`;
+    };
+
+    // EMI options configuration
+    const emiOptions = [
+        { 
+            months: 3, 
+            rate: 12,
+            emiAmount: Math.round(productPrice / 3),
+            totalAmount: Math.round(productPrice * 1.03),
+            description: "No Cost EMI"
+        },
+        { 
+            months: 6, 
+            rate: 13,
+            emiAmount: Math.round(productPrice / 6),
+            totalAmount: Math.round(productPrice * 1.05),
+            description: "Low Interest EMI"
+        },
+        { 
+            months: 9, 
+            rate: 15,
+            emiAmount: Math.round(productPrice / 9),
+            totalAmount: Math.round(productPrice * 1.08),
+            description: "Flexible EMI"
+        },
+        { 
+            months: 12, 
+            rate: 18,
+            emiAmount: Math.round(productPrice / 12),
+            totalAmount: Math.round(productPrice * 1.12),
+            description: "Easy Monthly EMI"
+        }
+    ];
+
+    const handleEmiCheckout = (emiOption) => {
+        // Navigate to checkout with EMI option selected
+        navigate('/checkout', { 
+            state: { 
+                quantity, 
+                fromProduct: true,
+                paymentMode: 'emi',
+                emiOption: emiOption
+            } 
+        });
     };
 
     // Detect user's country and set currency
@@ -406,7 +450,7 @@ const Product = ({ translations, currentLang }) => {
 
             {/* Trust Indicators Banner */}
             <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-lg p-6 mb-8 md:block hidden ">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
                     <div className="flex items-center justify-center space-x-2">
                         <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -425,14 +469,45 @@ const Product = ({ translations, currentLang }) => {
                         </svg>
                         <span className="font-semibold text-gray-800">World-wide Shipping</span>
                     </div>
+                    <div className="flex items-center justify-center space-x-2">
+                        <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="font-semibold text-gray-800">EMI by Razorpay</span>
+                    </div>
                 </div>
             </div>
-
+            
+            {/* telling about product section */}
             <div className="flex flex-col md:flex-row gap-8">
                 {/* Mobile: Title, Description, Reviews - Shows first on mobile only */}
                 <div className="md:hidden w-full">
                     <h1 className="text-3xl font-bold montserrat text-gray-800 mb-2">Pain Relief Oil For Muscles</h1>
                     <p className='text-blue-600 scada-regular text-sm mb-4'>Helps Relieve All Types of Joint & Nerve Pain | With Castor Oil, Gaultheria Oil, Eucalyptus Oil, Arnica Oil & Myrrh Oil | 100% Natural</p>
+                    
+                    {/* Mobile EMI Options Available Notice */}
+                    <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg p-3 mb-4">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                                <div className="bg-purple-100 p-1.5 rounded-full">
+                                    <svg className="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-purple-800 text-sm">EMI Available</h3>
+                                    <p className="text-purple-600 text-xs">Easy monthly payments</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center space-x-1">
+                                <span className="text-xs text-purple-600">by</span>
+                                <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
+                                    Razorpay
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div className='flex items-center gap-2 mb-6 scada-regular'>
                         <span className="text-lg font-medium text-gray-600">4.5/5</span>
                         <div className="flex">
@@ -443,12 +518,6 @@ const Product = ({ translations, currentLang }) => {
                             ))}
                         </div>
                     </div>                    
-                    {/* <a href={currency === 'USD' ? "https://www.amazon.in/" : "https://www.amazon.in/"} target="_blank" rel="noopener noreferrer" className='flex items-center gap-4 mb-6'> */}
-                        <div className='flex items-center gap-4'>
-                            {/* <img src={amazon} alt="Amazon Logo" className="h-20" /> */}
-                            {/* <img src={flipkart} alt="Flipkart Logo" className="h-20" /> */}
-                        </div>
-                    {/* </a> */}
                 </div>
 
                 {/* Product Images Section */}
@@ -486,24 +555,30 @@ const Product = ({ translations, currentLang }) => {
                         <h1 className="text-3xl font-bold montserrat text-gray-800 mb-2">Pain Relief Oil For Muscles</h1>
                         <p className='text-black text-sm'>Pain relief oils are therapeutic herbal oils created using time-tested formulations. These oils are typically made by infusing potent herbs into base oils. Each ingredient is selected for its specific healing properties, making these oils effective for managing pain without harmful chemicals.Try them for a natural and soothing way to feel better.</p>
                         
-                        {/* <div className='flex items-center gap-2 my-4 scada-regular'>
-                            <span className="text-lg font-medium text-gray-600">4.5/5</span>
-                            <div className="flex">
-                                {[...Array(5)].map((_, index) => (
-                                <span key={index} className={`text-2xl ${index < 4.5 ? 'text-yellow-400' : 'text-gray-300'}`}>
-                                    ★
-                                </span>
-                                ))}
+                        {/* EMI Options Available Notice */}
+                        <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg p-4 my-4">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                    <div className="bg-purple-100 p-2 rounded-full">
+                                        <svg className="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-purple-800 text-sm">EMI Options Available</h3>
+                                        <p className="text-purple-600 text-xs">Pay in easy monthly installments</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <span className="text-xs text-purple-600">Powered by</span>
+                                    <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
+                                        Razorpay
+                                    </div>
+                                </div>
                             </div>
-                        </div> */}
-
+                        </div>
+                        
                         <div className='flex items-start gap-5 flex-col'>
-                            {/* <div className='flex items-center gap-2'>
-                                <p className='line-through text-gray-400 text-3xl'>{formatPrice(originalPrice)}</p>
-                                <p className='text-xl font-bold text-red-600'>{formatPrice(productPrice)}</p>
-                                <span className='bg-blue-500 text-white px-2 py-1 rounded-2xl text-sm'>Discounted Price</span>
-                            </div> */}
-                            
                             <div className='w-full h-[1px] bg-gray-300'></div>
                             <div>
                                 <img src={stamps} alt="Stamps" className="" />
@@ -553,33 +628,66 @@ const Product = ({ translations, currentLang }) => {
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-pulse"></div>
                                     
                                         {/* Main CTA Button */}
-                                        <div className='flex gap-5'>
-                                            <button onClick={handleCheckout} className="w-full flex items-center justify-center bg-yellow-400 hover:bg-yellow-500 text-[#42C056] py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
+                                        <div className=''>
+                                            <div className='flex gap-5 items-center justify-between mb-4'>
+                                                <div className="flex items-center justify-center space-x-4">
+                                                    <label className="text-white font-medium">Quantity:</label>
+                                                    <div className="flex items-center bg-white rounded-lg">
+                                                        <button 
+                                                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                                            className="text-green-600 px-3 py-2 font-bold hover:bg-gray-100 rounded-l-lg"
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <input
+                                                            type="number"
+                                                            min="1"
+                                                            value={quantity}
+                                                            onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                                                            className="w-16 text-center py-2 text-green-800 font-bold border-0 focus:outline-none"
+                                                        />
+                                                        <button 
+                                                            onClick={() => setQuantity(quantity + 1)}
+                                                            className="text-green-600 px-3 py-2 font-bold hover:bg-gray-100 rounded-r-lg"
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <button id="amazon" onClick={handleCheckout2} className="w-full flex items-center justify-center bg-white hover:bg-white text-black py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
+                                                    <a href={currency === 'USD' ? "https://www.amazon.com/dp/B0FD9S7FRP" : "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB"}  target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                                                        <span className="relative z-10 flex items-center justify-center space-x-2">
+                                                            <span>ALSO AVAILABLE ON</span>
+                                                        </span>
+                                                        <img src={amazon} alt="Amazon Logo" className="w-20 pt-4" />
+                                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                                                    </a>
+                                                </button>
+                                            </div>
+                                            <button onClick={handleCheckout} className="w-full flex items-center justify-center bg-white text-black py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
                                                 <img src={cart} alt="Buy Now" className="w-20" />
                                                 <span className="relative z-10 flex items-center justify-center space-x-2">
                                                     <span>BUY NOW </span>
                                                 </span>
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                                             </button>
-                                            <button id="amazon" onClick={handleCheckout2} className="w-full flex items-center justify-center bg-white hover:bg-white text-black py-4 rounded-xl text-xl font-black transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden group" >
-                                                <a href={currency === 'USD' ? "https://www.amazon.com/dp/B0FD9S7FRP" : "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB"}  target="_blank" rel="noopener noreferrer">
-                                                    <img src={amazon} alt="Amazon Logo" className="w-20" />
-                                                    <span className="relative z-10 flex items-center justify-center space-x-2">
-                                                        <span>Amazon</span>
-                                                    </span>
-                                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                                                </a>
-                                            </button>
                                         </div>
+
+                                        {/* EMI Toggle Button */}
+                                        {/* {currency === 'INR' && (
+                                            <div className="mt-4">
+                                                <button
+                                                    onClick={() => setShowEmiOptions(!showEmiOptions)}
+                                                    className="w-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white py-3 rounded-xl text-lg font-bold transition-all duration-200 border border-white/30"
+                                                >
+                                                    💳 View EMI Options {showEmiOptions ? '▲' : '▼'}
+                                                </button>
+                                            </div>
+                                        )} */}
 
                                     <div className="relative z-10">
-                                        {/* Special Offer Badge */}
-                                        <div className="absolute -top-3 -right-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold transform rotate-12 animate-bounce">
-                                            SAVE 43%
-                                        </div>
-
                                         <div className="text-center mb-4">
-                                            <h3 className="text-2xl font-bold mb-2">🔥 FLASH SALE ACTIVE 🔥</h3>
+                                            <h3 className="text-2xl font-bold my-2">FLASH SALE ACTIVE</h3>
                                             <p className="text-green-100 text-sm">Get instant relief at the lowest price ever!</p>
                                         </div>
 
@@ -595,31 +703,7 @@ const Product = ({ translations, currentLang }) => {
                                         </div>
 
                                         {/* Quantity Selector */}
-                                        <div className="flex items-center justify-center space-x-4 mb-6">
-                                            <label className="text-white font-medium">Quantity:</label>
-                                            <div className="flex items-center bg-white rounded-lg">
-                                                <button 
-                                                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                                    className="text-green-600 px-3 py-2 font-bold hover:bg-gray-100 rounded-l-lg"
-                                                >
-                                                    -
-                                                </button>
-                                                <input
-                                                    type="number"
-                                                    min="1"
-                                                    value={quantity}
-                                                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                                                    className="w-16 text-center py-2 text-green-800 font-bold border-0 focus:outline-none"
-                                                />
-                                                <button 
-                                                    onClick={() => setQuantity(quantity + 1)}
-                                                    className="text-green-600 px-3 py-2 font-bold hover:bg-gray-100 rounded-r-lg"
-                                                >
-                                                    +
-                                                </button>
-                                            </div>
-                                        </div>
-
+                                        
                                        
 
                                         {/* Trust Badges */}
@@ -649,6 +733,54 @@ const Product = ({ translations, currentLang }) => {
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* EMI Options Section */}
+                                {currency === 'INR' && showEmiOptions && (
+                                    <div className="bg-gradient-to-br from-purple-500 via-indigo-500 to-purple-600 rounded-xl p-6 text-white shadow-2xl border-4 border-purple-300 relative overflow-hidden mt-4">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-10 animate-pulse"></div>
+                                        
+                                        <div className="relative z-10">
+                                            <div className="text-center mb-4">
+                                                <h3 className="text-2xl font-bold mb-2">💳 EMI Options Available</h3>
+                                                <p className="text-purple-100 text-sm">Pay in easy monthly installments</p>
+                                            </div>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                {emiOptions.map((option, index) => (
+                                                    <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg p-4 border border-white/30 hover:bg-white/30 transition-all duration-200">
+                                                        <div className="flex justify-between items-start mb-2">
+                                                            <div>
+                                                                <div className="text-lg font-bold text-yellow-300">
+                                                                    {formatPrice(option.emiAmount)}/month
+                                                                </div>
+                                                                <div className="text-sm text-purple-100">
+                                                                    {option.months} months • {option.rate}% p.a.
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-right">
+                                                                <div className="text-xs text-purple-200">Total</div>
+                                                                <div className="text-sm font-semibold">{formatPrice(option.totalAmount)}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-xs text-purple-200 mb-3">{option.description}</div>
+                                                        <button
+                                                            onClick={() => handleEmiCheckout(option)}
+                                                            className="w-full bg-yellow-400 hover:bg-yellow-500 text-purple-900 py-2 px-4 rounded-lg text-sm font-bold transition-all duration-200 transform hover:scale-105"
+                                                        >
+                                                            Choose EMI
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className="mt-4 text-center">
+                                                <p className="text-purple-100 text-xs">
+                                                    💡 EMI available on Credit Cards & Debit Cards
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -767,27 +899,71 @@ const Product = ({ translations, currentLang }) => {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <button onClick={handleCheckout} className="w-full bg-yellow-400 hover:bg-yellow-500 text-[#42C056] py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg">
+                                    <button onClick={handleCheckout} className="w-full bg-white text-black py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg">
                                         <img src={cart} alt="Cart Icon" className="w-20 mx-auto mb-2" />
                                         BUY NOW - INSTANT RELIEF!
                                     </button>
                                     <button
                                         id="amazon"
                                         className="w-full bg-white hover:bg-white text-black py-4 rounded-xl text-lg font-black transform active:scale-95 transition-all duration-200 shadow-lg">
-                                        <a href={currency === 'USD' ? "https://www.amazon.com/dp/B0FD9S7FRP" : "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB"} target="_blank" rel="noopener noreferrer">
-                                            <img src={amazon} alt="Amazon Logo" className="w-20 mx-auto mb-2" />
+                                        <a href={currency === 'USD' ? "https://www.amazon.com/dp/B0FD9S7FRP" : "https://www.amazon.in/Dr-Joints-Relief-Muscle-Muscles-Stress/dp/B0BLYHKJWB"} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
                                             <span className="relative z-10 flex items-center justify-center space-x-2">
-                                                <span>Buy on Amazon</span>
+                                                <span>ALSO AVAILABLE ON</span>
                                             </span>
+                                            <img src={amazon} alt="Amazon Logo" className="w-24 pt-4" />
                                         </a>
                                     </button>
+                                    
+                                    {/* Mobile EMI Toggle Button */}
+                                    {/* {currency === 'INR' && (
+                                        <button
+                                            onClick={() => setShowEmiOptions(!showEmiOptions)}
+                                            className="w-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white py-3 rounded-xl text-sm font-bold transition-all duration-200 border border-white/30"
+                                        >
+                                            💳 EMI Options {showEmiOptions ? '▲' : '▼'}
+                                        </button>
+                                    )} */}
                                 </div>
 
                                 <div className="grid grid-cols-3 gap-2 mt-3 text-xs text-center">
-                                    <div>🚚 FREE Ship</div>
-                                    <div>💰 COD</div>
-                                    <div>🔄 15-Day Return</div>
+                                    <div>FREE Ship</div>
+                                    <div>COD</div>
+                                    <div>15-Day Return</div>
                                 </div>
+
+                                {/* Mobile EMI Options */}
+                                {currency === 'INR' && showEmiOptions && (
+                                    <div className="mt-4 space-y-2">
+                                        <div className="text-center text-yellow-300 font-bold text-sm mb-3">
+                                            💳 Choose Your EMI Plan
+                                        </div>
+                                        {emiOptions.map((option, index) => (
+                                            <div key={index} className="bg-white/20 backdrop-blur-sm rounded-lg p-3 border border-white/30">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <div className="text-yellow-300 font-bold text-sm">
+                                                        {formatPrice(option.emiAmount)}/mo
+                                                    </div>
+                                                    <div className="text-xs text-purple-200">
+                                                        {option.months} months
+                                                    </div>
+                                                </div>
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <div className="text-xs text-purple-200">{option.description}</div>
+                                                    <div className="text-xs text-white">Total: {formatPrice(option.totalAmount)}</div>
+                                                </div>
+                                                <button
+                                                    onClick={() => handleEmiCheckout(option)}
+                                                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-purple-900 py-2 rounded-lg text-xs font-bold"
+                                                >
+                                                    Select EMI
+                                                </button>
+                                            </div>
+                                        ))}
+                                        <div className="text-center text-purple-200 text-xs mt-2">
+                                            Available on Credit & Debit Cards
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
